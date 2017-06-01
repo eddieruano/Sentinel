@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:48:50
+# @Last Modified time: 2017-06-01 12:51:55
 
 import curses
 
@@ -11,6 +11,10 @@ class HUD(object):
     v_box_wt = 30
     def __init__(self):
         self.display = curses.initscr()
+        self.leftBox = None
+        self.rightBox = None
+        self.midBox = None
+        self.touchBox = None
         self.configureHUD()
     def configureHUD(self):
         curses.noecho()
@@ -21,7 +25,7 @@ class HUD(object):
         self.leftBox = self.display.subwin(self.v_box_ht, self.v_box_wt, 5, 5)
         self.leftBox.box()
         # Create Right Window
-        self.rightBox = self.display.subwin(v_box_ht, v_box_wt, 5, 40)
+        self.rightBox = self.display.subwin(self.v_box_ht, self.v_box_wt, 5, 40)
         self.rightBox.box()
         self.leftBox.addstr(1, 5, "Voyager 1 Distance")
         self.rightBox.addstr(1, 5, "Voyager 2 Distance")
