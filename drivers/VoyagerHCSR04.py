@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 14:54:44
+# @Last Modified time: 2017-06-01 14:55:37
 
 """
     DESI uses two HCSR04 proximity sensors to determine Megan's postition on the treadmill.
@@ -13,7 +13,7 @@ import time
  
 class Voyager:
     
-    Timeout = time.ctime(1)
+    Timeout = time.gmtime(1)
 
     """ Begin VoyagerHCSR04 class structure """
     def __init__(self, name, t_pin, e_pin):
