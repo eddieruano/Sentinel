@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:04:53
+# @Last Modified time: 2017-06-01 13:09:03
 
 import curses
 
@@ -69,3 +69,18 @@ class HUD(object):
         self.display.addstr(22, 5, buf)
         self.displayRefresh()
     def displayInfo(self, prox1, prox2, status):
+        self.updateV1(prox1)
+        self.displayRefresh()
+    def updateV1(self, prox1):
+        status = "Green"
+        update = str(distance) +  " cm"
+        self.display.addstr(8, 8, update)
+        if distance < 17.2:
+            self.display.addstr(14, 30, "Within Green Zone", curses.A_UNDERLINE)
+        elif distance > 17.2 and distance < 30:
+            self.display.addstr(14, 30, "Within Yellow Zone", curses.A_UNDERLINE)
+            status = "Yellow"
+        else:
+            self.display.addstr(14, 30, "RED ZONE, Beginning Timeout", curses.A_UNDERLINE)
+            status = "Red"
+    return status
