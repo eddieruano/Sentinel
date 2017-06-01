@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 02:14:21
+# @Last Modified time: 2017-06-01 07:06:32
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -18,14 +18,18 @@ import VoyagerHCSR04
 TOP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def main():
+    Trig_V1 = 4
+    Echo_V1 = 17
+    Trig_V2 = 27
+    Echo_V2 = 22
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(17, GPIO.OUT)
-    GPIO.setup(22, GPIO.IN)
-    GPIO.setup(4, GPIO.OUT)
-    GPIO.setup(27, GPIO.IN)
+    GPIO.setup(Trig_V1, GPIO.OUT)
+    GPIO.setup(Echo_V1, GPIO.IN)
+    GPIO.setup(Trig_V2, GPIO.OUT)
+    GPIO.setup(Echo_V2, GPIO.IN)
 
-    Voyager1 = VoyagerHCSR04.Voyager("Voyager1", 17, 4)
-    Voyager2 = VoyagerHCSR04.Voyager("Voyager2", 22, 27)
+    Voyager1 = VoyagerHCSR04.Voyager("Voyager1", Trig_V1, Echo_V1)
+    Voyager2 = VoyagerHCSR04.Voyager("Voyager2", Trig_V2, Echo_V2)
     try:
         while True:
             distv1 = Voyager1.get_distance()
