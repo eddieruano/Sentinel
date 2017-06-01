@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 10:22:11
+# @Last Modified time: 2017-06-01 10:22:56
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -24,7 +24,6 @@ import snowboydecoder
 
 
 ### Set path ###
-TOP_DIR = os.path.dirname(os.path.abspath(__file__))
 ### Global Variables ###
 DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
