@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:10:38
+# @Last Modified time: 2017-06-01 13:11:10
 
 import curses
 
@@ -71,7 +71,7 @@ class HUD(object):
     def displayInfo(self, prox1, prox2, status):
         self.updateV1(prox1)
         self.displayRefresh()
-    def updateV1(self, prox1):
+    def updateV1(self, distance):
         status = "Green"
         update = str(distance) +  " cm"
         self.display.addstr(8, 8, update)
