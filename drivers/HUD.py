@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 15:43:18
+# @Last Modified time: 2017-06-01 15:45:52
 
 import curses
 
@@ -43,9 +43,9 @@ class HUD(object):
     def displayHeaderBar(self):
         #Print the Greeting
         self.display.addstr(1, 14, 
-            "*******  DESI Mission Control Module v1.0  *******")
+            "**************   SentinelMC v3.2   **************")
         self.display.addstr(2, 14, 
-            "**************  Updated April 2017  **************")
+            "**************  Updated June 2017  **************")
         self.displayRefresh()
     def displayRefresh(self):
         self.display.refresh()
@@ -73,7 +73,6 @@ class HUD(object):
         bar = fill * filledLength + '-' * (length - filledLength)
         end = "%\r"
         buf = "%s |%s| %s %s %%\n" % (prefix, bar, suffix, percent)
-        
         self.display.addstr(22, 5, buf)
         self.displayRefresh()
     def updateV1(self, distance):
