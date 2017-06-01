@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:43:51
+# @Last Modified time: 2017-06-01 08:47:18
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -12,7 +12,7 @@ import os
 import time
 import RPi.GPIO as GPIO
 import VoyagerHCSR04
-import MPR121
+import Adafruit_MPR121.MPR121 as MPR121
 import DESIConfig
 
 ### Set path ###
