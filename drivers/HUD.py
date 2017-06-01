@@ -2,12 +2,13 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:35:44
+# @Last Modified time: 2017-06-01 12:38:54
 
 import curses
 
 class HUD(object):
-
+    v_box_ht = 5
+    v_box_wt = 30
     def __init__(self):
         self.display = curses.initscr()
         self.configureHUD()
@@ -16,6 +17,7 @@ class HUD(object):
         self.display.nodelay(True)
         self.display.border(0)
         self.displayHeaderBar()
+        self.leftBox = self.display.subwin(self.v_box_ht, self.v_box_wt, 5, 5)
     def displayHeaderBar(self):
         #Print the Greeting
         self.display.addstr(1, 14, 
