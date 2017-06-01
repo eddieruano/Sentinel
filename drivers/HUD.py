@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 15:42:19
+# @Last Modified time: 2017-06-01 15:43:18
 
 import curses
 
@@ -63,7 +63,7 @@ class HUD(object):
         suffix = 'RedZone'
         fill = '█'
         decimals = 1
-        length = 100
+        length = 35
         # Do work
         percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
         if iteration > length:
