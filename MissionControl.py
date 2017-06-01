@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:25:59
+# @Last Modified time: 2017-06-01 12:29:30
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -19,12 +19,12 @@ import RPi.GPIO as GPIO
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04
 import drivers.HUD
-import drivers.DESIConfig
+#import drivers.DESIConfig
 ### Set path ###
 ### Global Variables ###
-DESI = DESIConfig.DESI()
-Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
-Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
+#DESI = DESIConfig.DESI()
+#Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
+#Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
 HUD = HUD.HUD()
 ### Begin Voice Detection Config ###
@@ -34,9 +34,9 @@ HUD = HUD.HUD()
 
 def main():
     # Initialize DESI States
-    DESI.initDESI()
+    #DESI.initDESI()
     # Initialize Voyager Proximity Sensors
-    DESI.initProximity(Voyager1, Voyager2)
+    #DESI.initProximity(Voyager1, Voyager2)
     # Initialize TouchSense Capacitive Sensor Array
     # Initialize comms with MPR121 using default I2C bus of device, and
     # default I2C address (0x5A).  
@@ -55,13 +55,13 @@ def main():
     ActiveFlag = True
     try:
         while ActiveFlag:
-            distv1 = Voyager1.get_distance()
-            print ("Measured Distance = %.1f cm" % distv1)
+            #distv1 = Voyager1.get_distance()
+            #print ("Measured Distance = %.1f cm" % distv1)
             time.sleep(1)
     # Catch Ctrl+C
     except KeyboardInterrupt:
         print("Shutdown Mission.")
-        Detector.terminate()
+        #Detector.terminate()
         GPIO.cleanup()
 ### END OF MAIN ###
 """Helper Functions"""
