@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:28:20
+# @Last Modified time: 2017-06-01 08:29:40
 
 import RPi.GPIO as GPIO
 
@@ -50,14 +50,14 @@ class DESI(object):
         self.initProximity()
         self.initRelays()
     def initControlBox(self):
-        GPIO.setup(IN_START, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(IN_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_START, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("Start & Pause Set.")
-        GPIO.setup(IN_SPEED0, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(IN_SPEED1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(IN_SPEED2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(IN_SPEED3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(IN_SPEED4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_SPEED0, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_SPEED1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_SPEED2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_SPEED3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_SPEED4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("Buttons Complete.")
     def initProximity(sensorV1, sensorV2):
         # Set up the correct In/Out Scheme for send/receive
