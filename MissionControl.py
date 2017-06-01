@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:09:53
+# @Last Modified time: 2017-06-01 13:14:10
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -12,6 +12,7 @@ import sys
 import os.path
 import signal
 import time
+import curses
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
@@ -61,10 +62,11 @@ def main():
     # Catch Ctrl+C
     except KeyboardInterrupt:
         print("Shutdown Mission.")
+        GPIO.cleanup()
         curses.echo()
         curses.endwin()
         #Detector.terminate()
-        GPIO.cleanup()
+        
 ### END OF MAIN ###
 """Helper Functions"""
 def activateAlexa():
