@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 15:35:31
+# @Last Modified time: 2017-06-01 15:36:48
 
 import curses
 
@@ -58,7 +58,7 @@ class HUD(object):
         self.displayBar(prox1)
         self.displayRefresh()
     def displayBar (self, iteration):
-        total = 30
+        total = 40
         prefix = 'StartZone'
         suffix = 'RedZone'
         fill = '█'
