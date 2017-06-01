@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 02:13:23
+# @Last Modified time: 2017-06-01 02:14:21
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -10,6 +10,7 @@
 ### IMPORT MODULES ###
 import os
 import time
+import RPi.GPIO as GPIO
 import VoyagerHCSR04
 
 
