@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:35:15
+# @Last Modified time: 2017-06-01 12:35:44
 
 import curses
 
@@ -14,7 +14,7 @@ class HUD(object):
     def configureHUD(self):
         curses.noecho()
         self.display.nodelay(True)
-        self.display.border.(0)
+        self.display.border(0)
         self.displayHeaderBar()
     def displayHeaderBar(self):
         #Print the Greeting
