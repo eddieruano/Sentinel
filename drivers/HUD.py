@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:17:26
+# @Last Modified time: 2017-06-01 15:35:31
 
 import curses
 
@@ -66,10 +66,14 @@ class HUD(object):
         length = 35
         # Do work
         percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+        if iteration > length:
+            iteration = length
+            suffix = 'MAX'
         filledLength = int(length * iteration // total)
         bar = fill * filledLength + '-' * (length - filledLength)
         end = "%\r"
         buf = "%s |%s| %s %s %%\n" % (prefix, bar, suffix, percent)
+        
         self.display.addstr(22, 5, buf)
         self.displayRefresh()
     def updateV1(self, distance):
