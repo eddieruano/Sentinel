@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:14:52
+# @Last Modified time: 2017-06-01 13:18:32
 
 import RPi.GPIO as GPIO
 
@@ -52,20 +52,19 @@ class DESI(object):
     def initControlBox(self):
         GPIO.setup(self.IN_START, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_PAUSE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print("Start & Pause Set.")
         GPIO.setup(self.IN_SPEED0, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print("Buttons Complete.")
+        return "Buttons Complete."
     def initProximity(self, sensorV1, sensorV2):
         # Set up the correct In/Out Scheme for send/receive
         GPIO.setup(sensorV1.trigger_pin, GPIO.OUT)
         GPIO.setup(sensorV1.echo_pin, GPIO.IN)
         GPIO.setup(sensorV2.trigger_pin, GPIO.OUT)
         GPIO.setup(sensorV2.echo_pin, GPIO.IN)
-        print("Proximity Sensors Set.")
+        return "Proximity Sensors Set."
     def initRelays(self):
         # Set up the correct In/Out Scheme for send/receive
         GPIO.setup(self.OUT_START, GPIO.OUT)
@@ -92,4 +91,4 @@ class DESI(object):
         GPIO.output(self.OUT_5, GPIO.HIGH)
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
-        print("Relay Array Set.")
+        return "Relay Array Set."

@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:11:10
+# @Last Modified time: 2017-06-01 13:17:26
 
 import curses
 
@@ -53,6 +53,10 @@ class HUD(object):
         self.rightBox.refresh()
         self.midBox.refresh()
         self.touchBox.refresh()
+    def displayInfo(self, prox1, prox2, status):
+        self.updateV1(prox1)
+        self.displayBar(prox1)
+        self.displayRefresh()
     def displayBar (self, iteration):
         total = 30
         prefix = 'StartZone'
@@ -67,9 +71,6 @@ class HUD(object):
         end = "%\r"
         buf = "%s |%s| %s %s %%\n" % (prefix, bar, suffix, percent)
         self.display.addstr(22, 5, buf)
-        self.displayRefresh()
-    def displayInfo(self, prox1, prox2, status):
-        self.updateV1(prox1)
         self.displayRefresh()
     def updateV1(self, distance):
         status = "Green"
