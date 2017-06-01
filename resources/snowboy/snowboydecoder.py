@@ -1,8 +1,10 @@
 #!/usr/bin/env python
-
+import sys
+import os.path
 import collections
 import pyaudio
-#import snowboydetect
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import snowboydetect
 import time
 import wave
 import os
