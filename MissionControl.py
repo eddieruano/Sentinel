@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:20:01
+# @Last Modified time: 2017-06-01 12:23:36
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -50,9 +50,8 @@ def main():
     #           interrupt_check=interrupt_callback,
     #           sleep_time=0.03)
     """Heads Up Display"""
-    HUD.border(0)
-    HUD.nodelay(True)
-    curses.noecho()
+    HUD.displayHeaderBar()
+    
     """Starts Main Workout Loop"""
     ActiveFlag = True
     try:
