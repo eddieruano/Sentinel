@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
-# @Last Modified by:   eddieruano
-# @Last Modified time: 2017-06-01 01:45:27
+# @Last Modified by:   Eddie Ruano
+# @Last Modified time: 2017-06-01 02:07:17
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -10,7 +10,7 @@
 ### IMPORT MODULES ###
 import os
 import time
-import VoyagerHCSRO4
+import VoyagerHCSR04
 
 
 ### Set path ###
