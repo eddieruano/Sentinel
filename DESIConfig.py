@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:16:06
+# @Last Modified time: 2017-06-01 08:19:03
 
 import RPi.GPIO as GPIO
 # Control Box Pins
@@ -15,9 +15,9 @@ IN_SPEED3   = 13
 IN_SPEED4   = 19
 # Proximity Sensor Pins
 PROX1_TRIG  = 4
-PROX1_TRIG  = 17
+PROX1_ECHO  = 17
 PROX2_TRIG  = 27
-PROX2_TRIG  = 22
+PROX2_ECHO  = 22
 # Relay Pins
 OUT_START   = 14
 OUT_OFF     = 15
