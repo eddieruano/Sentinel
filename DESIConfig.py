@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:32:11
+# @Last Modified time: 2017-06-01 08:33:43
 
 import RPi.GPIO as GPIO
 
@@ -58,7 +58,7 @@ class DESI(object):
         GPIO.setup(self.IN_SPEED3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("Buttons Complete.")
-    def initProximity(sensorV1, sensorV2):
+    def initProximity(self, sensorV1, sensorV2):
         # Set up the correct In/Out Scheme for send/receive
         GPIO.setup(sensorV1.trigger_pin, GPIO.OUT)
         GPIO.setup(sensorV1.echo_pin, GPIO.IN)
