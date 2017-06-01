@@ -2,42 +2,43 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:19:03
+# @Last Modified time: 2017-06-01 08:28:20
 
 import RPi.GPIO as GPIO
-# Control Box Pins
-IN_START    = 9
-IN_PAUSE     = 10
-IN_SPEED0   = 11
-IN_SPEED1   = 5
-IN_SPEED2   = 6
-IN_SPEED3   = 13
-IN_SPEED4   = 19
-# Proximity Sensor Pins
-PROX1_TRIG  = 4
-PROX1_ECHO  = 17
-PROX2_TRIG  = 27
-PROX2_ECHO  = 22
-# Relay Pins
-OUT_START   = 14
-OUT_OFF     = 15
-OUT_PAUSE   = 18
-OUT_ENTER   = 23
-OUT_0       = 24
-OUT_1       = 25
-OUT_2       = 8
-OUT_3       = 7
-OUT_4       = 12
-OUT_5       = 16
-OUT_DOWN    = 21
-OUT_ALEXA   = 20
-# States of DESI
-State_Main  = "Idle"
-State_Knob  = "Speed0"
-State_Touch = "Negative"
 
 class DESI(object):
     """Representation of a DESI Entity"""
+    # Control Box Pins
+    IN_START    = 9
+    IN_PAUSE     = 10
+    IN_SPEED0   = 11
+    IN_SPEED1   = 5
+    IN_SPEED2   = 6
+    IN_SPEED3   = 13
+    IN_SPEED4   = 19
+    # Proximity Sensor Pins
+    PROX1_TRIG  = 4
+    PROX1_ECHO  = 17
+    PROX2_TRIG  = 27
+    PROX2_ECHO  = 22
+    # Relay Pins
+    OUT_START   = 14
+    OUT_OFF     = 15
+    OUT_PAUSE   = 18
+    OUT_ENTER   = 23
+    OUT_0       = 24
+    OUT_1       = 25
+    OUT_2       = 8
+    OUT_3       = 7
+    OUT_4       = 12
+    OUT_5       = 16
+    OUT_DOWN    = 21
+    OUT_ALEXA   = 20
+    # States of DESI
+    State_Main  = "Idle"
+    State_Knob  = "Speed0"
+    State_Touch = "Negative"
+    # Constructor
     def __init__(self):
         """Create an instance of DESI"""
         # Nothing to do here since there is very little state in the class.
