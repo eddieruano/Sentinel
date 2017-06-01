@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:47:18
+# @Last Modified time: 2017-06-01 09:58:24
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -14,29 +14,38 @@ import RPi.GPIO as GPIO
 import VoyagerHCSR04
 import Adafruit_MPR121.MPR121 as MPR121
 import DESIConfig
+import snowboydecoder
+import sys
+import signal
 
 ### Set path ###
 TOP_DIR = os.path.dirname(os.path.abspath(__file__))
-
 ### Global Variables ###
 DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
+### Begin Voice Detection Config ###
+HotwordInterrupt = False
+TriggerWord = DESI.pmdl
+Detector = snowboydecoder.HotwordDetector(TriggerWord, sensitivity=0.5)
 
 def main():
-    
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
     DESI.initProximity(Voyager1, Voyager2)
     # Initialize TouchSense Capacitive Sensor Array
-    # Initialize communication with MPR121 using default I2C bus of device, and
+    # Initialize comms with MPR121 using default I2C bus of device, and
     # default I2C address (0x5A).  
     if not TouchSense.begin():
-        print('Error initializing MPR121.  Check your wiring!')
+        print('Error initializing MPR121')
         sys.exit(1)
-
+    # Voice Detection
+    signal.signal(signal.SIGINT, signal_handler)
+    detector.start(detected_callback=snowboydecoder.play_audio_file,
+               interrupt_check=interrupt_callback,
+               sleep_time=0.03)
     """Starts Main Workout Loop"""
     ActiveFlag = True
     try:
@@ -47,8 +56,20 @@ def main():
     # Reset by pressing CTRL + C
     except KeyboardInterrupt:
         print("Shutdown Mission.")
+        Detector.terminate()
         GPIO.cleanup()
-
+    ### END OF MAIN ###
+"""Helper Functions"""
+def activateAlexa():
+    GPIO.output(DESI.OUT_ALEXA, GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(DESI.OUT_ALEXA, GPIO.HIGH)
+def signal_handler(signal, frame):
+    global HotwordInterrupt
+    HotwordInterrupt = True
+def interrupt_callback():
+    global HotwordInterrupt
+    return HotwordInterrupt
 ### MAIN CALL ###
 if __name__ == "__main__":
     main()

@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:33:43
+# @Last Modified time: 2017-06-01 08:52:57
 
 import RPi.GPIO as GPIO
 
@@ -91,4 +91,4 @@ class DESI(object):
         GPIO.output(self.OUT_5, GPIO.HIGH)
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
-        print("Proximity Sensors Set.")
+        print("Relay Array Set.")
