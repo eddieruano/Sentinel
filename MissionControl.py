@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:29:30
+# @Last Modified time: 2017-06-01 12:31:29
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
