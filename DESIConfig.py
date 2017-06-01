@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:30:21
+# @Last Modified time: 2017-06-01 08:32:11
 
 import RPi.GPIO as GPIO
 
@@ -47,7 +47,6 @@ class DESI(object):
         # Set up GPIO stuff
         GPIO.setmode(GPIO.BCM)
         self.initControlBox()
-        self.initProximity()
         self.initRelays()
     def initControlBox(self):
         GPIO.setup(self.IN_START, GPIO.IN, pull_up_down=GPIO.PUD_UP)

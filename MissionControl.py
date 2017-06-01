@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:22:14
+# @Last Modified time: 2017-06-01 08:32:57
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -24,11 +24,11 @@ Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 
 
 def main():
-    # Sets the Pin Numbering Scheme to same as Cobbler
-    
     
     # Initialize DESI States
     DESI.initDESI()
+    # Initialize Voyager Proximity Sensors
+    DESI.initProximity(Voyager1, Voyager2)
     try:
         while True:
             distv1 = Voyager1.get_distance()
