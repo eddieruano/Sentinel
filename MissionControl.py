@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:15:30
+# @Last Modified time: 2017-06-01 08:17:59
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -19,8 +19,8 @@ TOP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ### Global Variables ###
 DESI = DESI.DESI()
-Voyager1 = VoyagerHCSR04.Voyager("Voyager1", Trig_V1, Echo_V1)
-Voyager2 = VoyagerHCSR04.Voyager("Voyager2", Trig_V2, Echo_V2)
+Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
+Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 
 
 def main():
