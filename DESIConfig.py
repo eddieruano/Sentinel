@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:12:55
+# @Last Modified time: 2017-06-01 08:16:06
 
 import RPi.GPIO as GPIO
 # Control Box Pins
@@ -36,7 +36,7 @@ State_Main  = "Idle"
 State_Knob  = "Speed0"
 State_Touch = "Negative"
 
-class MPR121(object):
+class DESI(object):
     """Representation of a DESI Entity"""
     def __init__(self):
         """Create an instance of DESI"""

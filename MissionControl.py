@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:13:21
+# @Last Modified time: 2017-06-01 08:15:30
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -12,13 +12,13 @@ import os
 import time
 import RPi.GPIO as GPIO
 import VoyagerHCSR04
-import DESIConfig
+import DESIConfig as DESI
 
 ### Set path ###
 TOP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 ### Global Variables ###
-DESI = DESIConfig.DESI()
+DESI = DESI.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", Trig_V1, Echo_V1)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", Trig_V2, Echo_V2)
 
