@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:24:28
+# @Last Modified time: 2017-06-01 12:25:59
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -18,9 +18,8 @@ import RPi.GPIO as GPIO
 # Local Modules #
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04
-import drivers.DESIConfig
 import drivers.HUD
-
+import drivers.DESIConfig
 ### Set path ###
 ### Global Variables ###
 DESI = DESIConfig.DESI()
