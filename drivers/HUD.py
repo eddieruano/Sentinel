@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 13:09:03
+# @Last Modified time: 2017-06-01 13:10:38
 
 import curses
 
@@ -83,4 +83,4 @@ class HUD(object):
         else:
             self.display.addstr(14, 30, "RED ZONE, Beginning Timeout", curses.A_UNDERLINE)
             status = "Red"
-    return status
+        return status
