@@ -2,14 +2,14 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:23:36
+# @Last Modified time: 2017-06-01 12:24:28
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
 """
 ### IMPORT MODULES ###
 import sys
-import os
+import os.path
 import signal
 import time
 # Customs Mods #
@@ -51,7 +51,7 @@ def main():
     #           sleep_time=0.03)
     """Heads Up Display"""
     HUD.displayHeaderBar()
-    
+
     """Starts Main Workout Loop"""
     ActiveFlag = True
     try:
