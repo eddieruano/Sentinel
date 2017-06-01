@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 08:29:40
+# @Last Modified time: 2017-06-01 08:30:21
 
 import RPi.GPIO as GPIO
 
@@ -10,7 +10,7 @@ class DESI(object):
     """Representation of a DESI Entity"""
     # Control Box Pins
     IN_START    = 9
-    IN_PAUSE     = 10
+    IN_PAUSE    = 10
     IN_SPEED0   = 11
     IN_SPEED1   = 5
     IN_SPEED2   = 6
@@ -51,7 +51,7 @@ class DESI(object):
         self.initRelays()
     def initControlBox(self):
         GPIO.setup(self.IN_START, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        GPIO.setup(self.IN_STOP, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(self.IN_PAUSE, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("Start & Pause Set.")
         GPIO.setup(self.IN_SPEED0, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
