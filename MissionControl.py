@@ -2,22 +2,24 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 10:34:58
+# @Last Modified time: 2017-06-01 12:20:01
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
 """
 ### IMPORT MODULES ###
 import sys
-import os.path
+import os
 import signal
 import time
+# Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
+# Local Modules #
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import tresources.VoyagerHCSR04
-import tresources.DESIConfig
-#import snowboydecoder
+import drivers.VoyagerHCSR04
+import drivers.DESIConfig
+import drivers.HUD
 
 ### Set path ###
 ### Global Variables ###
@@ -25,6 +27,7 @@ DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
+HUD = HUD.HUD()
 ### Begin Voice Detection Config ###
 #HotwordInterrupt = False
 #TriggerWord = DESI.pmdl
@@ -46,6 +49,10 @@ def main():
     #detector.start(detected_callback=snowboydecoder.play_audio_file,
     #           interrupt_check=interrupt_callback,
     #           sleep_time=0.03)
+    """Heads Up Display"""
+    HUD.border(0)
+    HUD.nodelay(True)
+    curses.noecho()
     """Starts Main Workout Loop"""
     ActiveFlag = True
     try:
@@ -53,12 +60,12 @@ def main():
             distv1 = Voyager1.get_distance()
             print ("Measured Distance = %.1f cm" % distv1)
             time.sleep(1)
-    # Reset by pressing CTRL + C
+    # Catch Ctrl+C
     except KeyboardInterrupt:
         print("Shutdown Mission.")
         Detector.terminate()
         GPIO.cleanup()
-    ### END OF MAIN ###
+### END OF MAIN ###
 """Helper Functions"""
 def activateAlexa():
     GPIO.output(DESI.OUT_ALEXA, GPIO.LOW)
