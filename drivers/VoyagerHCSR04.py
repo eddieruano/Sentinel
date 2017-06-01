@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 15:27:40
+# @Last Modified time: 2017-06-01 15:28:38
 
 """
     DESI uses two HCSR04 proximity sensors to determine Megan's postition on the treadmill.
@@ -46,9 +46,8 @@ class Voyager:
         while GPIO.input(self.echo_pin) == 0:
             StartTime = time.time()
             SendCount += 1
-            if SendCount > 4:
+            if SendCount > 40:
                 return 0.0
-
         # save time of arrival
         while GPIO.input(self.echo_pin) == 1:
             StopTime = time.time()
