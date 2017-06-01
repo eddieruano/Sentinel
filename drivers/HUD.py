@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 12:46:11
+# @Last Modified time: 2017-06-01 12:48:50
 
 import curses
 
@@ -39,7 +39,7 @@ class HUD(object):
         self.touchBox = self.display.subwin(10, 60, 25, 10)
         self.touchBox.box()
         self.touchBox.addstr(1, 21, "Cap Touch Status")
-        
+        self.displayRefresh()
         # Create Serial Box
     def displayHeaderBar(self):
         #Print the Greeting
@@ -48,7 +48,7 @@ class HUD(object):
         self.display.addstr(2, 14, 
             "**************  Updated April 2017  **************")
         self.displayRefresh()
-    def displayRefresh(self, box):
+    def displayRefresh(self):
         self.display.refresh()
         self.leftBox.refresh()
         self.rightBox.refresh()
