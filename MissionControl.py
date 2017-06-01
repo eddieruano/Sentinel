@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 02:07:17
+# @Last Modified time: 2017-06-01 02:10:59
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -18,8 +18,8 @@ TOP_DIR = os.path.dirname(os.path.abspath(__file__))
 
 def main():
 
-    Voyager1 = VoyagerHCSR04("Voyager1", 17, 4)
-    Voyager2 = VoyagerHCSR04("Voyager2", 22, 27)
+    Voyager1 = VoyagerHCSR04.Voyager("Voyager1", 17, 4)
+    Voyager2 = VoyagerHCSR04.Voyager("Voyager2", 22, 27)
     try:
         while True:
             distv1 = Voyager1.get_distance()

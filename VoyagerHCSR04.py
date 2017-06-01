@@ -1,8 +1,8 @@
 #!/usr/bin/python
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
-# @Last Modified by:   eddieruano
-# @Last Modified time: 2017-06-01 01:44:26
+# @Last Modified by:   Eddie Ruano
+# @Last Modified time: 2017-06-01 02:09:36
 
 """
     DESI uses two HCSR04 proximity sensors to determine Megan's postition on the treadmill.
@@ -11,7 +11,7 @@
 import RPi.GPIO as GPIO
 import time
  
-class VoyagerHCSR04:
+class Voyager:
     """ Begin VoyagerHCSR04 class structure """
     def __init__(self, name, t_pin, e_pin):
         self.name = name
