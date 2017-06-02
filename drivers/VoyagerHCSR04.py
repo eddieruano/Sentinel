@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 21:33:11
+# @Last Modified time: 2017-06-01 21:39:53
 
 """
     DESI uses two HCSR04 proximity sensors to determine Megan's postition on the treadmill.
@@ -19,7 +19,6 @@ class Voyager:
         self.trigger_pin = t_pin
         self.echo_pin = e_pin
         self.status = "Pass"
-        self.timeout = 3
 
     def update_status(self, stat):
         self.status = stat
@@ -40,8 +39,6 @@ class Voyager:
         GPIO.output(self.trigger_pin, False)
         # Create holders for times
         StartTime = time.time()
-        StopTime = time.time()
-        #SendCount = 0
         # save StartTime
         while GPIO.input(self.echo_pin) == 0:
             StartTime = time.time()
