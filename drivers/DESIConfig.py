@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:31:32
+# @Last Modified time: 2017-06-02 12:32:09
 
 import RPi.GPIO as GPIO
 import logger
@@ -149,7 +149,7 @@ class DESI(object):
         time.sleep(0.2)
         self.State_Main = "Shutdown"
     def performPause(self):
-        if self.State_Main != "Pause"
+        if self.State_Main != "Pause":
             GPIO.output(self.OUT_PAUSE, GPIO.LOW)
             time.sleep(0.2)
             GPIO.output(self.OUT_PAUSE, GPIO.HIGH)
@@ -163,7 +163,7 @@ class DESI(object):
             print("Shutting Down")
             self.performShutdown()
     def performStart(self):
-        if self.State_Main == "Idle"
+        if self.State_Main == "Idle":
             GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.2)
             GPIO.output(self.OUT_0, GPIO.HIGH)
@@ -176,7 +176,7 @@ class DESI(object):
         else:
             print("Already Started")
     def perform00(self):
-        if self.State_Main == "Speed1" or self.State_Main == "Idle"
+        if self.State_Main == "Speed1" or self.State_Main == "Idle":
             GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.2)
             GPIO.output(self.OUT_0, GPIO.HIGH)
@@ -228,7 +228,7 @@ class DESI(object):
         else:
             print("Nope")
     def perform04(self):
-        if self.State_Main == "Speed3"
+        if self.State_Main == "Speed3":
             GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.2)
             GPIO.output(self.OUT_0, GPIO.HIGH)
