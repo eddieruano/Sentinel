@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:33:31
+# @Last Modified time: 2017-06-02 12:34:26
 
 import RPi.GPIO as GPIO
 class DESI(object):
@@ -37,6 +37,7 @@ class DESI(object):
     State_Main  = "Idle"
     State_Knob  = "Speed0"
     State_Touch = "Negative"
+    bounceTime = 800
     # Constructor
     def __init__(self):
         """Create an instance of DESI"""
@@ -92,13 +93,13 @@ class DESI(object):
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
         print ("Relay Array Set.")
     def DESIListen(self):
-        GPIO.add_event_detect(self.IN_START, GPIO.FALLING, self.performStart, bounceTime)
-        GPIO.add_event_detect(self.IN_PAUSE, GPIO.FALLING, self.performPause, bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED0, GPIO.FALLING, self.perform00, bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED1, GPIO.FALLING, self.perform01, bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED2, GPIO.FALLING, perform02, bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED3, GPIO.FALLING, perform03, bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED4, GPIO.FALLING, perform04, bounceTime)
+        GPIO.add_event_detect(self.IN_START, GPIO.FALLING, self.performStart, self.bounceTime)
+        GPIO.add_event_detect(self.IN_PAUSE, GPIO.FALLING, self.performPause, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED0, GPIO.FALLING, self.perform00, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED1, GPIO.FALLING, self.perform01, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED2, GPIO.FALLING, self.perform02, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED3, GPIO.FALLING, self.perform03, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED4, GPIO.FALLING, self.perform04, self.bounceTime)
         print("Listening.")
     def DESISend(self, command):
         if command == "Start":
