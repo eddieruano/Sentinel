@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:41:17
+# @Last Modified time: 2017-06-02 01:43:55
 
 """
 Basic DESI Driver for Prototyping
@@ -43,7 +43,7 @@ GR_ALEXA = 21
 # #BOUNCE IN MS# #
 bounceTime = 800
 # #STATE# #
-state = "Startup"
+state = ""
 ### MAIN PROGRAM START ###
 def main():
    GPIO.setmode(GPIO.BCM)
@@ -64,13 +64,12 @@ def main():
    print("In Main Loop:\n")
    while activeFlag:
         try:
-            if state == "Shutdown":
+            if state != "Shutdown":
+                activeFlag = True
+            else:
                 print("Cleaning GPIO..")
-                print("DESI Shutdown Complete.")
                 GPIO.cleanup()
                 sys.exit(1)
-            else:
-                activeFlag = True
         # Catch Ctrl+C
         except KeyboardInterrupt:
             GPIO.cleanup()
