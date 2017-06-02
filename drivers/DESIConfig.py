@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:59:54
+# @Last Modified time: 2017-06-02 13:05:47
 
 import RPi.GPIO as GPIO
 class DESI(object):
@@ -129,7 +129,7 @@ class DESI(object):
             print(command)
     def DESIUpdateState(self, state):
         pass
-    def performStart():
+    def performStart(channel):
         if self.State_Main == "Idle":
             GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.2)
