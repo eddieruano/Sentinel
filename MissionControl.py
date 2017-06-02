@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 21:41:18
+# @Last Modified time: 2017-06-01 21:43:39
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -28,7 +28,7 @@ DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
-HUD = HUD.HUD()
+#HUD = HUD.HUD()
 ### Begin Voice Detection Config ###
 #HotwordInterrupt = False
 #TriggerWord = DESI.pmdl
@@ -51,13 +51,12 @@ def main():
     #           interrupt_check=interrupt_callback,
     #           sleep_time=0.03)
     """Heads Up Display"""
-    HUD.displayHeaderBar()
-
+    #HUD.displayHeaderBar()
     """Starts Main Workout Loop"""
     ActiveFlag = True
-
     try:
         while ActiveFlag:
+            print("in loop")
             #distv1 = Voyager1.get_distance()
             distv2 = Voyager2.get_distance()
             print(distv2)

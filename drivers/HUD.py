@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 15:45:52
+# @Last Modified time: 2017-06-01 21:43:29
 
 import curses
 
