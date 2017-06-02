@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:29:19
+# @Last Modified time: 2017-06-02 12:31:32
 
 import RPi.GPIO as GPIO
 import logger
@@ -57,14 +57,14 @@ class DESI(object):
         GPIO.setup(self.IN_SPEED2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        print "Buttons Complete."
+        print ("Buttons Complete.")
     def initProximity(self, sensorV1, sensorV2):
         # Set up the correct In/Out Scheme for send/receive
         GPIO.setup(sensorV1.trigger_pin, GPIO.OUT)
         GPIO.setup(sensorV1.echo_pin, GPIO.IN)
         GPIO.setup(sensorV2.trigger_pin, GPIO.OUT)
         GPIO.setup(sensorV2.echo_pin, GPIO.IN)
-        print "Proximity Sensor Set."
+        print ("Proximity Sensor Set.")
     def initRelays(self):
         # Set up the correct In/Out Scheme for send/receive
         GPIO.setup(self.OUT_START, GPIO.OUT)
@@ -91,7 +91,7 @@ class DESI(object):
         GPIO.output(self.OUT_5, GPIO.HIGH)
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
-        print "Relay Array Set."
+        print ("Relay Array Set.")
     def DESIListen(self):
         GPIO.add_event_detect(self.IN_START, GPIO.FALLING, performStart, bounceTime)
         GPIO.add_event_detect(self.IN_PAUSE, GPIO.FALLING, performPause, bounceTime)
