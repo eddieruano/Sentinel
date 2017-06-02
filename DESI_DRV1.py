@@ -2,16 +2,22 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:32:43
+# @Last Modified time: 2017-06-02 01:36:15
 
 """
 Basic DESI Driver for Prototyping
 """
 import sys
-import RPi.GPIO as GPIO
+import os.path
 import time
-# SnowBoy
-#import Adafruit_MPR121.MPR121 as MPR121
+# Customs Mods #
+import Adafruit_MPR121.MPR121 as MPR121
+import RPi.GPIO as GPIO
+# Local Modules #
+### Set path ###
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import drivers.VoyagerHCSR04 as VoyagerHCSR04
+
 # #Buttons# #
 G_INSTART = 9
 G_INPAUSE= 10
@@ -62,9 +68,9 @@ def main():
          print("Cleaning GPIO..")
          print("DESI Shutdown Complete.")
          GPIO.cleanup()
-         sys.exit
+         sys.exit(1)
       else:
-         activeFlag = True
+         
    #Should not get here
 def performS0(channel):
    global state
