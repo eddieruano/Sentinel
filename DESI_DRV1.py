@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:32:14
+# @Last Modified time: 2017-06-02 01:32:43
 
 """
 Basic DESI Driver for Prototyping
@@ -190,7 +190,7 @@ def performStart(channel):
 
 def performStop(channel):
    global state
-   if state == "Speed0"
+   if state == "Speed0":
       print("Shutting Down.")
       GPIO.output(GR_OFF, GPIO.LOW)
       time.sleep(0.1)
