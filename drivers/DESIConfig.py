@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 23:31:39
+# @Last Modified time: 2017-06-01 23:40:28
 
 import RPi.GPIO as GPIO
 
@@ -17,10 +17,10 @@ class DESI(object):
     IN_SPEED3   = 13
     IN_SPEED4   = 19
     # Proximity Sensor Pins
-    PROX1_TRIG  = 4
-    PROX1_ECHO  = 17
-    PROX2_TRIG  = 27
-    PROX2_ECHO  = 22
+    PROX1_TRIG  = 17
+    PROX1_ECHO  = 4
+    PROX2_TRIG  = 22
+    PROX2_ECHO  = 27
     # Relay Pins
     OUT_START   = 14
     OUT_OFF     = 15
@@ -46,7 +46,7 @@ class DESI(object):
     def initDESI(self):
         # Set up GPIO stuff
         GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
+        GPIO.setwarnings(False) #check
         self.initControlBox()
         self.initRelays()
     def initControlBox(self):
@@ -58,12 +58,12 @@ class DESI(object):
         GPIO.setup(self.IN_SPEED3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         GPIO.setup(self.IN_SPEED4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         return "Buttons Complete."
-    def initProximity(self, sensorV1):
+    def initProximity(self, sensorV1, sensorV2):
         # Set up the correct In/Out Scheme for send/receive
         GPIO.setup(sensorV1.trigger_pin, GPIO.OUT)
         GPIO.setup(sensorV1.echo_pin, GPIO.IN)
-        #GPIO.setup(sensorV2.trigger_pin, GPIO.OUT)
-        #GPIO.setup(sensorV2.echo_pin, GPIO.IN)
+        GPIO.setup(sensorV2.trigger_pin, GPIO.OUT)
+        GPIO.setup(sensorV2.echo_pin, GPIO.IN)
         return "Proximity Sensor Set."
     def initRelays(self):
         # Set up the correct In/Out Scheme for send/receive

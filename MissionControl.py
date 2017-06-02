@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 23:30:48
+# @Last Modified time: 2017-06-01 23:39:45
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -10,25 +10,25 @@
 ### IMPORT MODULES ###
 import sys
 import os.path
-#import signal
+import signal
 import time
-#import curses
-#import logging
+import curses
+import logging
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
 # Local Modules #
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04 as VoyagerHCSR04
-#import drivers.HUD as HUD
+import drivers.HUD as HUD
 import drivers.DESIConfig as DESIConfig
 ### Set path ###
 ### Global Variables ###
 DESI = DESIConfig.DESI()
-#Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
+Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
-#HUD = HUD.HUD()
+HUD = HUD.HUD()
 ### Begin Voice Detection Config ###
 #HotwordInterrupt = False
 #TriggerWord = DESI.pmdl
@@ -38,35 +38,33 @@ def main():
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
-    DESI.initProximity(Voyager2)
+    DESI.initProximity(Voyager1, Voyager2)
     # Initialize TouchSense Capacitive Sensor Array
     # Initialize comms with MPR121 using default I2C bus of device, and
     # default I2C address (0x5A).  
-    #if not TouchSense.begin():
-    #    print('Error initializing MPR121.')
-    #    sys.exit(1)
+    if not TouchSense.begin():
+        print('Error initializing MPR121.')
+        sys.exit(1)
     # Voice Detection
     #signal.signal(signal.SIGINT, signal_handler)
     #detector.start(detected_callback=snowboydecoder.play_audio_file,
     #           interrupt_check=interrupt_callback,
     #           sleep_time=0.03)
     """Heads Up Display"""
-    #HUD.displayHeaderBar()
+    HUD.displayHeaderBar()
     """Starts Main Workout Loop"""
     ActiveFlag = True
     try:
         while ActiveFlag:
-            print("in loop")
-            #distv1 = Voyager1.get_distance()
+            distv1 = Voyager1.get_distance()
             distv2 = Voyager2.get_distance()
-            print(distv2)
-            #HUD.displayInfo(0, distv2, 0)
-            time.sleep(1)
+            HUD.displayInfo(0, distv2, 0)
+            time.sleep(0.5)
     # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
-        #curses.echo()
-        #curses.endwin()
+        curses.echo()
+        curses.endwin()
         print("Shutdown Mission.")
         #Detector.terminate()
         
