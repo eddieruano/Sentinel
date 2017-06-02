@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:59:19
+# @Last Modified time: 2017-06-02 13:28:05
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -53,6 +53,7 @@ def main():
         activeFlag = True
         while activeFlag == True:
             activeFlag = True
+            print(DESI.State_Main)
             # Query for the proximity of Megan #
             #distv1 = Voyager1.get_distance()
             #time.sleep(0.3)
