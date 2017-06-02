@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 23:30:20
+# @Last Modified time: 2017-06-01 23:42:22
 
 """
     DESI uses two HCSR04 proximity sensors to determine Megan's postition on the treadmill.
@@ -51,5 +51,5 @@ class Voyager(object):
         self.TimeElapsed = self.StopTime - self.StartTime
         # multiply with the sonic speed (34300 cm/s)
         # and divide by 2, because there and back
-        self.distance = (TimeElapsed * 34300) / 2
+        self.distance = (self.TimeElapsed * 34300) / 2
         return self.distance
