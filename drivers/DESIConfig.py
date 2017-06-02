@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:55:15
+# @Last Modified time: 2017-06-02 12:59:54
 
 import RPi.GPIO as GPIO
 class DESI(object):
@@ -92,15 +92,7 @@ class DESI(object):
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
         print ("Relay Array Set.")
-    def DESIListen(self):
-        GPIO.add_event_detect(self.IN_START, GPIO.FALLING, self.performStart, self.bounceTime)
-        GPIO.add_event_detect(self.IN_PAUSE, GPIO.FALLING, self.performPause, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED0, GPIO.FALLING, self.perform00, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED1, GPIO.FALLING, self.perform01, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED2, GPIO.FALLING, self.perform02, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED3, GPIO.FALLING, self.perform03, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED4, GPIO.FALLING, self.perform04, self.bounceTime)
-        print("Listening.")
+    
     def DESISend(self, command):
         if command == "Start":
             performStart()
