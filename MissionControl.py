@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:28:05
+# @Last Modified time: 2017-06-02 13:40:42
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -37,9 +37,9 @@ def main():
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
     #DESI.initProximity(Voyager1, Voyager2)
-    #if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
-    #    print("TSense")
-    #    sys.exit(1)
+    if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
+        print("TSense")
+        sys.exit(1)
     try:
         print("Listening")
         GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.bounceTime)

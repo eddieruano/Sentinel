@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:38:37
+# @Last Modified time: 2017-06-02 13:40:27
 
 import RPi.GPIO as GPIO
 import time
@@ -189,6 +189,7 @@ class DESI(object):
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
             DESI.State_Main = "Speed0"
+            time.sleep(1)
         else:
             print("Nope")
     def perform01(a,b):
@@ -206,6 +207,7 @@ class DESI(object):
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
             DESI.State_Main = "Speed1"
+            time.sleep(1)
         else:
             print("Nope")
     def perform02(a,b):
@@ -224,6 +226,7 @@ class DESI(object):
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
             DESI.State_Main = "Speed2"
+            time.sleep(1)
         else:
             print("Nope")
     def perform03(a,b):
@@ -241,6 +244,7 @@ class DESI(object):
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
             DESI.State_Main = "Speed3"
+            time.sleep(1)
         else:
             print("Nope")
     def perform04(a,b):
@@ -258,6 +262,7 @@ class DESI(object):
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
             DESI.State_Main = "Speed4"
+            time.sleep(1)
         else:
             print("Nope")
 
