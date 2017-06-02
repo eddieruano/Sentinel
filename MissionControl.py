@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:37:27
+# @Last Modified time: 2017-06-02 12:38:05
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -70,7 +70,7 @@ def main():
             #    redux = ((distAverage - 10) / 2) * 10
             #    redux = int(redux)
 #
- #           time.sleep(1)
+#           time.sleep(1)
     # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
