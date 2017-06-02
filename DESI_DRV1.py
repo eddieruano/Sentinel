@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:36:15
+# @Last Modified time: 2017-06-02 01:38:59
 
 """
 Basic DESI Driver for Prototyping
@@ -70,7 +70,7 @@ def main():
          GPIO.cleanup()
          sys.exit(1)
       else:
-         
+         activeFlag = True
    #Should not get here
 def performS0(channel):
    global state
