@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 23:39:45
+# @Last Modified time: 2017-06-01 23:40:55
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -58,7 +58,7 @@ def main():
         while ActiveFlag:
             distv1 = Voyager1.get_distance()
             distv2 = Voyager2.get_distance()
-            HUD.displayInfo(0, distv2, 0)
+            HUD.displayInfo(distv1, distv2, 0)
             time.sleep(0.5)
     # Catch Ctrl+C
     except KeyboardInterrupt:
