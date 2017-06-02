@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:43:55
+# @Last Modified time: 2017-06-02 11:53:52
 
 """
 Basic DESI Driver for Prototyping
@@ -43,7 +43,7 @@ GR_ALEXA = 21
 # #BOUNCE IN MS# #
 bounceTime = 800
 # #STATE# #
-state = ""
+state = "Startup"
 ### MAIN PROGRAM START ###
 def main():
    GPIO.setmode(GPIO.BCM)
@@ -53,7 +53,6 @@ def main():
 
    GPIO.add_event_detect(G_INSTART, GPIO.FALLING, performStart, bounceTime)
    GPIO.add_event_detect(G_INPAUSE, GPIO.FALLING, performStop, bounceTime)
-
    GPIO.add_event_detect(G_INSTOP, GPIO.FALLING, performS0, bounceTime)
    GPIO.add_event_detect(G_INSLOW, GPIO.FALLING, performS1, bounceTime)
    GPIO.add_event_detect(G_INMED, GPIO.FALLING, performS2, bounceTime)
@@ -75,7 +74,6 @@ def main():
             GPIO.cleanup()
             sys.exit(0)
             print("Shutdown Mission.")
-            #Detector.terminate()
             #Should not get here
 def performS0(channel):
    global state
@@ -176,11 +174,6 @@ def performS4(channel):
       time.sleep(0.1)
       GPIO.output(GR_ENTER, GPIO.HIGH)
       time.sleep(0.1)
-      #alexa
-      #GPIO.output(GR_ALEXA, GPIO.LOW)
-      #time.sleep(0.2)
-      #GPIO.output(GR_ALEXA, GPIO.HIGH)
-      #time.sleep(0.2)
       global state
       state = "Speed4"
       print(state)

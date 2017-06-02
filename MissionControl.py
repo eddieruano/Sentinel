@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:03:26
+# @Last Modified time: 2017-06-02 12:29:51
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -12,8 +12,6 @@ import sys
 import os.path
 import signal
 import time
-import curses
-import logging
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
@@ -21,19 +19,12 @@ import RPi.GPIO as GPIO
 ### Set path ###
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04 as VoyagerHCSR04
-import drivers.HUD as HUD
 import drivers.DESIConfig as DESIConfig
-
-### Configure Logger ###
-logging.basicConfig()
-logger = logging.getLogger("Houston")
-logger.setLevel(logging.INFO)
 ### Global Variables ###
 DESI = DESIConfig.DESI()
-Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
-Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
-TouchSense = MPR121.MPR121()
-HUD = HUD.HUD()
+#Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
+#Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
+#TouchSense = MPR121.MPR121()
 
 def main():
     # Variables
@@ -41,36 +32,44 @@ def main():
     distv1 = 0.0
     distv2 = 0.0
     slack = 0.0
+    contact = False
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
-    DESI.initProximity(Voyager1, Voyager2)
-    if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
-        logger.info("TouchSense Failure.")
-                                  # Initialize comms with MPR121 using default I2C bus of device, and # default I2C address (0x5A). 
-        sys.exit(1)
-
+    #DESI.initProximity(Voyager1, Voyager2)
+    #if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
+    #    print("TSense")
+    #    sys.exit(1)
     try:
         while True:
+            DESI.DESIListen()
             # Query for the proximity of Megan #
-            distv1 = Voyager1.get_distance()
-            distv2 = Voyager2.get_distance()
-            distAverage = distv1 + distv2 / 2
-
-            proxError = distv1 - distv2
-
-            state = checkState(distAverage)
-
-            if state != "Green":
-                if state == "Red":
-                    DESI.send("Pause")
-
-                slack = 30 - distAverage
-                redux = ((distAverage - 10) / 2) * 10
-                redux = int(redux)
-
-            renderDisplay(self, STATE, SPEED, distv1, distv2, CONTACT_M, CONTACT_L, CONTACT_R, CONTACT_T, "Active"):
-            time.sleep(0.5)
+            #distv1 = Voyager1.get_distance()
+            #time.sleep(0.3)
+            #distv2 = Voyager2.get_distance()
+            #distAverage = (distv1 + distv2) / 2
+            #proxError = distv1 - distv2
+            #contact = checkContact()
+            #state = checkState(distAverage)
+            #if state == "Red":
+            #    print("Red!")
+            #    past_state = state
+            #    DESI.send("Pause")
+            #    time.sleep(5)
+            #    DESI.send(past_state)
+            #elif state == "Yellow":
+            #    DESI.send("Down")
+            #    time.sleep(0.4)
+            #    DESI.send("Down")
+            #    time.sleep(0.4)
+            #    DESI.send("Down")
+            #else:
+            #    print("Green!")
+            #    slack = 30 - distAverage
+            #    redux = ((distAverage - 10) / 2) * 10
+            #    redux = int(redux)
+#
+ #           time.sleep(1)
     # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
