@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:40:42
+# @Last Modified time: 2017-06-02 13:41:51
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -24,7 +24,7 @@ import drivers.DESIConfig as DESIConfig
 DESI = DESIConfig.DESI()
 #Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 #Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
-#TouchSense = MPR121.MPR121()
+TouchSense = MPR121.MPR121()
 
 def main():
     # Variables
