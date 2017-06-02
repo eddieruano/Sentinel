@@ -2,10 +2,9 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:32:09
+# @Last Modified time: 2017-06-02 12:32:27
 
 import RPi.GPIO as GPIO
-import logger
 class DESI(object):
     """Representation of a DESI Entity"""
     # Control Box Pins
