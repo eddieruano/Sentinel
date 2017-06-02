@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:51:32
+# @Last Modified time: 2017-06-02 12:54:09
 
 import RPi.GPIO as GPIO
 class DESI(object):
@@ -93,51 +93,51 @@ class DESI(object):
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
         print ("Relay Array Set.")
     def DESIListen(self):
-        GPIO.add_event_detect(self.IN_START, GPIO.FALLING, self.performStart, self.bounceTime)
-        GPIO.add_event_detect(self.IN_PAUSE, GPIO.FALLING, self.performPause, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED0, GPIO.FALLING, self.perform00, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED1, GPIO.FALLING, self.perform01, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED2, GPIO.FALLING, self.perform02, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED3, GPIO.FALLING, self.perform03, self.bounceTime)
-        GPIO.add_event_detect(self.IN_SPEED4, GPIO.FALLING, self.perform04, self.bounceTime)
+        GPIO.add_event_detect(self.IN_START, GPIO.FALLING, performStart, self.bounceTime)
+        GPIO.add_event_detect(self.IN_PAUSE, GPIO.FALLING, performPause, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED0, GPIO.FALLING, perform00, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED1, GPIO.FALLING, perform01, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED2, GPIO.FALLING, perform02, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED3, GPIO.FALLING, perform03, self.bounceTime)
+        GPIO.add_event_detect(self.IN_SPEED4, GPIO.FALLING, perform04, self.bounceTime)
         print("Listening.")
     def DESISend(self, command):
         if command == "Start":
-            self.performStart()
+            performStart()
             print("SendStart")
         elif command == "Pause":
-            self.performPause()
+            performPause()
             print("SendPause")
         elif command == "Off":
-            self.performOff()
+            performOff()
             print("Off")
         elif command == "Enter":
-            self.performEnter()
+            performEnter()
             print("Enter")
         elif command == "00":
-            self.perform00()
+            perform00()
             print("Send00")
         elif command == "01":
-            self.perform01()
+            perform01()
             print("Send01")
         elif command == "02":
-            self.perform02()
+            perform02()
             print("Send02")
         elif command == "03":
-            self.perform03()
+            perform03()
             print("Send03")
         elif command == "04":
-            self.perform04()
+            perform04()
             print("Send04")
         elif command == "05":
-            self.perform05()
+            perform05()
             print("Send04")
         else:
             print("Error")
             print(command)
     def DESIUpdateState(self, state):
         pass
-    def performStart():
+    def performStart(self):
         if self.State_Main == "Idle":
             GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.2)
@@ -150,7 +150,7 @@ class DESI(object):
             self.State_Main = "Speed0"
         else:
             print("Already Started")
-    def performShutdown():
+    def performShutdown(self):
         print("Shutting Down")
         GPIO.output(self.OUT_PAUSE, GPIO.LOW)
         time.sleep(0.2)
@@ -161,7 +161,7 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.2)
         self.State_Main = "Shutdown"
-    def performPause():
+    def performPause(self):
         if self.State_Main != "Pause":
             GPIO.output(self.OUT_PAUSE, GPIO.LOW)
             time.sleep(0.2)
