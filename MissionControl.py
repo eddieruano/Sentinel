@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 12:29:51
+# @Last Modified time: 2017-06-02 12:37:27
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -41,8 +41,9 @@ def main():
     #    print("TSense")
     #    sys.exit(1)
     try:
+        DESI.DESIListen()
         while True:
-            DESI.DESIListen()
+
             # Query for the proximity of Megan #
             #distv1 = Voyager1.get_distance()
             #time.sleep(0.3)
