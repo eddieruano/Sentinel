@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:37:42
+# @Last Modified time: 2017-06-02 13:38:37
 
 import RPi.GPIO as GPIO
 import time
@@ -132,9 +132,9 @@ class DESI(object):
         pass
     def performStart(a,b):
         if DESI.State_Main == "Idle":
-            GPIO.output(DESI.OUT_0, GPIO.LOW)
+            GPIO.output(DESI.OUT_START, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.HIGH)
+            GPIO.output(DESI.OUT_START, GPIO.HIGH)
             time.sleep(0.1)
             GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
