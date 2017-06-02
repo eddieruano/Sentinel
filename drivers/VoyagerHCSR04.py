@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 21:39:53
+# @Last Modified time: 2017-06-01 23:30:20
 
 """
     DESI uses two HCSR04 proximity sensors to determine Megan's postition on the treadmill.
@@ -11,8 +11,10 @@
 import RPi.GPIO as GPIO
 import time
  
-class Voyager:
-
+class Voyager(object):
+    StartTime = 0.0
+    StopTime = 0.0
+    TimeElapsed = 0.0
     """ Begin VoyagerHCSR04 class structure """
     def __init__(self, name, t_pin, e_pin):
         self.name = name
@@ -38,16 +40,16 @@ class Voyager:
         time.sleep(0.00001)
         GPIO.output(self.trigger_pin, False)
         # Create holders for times
-        StartTime = time.time()
+        self.StartTime = time.time()
         # save StartTime
         while GPIO.input(self.echo_pin) == 0:
-            StartTime = time.time()
+            self.StartTime = time.time()
         # save time of arrival
         while GPIO.input(self.echo_pin) == 1:
-            StopTime = time.time()
+            self.StopTime = time.time()
         # time difference between start and arrival
-        TimeElapsed = StopTime - StartTime
+        self.TimeElapsed = self.StopTime - self.StartTime
         # multiply with the sonic speed (34300 cm/s)
         # and divide by 2, because there and back
-        distance = (TimeElapsed * 34300) / 2
-        return distance
+        self.distance = (TimeElapsed * 34300) / 2
+        return self.distance
