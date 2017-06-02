@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 01:38:59
+# @Last Modified time: 2017-06-02 01:41:17
 
 """
 Basic DESI Driver for Prototyping
@@ -63,15 +63,21 @@ def main():
    activeFlag = True
    print("In Main Loop:\n")
    while activeFlag:
-      global state
-      if state == "Shutdown":
-         print("Cleaning GPIO..")
-         print("DESI Shutdown Complete.")
-         GPIO.cleanup()
-         sys.exit(1)
-      else:
-         activeFlag = True
-   #Should not get here
+        try:
+            if state == "Shutdown":
+                print("Cleaning GPIO..")
+                print("DESI Shutdown Complete.")
+                GPIO.cleanup()
+                sys.exit(1)
+            else:
+                activeFlag = True
+        # Catch Ctrl+C
+        except KeyboardInterrupt:
+            GPIO.cleanup()
+            sys.exit(0)
+            print("Shutdown Mission.")
+            #Detector.terminate()
+            #Should not get here
 def performS0(channel):
    global state
    if state != "Startup" and state != "Speed0":
