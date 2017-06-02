@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:11:21
+# @Last Modified time: 2017-06-02 13:13:49
 
 import RPi.GPIO as GPIO
 import time
@@ -145,15 +145,18 @@ class DESI(object):
             print("Already Started")
     def performShutdown():
         print("Shutting Down")
-        GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
-        time.sleep(0.2)
-        GPIO.output(DESI.OUT_PAUSE, GPIO.HIGH)
-        time.sleep(0.2)
-        GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
-        time.sleep(0.2)
-        GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
-        time.sleep(0.2)
-        DESI.State_Main = "Shutdown"
+        if DESI.State_Main == "Pause":
+            GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
+            time.sleep(0.2)
+            GPIO.output(DESI.OUT_PAUSE, GPIO.HIGH)
+            time.sleep(0.2)
+            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            time.sleep(0.2)
+            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            time.sleep(0.2)
+            DESI.State_Main = "Shutdown"
+        else:
+            print("Nope")
     def performPause(a,b):
         if DESI.State_Main != "Pause":
             GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
