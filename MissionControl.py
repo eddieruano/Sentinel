@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 21:40:48
+# @Last Modified time: 2017-06-01 21:41:18
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -38,7 +38,7 @@ def main():
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
-    #DESI.initProximity(Voyager1, Voyager2)
+    DESI.initProximity(Voyager1, Voyager2)
     # Initialize TouchSense Capacitive Sensor Array
     # Initialize comms with MPR121 using default I2C bus of device, and
     # default I2C address (0x5A).  
@@ -55,7 +55,7 @@ def main():
 
     """Starts Main Workout Loop"""
     ActiveFlag = True
-    
+
     try:
         while ActiveFlag:
             #distv1 = Voyager1.get_distance()
