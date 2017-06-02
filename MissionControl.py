@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:48:25
+# @Last Modified time: 2017-06-02 13:48:55
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -55,7 +55,7 @@ def main():
             activeFlag = True
             print(DESI.State_Main)
             if TouchSense.is_touched(2) == False:
-                DESI.performPause(a,b)
+                DESI.performPause(distv1, distv2)
             # Query for the proximity of Megan #
             #distv1 = Voyager1.get_distance()
             #time.sleep(0.3)
