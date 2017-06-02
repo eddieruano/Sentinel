@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:10:17
+# @Last Modified time: 2017-06-02 13:11:21
 
 import RPi.GPIO as GPIO
 import time
@@ -143,7 +143,7 @@ class DESI(object):
             DESI.State_Main = "Speed0"
         else:
             print("Already Started")
-    def performShutdown(a,b):
+    def performShutdown():
         print("Shutting Down")
         GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
         time.sleep(0.2)
