@@ -2,10 +2,10 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 23:40:28
+# @Last Modified time: 2017-06-02 00:07:51
 
 import RPi.GPIO as GPIO
-
+import logger
 class DESI(object):
     """Representation of a DESI Entity"""
     # Control Box Pins
@@ -92,3 +92,11 @@ class DESI(object):
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
         return "Relay Array Set."
+
+    def DESIListen(self):
+        pass
+    def DESISend(self, command):
+        pass
+    def DESIUpdateState(self, state):
+        pass
+

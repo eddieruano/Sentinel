@@ -2,9 +2,10 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 12:03:30
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 21:43:29
+# @Last Modified time: 2017-06-02 00:52:55
 
 import curses
+import logging
 
 class HUD(object):
     v_box_ht = 5
@@ -16,6 +17,9 @@ class HUD(object):
         self.midBox = self.display.subwin(10, 60, 10, 10)
         self.touchBox = self.display.subwin(10, 60, 25, 10)
         self.configureHUD()
+    def renderDisplay(self, state, speed, v1, v2, cap1, cap2, cap3, cap4, message):
+        self.displayHeaderBar()
+        self.displayInfo(v1, v2, state)
     def configureHUD(self):
         curses.noecho()
         self.display.nodelay(True)
@@ -30,14 +34,15 @@ class HUD(object):
         # Create MidSetion Status
         self.midBox.box()
         self.midBox.addstr(1, 21, "Control Status")
-        self.midBox.addstr(3, 5, "Voyager Disparity Error +/-: ")
-        self.midBox.addstr(4, 5, "ProxV1 Status: ")
-        self.midBox.addstr(5, 5, "ProxV2 Status: ")
-        self.midBox.addstr(6, 5, "SlowDown Factor: 0x (in Green)")
-        self.midBox.addstr(7, 5, "Timeout: 0 (in Green)")
+        self.midBox.addstr(3, 5, "Current State: ")
+        self.midBox.addstr(4, 5, "Current Speed: ")
+        self.midBox.addstr(5, 5, "ProxV1 Status: ")
+        self.midBox.addstr(6, 5, "ProxV2 Status: ")
+        self.midBox.addstr(7, 5, "SlowDown Factor: 0x (in Green)")
+        self.midBox.addstr(8, 5, "Timeout: 0 (in Green)")
         # Create Touch Box
         self.touchBox.box()
-        self.touchBox.addstr(1, 21, "Cap Touch Status")
+        self.touchBox.addstr(1, 21, "Action Traffic Log")
         self.displayRefresh()
         # Create Serial Box
     def displayHeaderBar(self):
@@ -54,7 +59,9 @@ class HUD(object):
         self.midBox.refresh()
         self.touchBox.refresh()
     def displayInfo(self, prox1, prox2, status):
-        self.updateV1(prox1)
+        
+        self.displayV1(prox1)
+        self.displayV2(prox1)
         self.displayBar(prox1)
         self.displayRefresh()
     def displayBar (self, iteration):
@@ -75,16 +82,37 @@ class HUD(object):
         buf = "%s |%s| %s %s %%\n" % (prefix, bar, suffix, percent)
         self.display.addstr(22, 5, buf)
         self.displayRefresh()
-    def updateV1(self, distance):
-        status = "Green"
+    def displayV1(self, distance):
         update = str(distance) +  " cm"
         self.display.addstr(8, 8, update)
-        if distance < 17.2:
-            self.display.addstr(14, 30, "Within Green Zone", curses.A_UNDERLINE)
-        elif distance > 17.2 and distance < 30:
-            self.display.addstr(14, 30, "Within Yellow Zone", curses.A_UNDERLINE)
-            status = "Yellow"
-        else:
-            self.display.addstr(14, 30, "RED ZONE, Beginning Timeout", curses.A_UNDERLINE)
-            status = "Red"
-        return status
+
+        #if distance < 17.2:
+        #    self.display.addstr(14, 30, "Within Green Zone", curses.A_UNDERLINE)
+        #elif distance > 17.2 and distance < 30:
+        #    self.display.addstr(14, 30, "Within Yellow Zone", curses.A_UNDERLINE)
+        #    status = "Yellow"
+        #else:
+        #    self.display.addstr(14, 30, "RED ZONE, Beginning Timeout", curses.A_UNDERLINE)
+        #    status = "Red"
+        #return status
+    def displayV2(self, distance):
+        update = str(distance) +  " cm"
+        screen.addstr(8, 43, update)
+
+        #if distance < 17.2:
+        #    self.display.addstr(14, 30, "Within Green Zone", curses.A_UNDERLINE)
+        #elif distance > 17.2 and distance < 30:
+        #    self.display.addstr(14, 30, "Within Yellow Zone", curses.A_UNDERLINE)
+        #    status = "Yellow"
+        #else:
+        #    self.display.addstr(14, 30, "RED ZONE, Beginning Timeout", curses.A_UNDERLINE)
+        #    status = "Red"
+        #return status
+    def displayState(self, state):
+    def cleanup(self):
+        curses.echo()
+        curses.endwin()
+    def msg(line):
+        pass
+        #logger.info(line)
+
