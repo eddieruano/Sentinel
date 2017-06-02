@@ -1,4 +1,4 @@
- import cayenne.client
+import cayenne.client
 import time
 
 # Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
