@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 15:17:12
+# @Last Modified time: 2017-06-01 21:31:03
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -13,6 +13,7 @@ import os.path
 import signal
 import time
 import curses
+import logging
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
@@ -56,10 +57,9 @@ def main():
     ActiveFlag = True
     try:
         while ActiveFlag:
-            distv1 = Voyager1.get_distance()
-            #distv2 = Voyager2.get_distance()
-            HUD.displayInfo(distv1, 0, 0)
-            time.sleep(1)
+            #distv1 = Voyager1.get_distance()
+            distv2 = Voyager2.get_distance()
+            HUD.displayInfo(0, distv2, 0)
     # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
