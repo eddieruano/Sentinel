@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-01 21:31:03
+# @Last Modified time: 2017-06-01 21:32:58
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -60,6 +60,7 @@ def main():
             #distv1 = Voyager1.get_distance()
             distv2 = Voyager2.get_distance()
             HUD.displayInfo(0, distv2, 0)
+            time.sleep(0.5)
     # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
