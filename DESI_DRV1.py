@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-05-31 13:47:17
+# @Last Modified time: 2017-06-02 01:32:14
 
 """
 Basic DESI Driver for Prototyping
@@ -189,6 +189,7 @@ def performStart(channel):
       print("Already Started.")
 
 def performStop(channel):
+   global state
    if state == "Speed0"
       print("Shutting Down.")
       GPIO.output(GR_OFF, GPIO.LOW)
@@ -204,7 +205,6 @@ def performStop(channel):
       time.sleep(0.1)
       GPIO.output(GR_PAUSE, GPIO.HIGH)
       time.sleep(0.1)
-      global state
       state = "Paused"
       print(state)
 def initializeButtons(start, pause):
