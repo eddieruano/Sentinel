@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 16:36:47
+# @Last Modified time: 2017-06-02 17:33:08
 
 import RPi.GPIO as GPIO
 import time
@@ -149,6 +149,10 @@ class DESI(object):
     def performShutdown():
         print("Shutting Down")
         if DESI.State_Main == "Pause":
+            GPIO.output(DESI.OUT_OFF, GPIO.LOW)
+            time.sleep(0.1)
+            GPIO.output(DESI.OUT_OFF, GPIO.HIGH)
+            time.sleep(0.1)
             GPIO.output(DESI.OUT_OFF, GPIO.LOW)
             time.sleep(0.1)
             GPIO.output(DESI.OUT_OFF, GPIO.HIGH)
