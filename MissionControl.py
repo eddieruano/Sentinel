@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:26:46
+# @Last Modified time: 2017-06-04 03:27:13
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -36,7 +36,8 @@ CONST_ZONE_FIX = 0.0
 Proximity = 0
 FlagDisparity = False
 
-def main(self):
+def main():
+    global FlagDisparity
     # Variables
     proxError = 0.0
     distv1 = 0.0
