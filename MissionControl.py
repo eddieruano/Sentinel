@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:34:40
+# @Last Modified time: 2017-06-04 02:35:52
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -145,6 +145,7 @@ def main():
             elif ave > DESI.Zone_Red:
                 saveSpeed = DESI.State_Speed
                 DESI.DESISend("Send00")
+                print(ave)
                 redFlag = True
             elif redFlag:
                 DESI.DESISend("Send01")
