@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 20:22:36
+# @Last Modified time: 2017-06-03 20:25:55
 
 import RPi.GPIO as GPIO
 import time
@@ -131,7 +131,7 @@ class DESI(object):
     def DESIUpdateState(self, state):
         pass
     def performStart(a,b):
-        if self.State_Main == "Idle":
+        if DESI.State_Main == "Idle":
             GPIO.output(DESI.OUT_START, GPIO.LOW)
             time.sleep(0.1)
             GPIO.output(DESI.OUT_START, GPIO.HIGH)
@@ -141,13 +141,13 @@ class DESI(object):
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
             self.perform00(a,b)
-        elif self.State_Main == "Pause":
+        elif DESI.State_Main == "Pause":
             self.performShutdown(a,b)
         else:
             print("Already Started")
     def performShutdown():
         print("Shutting Down")
-        if self.State_Main == "Pause":
+        if DESI.State_Main == "Pause":
             GPIO.output(DESI.OUT_OFF, GPIO.LOW)
             time.sleep(0.1)
             GPIO.output(DESI.OUT_OFF, GPIO.HIGH)
@@ -160,12 +160,11 @@ class DESI(object):
             time.sleep(0.1)
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            self.State_Main = "Shutdown"
+            DESI.State_Main = "Shutdown"
         else:
             print("Nope")
     def performPause(a,b):
-        if self.State_Main != "Pause":
-
+        if DESI.State_Main != "Pause":
             GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
             time.sleep(0.1)
             GPIO.output(DESI.OUT_PAUSE, GPIO.HIGH)
@@ -174,7 +173,7 @@ class DESI(object):
             time.sleep(0.1)
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            self.State_Main = "Pause"
+            DESI.State_Main = "Pause"
         else:
             GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
             time.sleep(0.1)
@@ -184,11 +183,11 @@ class DESI(object):
             time.sleep(0.1)
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            self.State_Main = ""
+            DESI.State_Main = "Speed0"
             print("Nope")
     
     def perform00(a,b):
-        if self.State_Main == "Speed1" or self.State_Main == "Idle":
+        if DESI.State_Main == "Speed1" or DESI.State_Main == "Idle":
             GPIO.output(DESI.OUT_0, GPIO.LOW)
             time.sleep(0.1)
             GPIO.output(DESI.OUT_0, GPIO.HIGH)
@@ -202,7 +201,7 @@ class DESI(object):
             time.sleep(0.1)
             GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            self.State_Main = "Speed0"
+            DESI.State_Main = "Speed0"
             time.sleep(1)
         else:
             print("Nope")
