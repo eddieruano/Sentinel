@@ -21,7 +21,7 @@
 import sys
 import time
 
-import Adafruit_MPR121.MPR121 as MPR121
+import MPR121
 
 
 print('Adafruit MPR121 Capacitive Touch Sensor Test')
@@ -60,7 +60,6 @@ while True:
             print('{0} released!'.format(i))
     # Update last state and wait a short period before repeating.
     last_touched = current_touched
-    cap.get_thresholds()
     # Alternatively, if you only care about checking one or a few pins you can
     # call the is_touched method with a pin number to directly check that pin.
     # This will be a little slower than the above code for checking a lot of pins.
