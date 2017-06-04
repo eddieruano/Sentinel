@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 10:15:12
+# @Last Modified time: 2017-06-04 10:16:09
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -18,7 +18,7 @@ import time
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
-import snowboydecoder
+import snowboy.snowboydecoder
 # Local Modules #
 ### Set path ###
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
