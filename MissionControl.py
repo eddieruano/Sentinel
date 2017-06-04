@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:04:46
+# @Last Modified time: 2017-06-03 22:07:29
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -74,6 +74,8 @@ def main():
                 DESI.DESISend("Send03")
             elif command == "4":
                 DESI.DESISend("Send04")
+            elif command == "alexa":
+                DESI.DESISend("SendAlexa")
             else:
                 print("Invalid Command")
             # Query for the proximity of Megan #
