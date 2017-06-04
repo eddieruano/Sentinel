@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 13:52:07
+# @Last Modified time: 2017-06-03 21:43:22
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -53,7 +53,23 @@ def main():
         activeFlag = True
         while activeFlag == True:
             activeFlag = True
-            print(DESI.State_Main)
+            command = input("Enter a command: ")
+            if command == "start":
+                DESI.send("Start")
+            elif command == "stop":
+                DESI.send("Stop")
+            elif command == "0":
+                DESI.send("Send00")
+            elif command == "1":
+                DESI.send("Send01")
+            elif command == "2":
+                DESI.send("Send02")
+            elif command == "3":
+                DESI.send("Send03")
+            elif command == "4":
+                DESI.send("Send04")
+            else:
+                print("Invalid Command")
             # Query for the proximity of Megan #
             #distv1 = Voyager1.get_distance()
             #time.sleep(0.3)

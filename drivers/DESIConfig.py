@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 20:30:41
+# @Last Modified time: 2017-06-03 21:41:48
 
 import RPi.GPIO as GPIO
 import time
@@ -96,7 +96,7 @@ class DESI(object):
     
     def DESISend(self, command):
         if command == "Start":
-            performStart()
+            self.performStart()
             print("SendStart")
         elif command == "Pause":
             performPause()
@@ -130,7 +130,7 @@ class DESI(object):
             print(command)
     def DESIUpdateState(self, state):
         pass
-    def performStart(a,b):
+    def performStart(self, a, b):
         if DESI.State_Main == "Idle":
             GPIO.output(DESI.OUT_START, GPIO.LOW)
             time.sleep(0.1)
@@ -142,6 +142,7 @@ class DESI(object):
             time.sleep(0.1)
             DESI.perform00(a,b)
         elif DESI.State_Main == "Pause":
+            print("Shutdown")
             DESI.performShutdown(a,b)
         else:
             print("Already Started")
