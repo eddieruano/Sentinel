@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:56:04
+# @Last Modified time: 2017-06-04 00:56:54
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -34,7 +34,7 @@ TouchSense = MPR121.MPR121()
 CONST_REDUX = 0.1
 CONST_ZONE_FIX = 0.0
 
-dFlag = True
+
 
 def main():
     # Variables
@@ -44,6 +44,7 @@ def main():
     slack = 0.0
     contact = False
     ave = 0.0
+    dFlag = True
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
