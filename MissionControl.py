@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:07:29
+# @Last Modified time: 2017-06-03 22:09:08
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -56,8 +56,8 @@ def main():
             command = input("Enter a command: ")
             if command == "start":
                 DESI.DESISend("Start")
-            elif command == "stop":
-                DESI.DESISend("Stop")
+            elif command == "shutdown":
+                DESI.DESISend("Shutdown")
             elif command == "pause":
                 DESI.DESISend("Pause")
             elif command == "unpause":

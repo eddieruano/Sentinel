@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:07:14
+# @Last Modified time: 2017-06-03 22:09:00
 
 import RPi.GPIO as GPIO
 import time
@@ -101,9 +101,9 @@ class DESI(object):
         elif command == "Pause":
             self.performPause()
             print("SendPause")
-        elif command == "Off":
+        elif command == "Shutdown":
             self.performOff()
-            print("Off")
+            print("Shutdown")
         elif command == "Enter":
             self.performEnter()
             print("Enter")
