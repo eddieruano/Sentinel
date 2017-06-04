@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 01:00:50
+# @Last Modified time: 2017-06-04 01:08:56
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -64,35 +64,7 @@ def main():
         #DESI.DESIListen()
         activeFlag = True
         while activeFlag == True:
-            i = 0
-            command = input("Enter a command: ")
-            if command == "s":
-                play_audio_file(DING)
-                DESI.DESISend("Start")
-            elif command == "h":
-                DESI.DESISend("Shutdown")
-            elif command == "p":
-                DESI.DESISend("Pause")
-            elif command == "u":
-                DESI.DESISend("Pause")
-            elif command == "e":
-                DESI.DESISend("Enter")
-            elif command == "0":
-                DESI.DESISend("Send00")
-            elif command == "1":
-                DESI.DESISend("Send01")
-            elif command == "2":
-                DESI.DESISend("Send02")
-            elif command == "3":
-                DESI.DESISend("Send03")
-            elif command == "4":
-                DESI.DESISend("Send04")
-            elif command == "d":
-                DESI.DESISend("SendDown")
-            elif command == "a":
-                DESI.DESISend("SendAlexa")
-            elif command == "r":
-                ave = queryDistance()
+            ave = queryDistance()
                 print(ave)
                 if(ave > DESI.Zone_Yellow):
                     subRedux = DESI.State_Speed * CONST_REDUX * 10
@@ -105,34 +77,6 @@ def main():
                         DESI.DESISend("SendDown")
                         i+=1
                     print("refresh")
-            else:
-                print("inv")
-            # Query for the proximity of Megan #
-            #time.sleep(0.3)
-            
-            #distAverage = (distv1 + distv2) / 2
-            #proxError = distv1 - distv2
-            #contact = checkContact()
-            #state = checkState(distAverage)
-            #if state == "Red":
-            #    print("Red!")
-            #    past_state = state
-            #    DESI.send("Pause")
-            #    time.sleep(5)
-            #    DESI.send(past_state)
-            #elif state == "Yellow":
-            #    DESI.send("Down")
-            #    time.sleep(0.4)
-            #    DESI.send("Down")
-            #    time.sleep(0.4)
-            #    DESI.send("Down")
-            #else:
-            #    print("Green!")
-            #    slack = 30 - distAverage
-            #    redux = ((distAverage - 10) / 2) * 10
-            #    redux = int(redux)
-    #           time.sleep(1)
-    # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")

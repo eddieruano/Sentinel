@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:55:50
+# @Last Modified time: 2017-06-04 01:07:44
 
 import RPi.GPIO as GPIO
 import time
@@ -128,12 +128,12 @@ class DESI(object):
         elif command == "Send03":
             self.performS3()
             print("Send03")
+        elif command == "Send04":
+            self.performS4()
+            print("Send04")
         elif command == "SendDown":
             self.performDown()
             print("SendDown")
-        elif command == "Send05":
-            self.performS5()
-            print("Send05")
         elif command == "SendAlexa":
             self.performAlexa()
             print("Alexa")
