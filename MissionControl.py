@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:54:40
+# @Last Modified time: 2017-06-04 00:55:07
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -51,11 +51,6 @@ def main():
     if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
         print("TSense")
         sys.exit(1)
-    stdscr = curses.initscr()
-    stdscr.border(0)
-    curses.noecho()
-    curses.use_default_colors()
-    stdscr.refresh()
     try:
         print("Listening")
         GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.Time_Bounce)
