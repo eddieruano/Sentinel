@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:04:28
+# @Last Modified time: 2017-06-04 00:07:28
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -94,7 +94,7 @@ def main():
             print(ave)
             
             if(ave > DESI.Zone_Yellow):
-                subZone = DESI.Zone_Red - DESI.Zone_Yellow
+                subZone = (ave - (DESI.Zone_Red - DESI.Zone_Yellow - 1.0)) * 10
                 print(subZone)
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
