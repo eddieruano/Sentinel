@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 01:08:56
+# @Last Modified time: 2017-06-04 01:09:59
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -44,7 +44,7 @@ def main():
     slack = 0.0
     contact = False
     ave = 0.0
-    dFlag = True
+    i = 0
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -64,6 +64,7 @@ def main():
         #DESI.DESIListen()
         activeFlag = True
         while activeFlag == True:
+            i = 0
             ave = queryDistance()
                 print(ave)
                 if(ave > DESI.Zone_Yellow):
@@ -76,7 +77,6 @@ def main():
                     while i < redux:
                         DESI.DESISend("SendDown")
                         i+=1
-                    print("refresh")
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")
