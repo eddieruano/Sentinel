@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:21:39
+# @Last Modified time: 2017-06-04 02:22:26
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -212,8 +212,8 @@ def queryDistance():
         distv2 = distv1
     if error:
         ave = -1.0
-    print(distv1)
-    print(distv2)
+    #print(distv1)
+    #print(distv2)
     ave = (distv1 + distv2) / 2
     return ave
 #def signal_handler(signal, frame):
