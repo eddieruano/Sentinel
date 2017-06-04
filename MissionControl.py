@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:48:23
+# @Last Modified time: 2017-06-04 00:51:56
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -34,6 +34,8 @@ Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
 CONST_REDUX = 0.1
 CONST_ZONE_FIX = 0.0
+
+dFlag = True
 
 def main(stdscr):
     # Variables
@@ -67,6 +69,7 @@ def main(stdscr):
         #DESI.DESIListen()
         activeFlag = True
         while activeFlag == True:
+            i = 0
             command = stdscr.getkey()
             #command = input("Enter a command: ")
             if command == "s":
@@ -110,8 +113,9 @@ def main(stdscr):
                 print(subRedux)
                 print(subZone)
                 print(redux)
-                for i in int(redux):
-                    DESISend("SendDown")
+                while (i < redux) and dFlag:
+                    DESI.DESISend("Down")
+                    dFlag = False    
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
             #contact = checkContact()
