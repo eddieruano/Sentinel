@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:38:42
+# @Last Modified time: 2017-06-03 23:59:50
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -48,13 +48,13 @@ def main():
         sys.exit(1)
     try:
         print("Listening")
-        GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, DESI.performPause, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING, DESI.performS0, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING, DESI.performS1, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING, DESI.performS2, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING, DESI.performS3, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING, DESI.performS4, DESI.bounceTime)
+        GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.Time_Bounce)
+        GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, DESI.performPause, DESI.Time_Bounce)
+        GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING, DESI.performS0, DESI.Time_Bounce)
+        GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING, DESI.performS1, DESI.Time_Bounce)
+        GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING, DESI.performS2, DESI.Time_Bounce)
+        GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING, DESI.performS3, DESI.Time_Bounce)
+        GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING, DESI.performS4, DESI.Time_Bounce)
         #DESI.DESIListen()
         activeFlag = True
         while activeFlag == True:
@@ -89,11 +89,14 @@ def main():
                 print("Invalid Command")
             print(DESI.State_Main)
             # Query for the proximity of Megan #
-            
             #time.sleep(0.3)
             ave = queryDistance()
             print(ave)
             
+            if(ave > DESI.Zone_Yellow):
+                subZone = DESI.Zone_Red - DESI.Zone_Yellow - ave
+                print(subZone)
+                #redux = DESI.Zone_Red - DE(DESI.State_Speed * 10) / 5)
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
             #contact = checkContact()
@@ -146,16 +149,6 @@ def play_audio_file(fname=DING):
     stream_out.stop_stream()
     stream_out.close()
     audio.terminate()
-def queryDistance():
-    distv1 = Voyager1.get_distance()
-    distv2 = Voyager2.get_distance()
-    # Sanitize
-    distv1 = distv1 - 3.5
-    distv2 = distv2 - 3.5
-    print(distv1)
-    print(distv2)
-    ave = (distv1 + distv2) / 2
-    return ave
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
 #    HotwordInterrupt = True

@@ -2,13 +2,18 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:01:30
+# @Last Modified time: 2017-06-03 23:55:50
 
 import RPi.GPIO as GPIO
 import time
 class DESI(object):
     """Representation of a DESI Entity"""
     # Control Box Pins
+    SPEED0 = 0.0
+    SPEED1 = 2.0
+    SPEED2 = 2.5
+    SPEED3 = 3.0
+    SPEED4 = 3.5
     IN_START    = 9
     IN_PAUSE    = 10
     IN_SPEED0   = 11
@@ -38,7 +43,11 @@ class DESI(object):
     State_Main  = "Idle"
     State_Knob  = "Speed0"
     State_Touch = "Negative"
-    bounceTime = 800
+    State_Speed = 0.0
+
+    Zone_Yellow = 8.0
+    Zone_Red = 14.0
+    Time_Bounce = 800
     # Constructor
     def __init__(self):
         """Create an instance of DESI"""
@@ -206,6 +215,7 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Main = "Speed0"
+        self.State_Speed = self.SPEED0
         time.sleep(1)
         # else:
             # print("Nope")
@@ -224,6 +234,7 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Main = "Speed1"
+        self.State_Speed = self.SPEED1
         time.sleep(1)
         # else:
             # print("Nope")
@@ -243,6 +254,7 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Main = "Speed2"
+        self.State_Speed = self.SPEED2
         time.sleep(1)
         # else:
             # print("Nope")
@@ -260,7 +272,7 @@ class DESI(object):
         time.sleep(0.1)
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
-        self.State_Main = "Speed3"
+        self.State_Speed = self.SPEED3
         time.sleep(1)
         # else:
             # print("Nope")
@@ -279,6 +291,7 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Main = "Speed4"
+        self.State_Speed = self.SPEED4
         time.sleep(1)
         # else:
             # print("Nope")
@@ -287,7 +300,7 @@ class DESI(object):
         time.sleep(0.1)
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         time.sleep(0.1)
-        time.sleep(1)
+        self.State_Speed -= 0.1
         # else:
             # print("Nope")
     def performAlexa(self):
@@ -295,3 +308,5 @@ class DESI(object):
         time.sleep(0.2)
         GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
         time.sleep(0.2)
+    def DESIQuerySpeed(self):
+        return self.State_Speed
