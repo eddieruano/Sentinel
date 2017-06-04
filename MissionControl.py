@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:27:13
+# @Last Modified time: 2017-06-04 03:27:48
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -99,37 +99,9 @@ def main():
                 DESI.DESISend("Send04")
             else:
                 pass
-            # command = input("Enter a command: ")
-            # if command == "s":
-            #     play_audio_file(DING)
-            #     DESI.DESISend("Start")
-            # elif command == "h":
-            #     DESI.DESISend("Shutdown")
-            # elif command == "p":
-            #     DESI.DESISend("Pause")
-            # elif command == "u":
-            #     DESI.DESISend("Pause")
-            # elif command == "e":
-            #     DESI.DESISend("Enter")
-            # elif command == "0":
-            #     DESI.DESISend("Send00")
-            # elif command == "1":
-            #     DESI.DESISend("Send01")
-            # elif command == "2":
-            #     DESI.DESISend("Send02")
-            # elif command == "3":
-            #     DESI.DESISend("Send03")
-            # elif command == "4":
-            #     DESI.DESISend("Send04")
-            # elif command == "d":
-            #     DESI.DESISend("SendDown")
-            # elif command == "a":
-            #     DESI.DESISend("SendAlexa")
-            # else:
-            #     print("")
+                
             Proximity = queryDistance()
             if FlagDisparity:
-                print("Disparity")
                 self.FlagDisparity = False;
             print(Proximity)
             subZone = floor(Proximity - DESI.Zone_Yellow) + 1.0
