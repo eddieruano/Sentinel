@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:28:43
+# @Last Modified time: 2017-06-04 02:32:39
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -53,6 +53,8 @@ def main():
     tS3 = False
     lastZone = -1.0
     subZone = 0.0
+    redFlag = False
+    saveSpeed = DESI.State_Speed
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -142,7 +144,11 @@ def main():
                 print("refresh")
             elif ave > DESI.Zone_Red:
                 saveSpeed = DESI.State_Speed
-                DESI.DESISend("Send00")
+                DESI.DESISend("Speed00")
+                redFlag = True
+            elif redFlag:
+                DESI.DESISend("Send01")
+                redFlag = False
             else:
                 pass
             time.sleep(0.3)
