@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:03:58
+# @Last Modified time: 2017-06-03 23:24:13
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -22,8 +22,8 @@ import drivers.VoyagerHCSR04 as VoyagerHCSR04
 import drivers.DESIConfig as DESIConfig
 ### Global Variables ###
 DESI = DESIConfig.DESI()
-#Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
-#Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
+Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
+Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
 
 def main():
@@ -36,7 +36,7 @@ def main():
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
-    #DESI.initProximity(Voyager1, Voyager2)
+    DESI.initProximity(Voyager1, Voyager2)
     if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
         print("TSense")
         sys.exit(1)
@@ -82,9 +82,11 @@ def main():
                 print("Invalid Command")
             print(DESI.State_Main)
             # Query for the proximity of Megan #
-            #distv1 = Voyager1.get_distance()
+            distv1 = Voyager1.get_distance()
             #time.sleep(0.3)
-            #distv2 = Voyager2.get_distance()
+            distv2 = Voyager2.get_distance()
+            print(distv1)
+            print(distv2)
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
             #contact = checkContact()
@@ -106,7 +108,6 @@ def main():
             #    slack = 30 - distAverage
             #    redux = ((distAverage - 10) / 2) * 10
             #    redux = int(redux)
-#
 #           time.sleep(1)
     # Catch Ctrl+C
     except KeyboardInterrupt:
