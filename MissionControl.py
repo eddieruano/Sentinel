@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:43:14
+# @Last Modified time: 2017-06-04 00:43:52
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -35,7 +35,7 @@ TouchSense = MPR121.MPR121()
 CONST_REDUX = 0.1
 CONST_ZONE_FIX = 0.0
 
-def main():
+def main(stdscr):
     # Variables
     proxError = 0.0
     distv1 = 0.0
