@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 17:42:59
+# @Last Modified time: 2017-06-03 19:54:10
 
 import RPi.GPIO as GPIO
 import time
@@ -32,8 +32,8 @@ class DESI(object):
     OUT_3       = 7
     OUT_4       = 12
     OUT_5       = 16
-    OUT_DOWN    = 21
-    OUT_ALEXA   = 20
+    OUT_DOWN    = 20
+    OUT_ALEXA   = 21
     # States of DESI
     State_Main  = "Idle"
     State_Knob  = "Speed0"
@@ -272,7 +272,6 @@ class DESI(object):
             print("Nope")
     def performAlexa(a,b):
         GPIO.output(DESI.OUT_A, GPIO.LOW)
-            time.sleep(0.2)
-            GPIO.output(DESI.OUT_A, GPIO.HIGH)
-            time.sleep(0.2)
-
+        time.sleep(0.2)
+        GPIO.output(DESI.OUT_A, GPIO.HIGH)
+        time.sleep(0.2)
