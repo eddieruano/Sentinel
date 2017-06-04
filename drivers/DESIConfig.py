@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:57:40
+# @Last Modified time: 2017-06-04 03:07:06
 
 import RPi.GPIO as GPIO
 import time
@@ -45,7 +45,7 @@ class DESI(object):
     State_Touch = "Negative"
     State_Speed = 0.0
 
-    Zone_Yellow = 8.0
+    Zone_Yellow = 10.0
     Zone_Red = 13.5
     Time_Bounce = 800
     # Constructor
