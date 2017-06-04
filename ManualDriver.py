@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 10:27:59
+# @Last Modified time: 2017-06-04 11:12:28
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -47,8 +47,6 @@ def main():
         print("TSense")
         sys.exit(1)
     try:
-        #detector = snowboydecoder.HotwordDetector("resources/DESI.pmdl", sensitivity=0.5, audio_gain=1)
-        #detector.start(detected_callback)
         print("Listening")
         #DESI.DESIListen()
         activeFlag = True
@@ -89,34 +87,12 @@ def main():
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")
-        #Detector.terminate()
-        
 ### END OF MAIN ###
 """Helper Functions"""
 def activateAlexa():
     GPIO.output(DESI.OUT_ALEXA, GPIO.LOW)
     time.sleep(2)
     GPIO.output(DESI.OUT_ALEXA, GPIO.HIGH)
-def detected_callback():
-    print ("hotword detected")
-# def play_audio_file(fname=DING):
-#     """Plays audio
-#     :param str fname: wave file name
-#     :return: None
-#     """
-#     ding_wav = wave.open(fname, 'rb')
-#     ding_data = ding_wav.readframes(ding_wav.getnframes())
-#     audio = pyaudio.PyAudio()
-#     stream_out = audio.open(
-#         format=audio.get_format_from_width(ding_wav.getsampwidth()),
-#         channels=ding_wav.getnchannels(),
-#         rate=ding_wav.getframerate(), input=False, output=True)
-#     stream_out.start_stream()
-#     stream_out.write(ding_data)
-#     time.sleep(0.2)
-#     stream_out.stop_stream()
-#     stream_out.close()
-#     audio.terminate()
 def queryDistance():
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
@@ -127,12 +103,6 @@ def queryDistance():
     print(distv2)
     ave = (distv1 + distv2) / 2
     return ave
-#def signal_handler(signal, frame):
-#    global HotwordInterrupt
-#    HotwordInterrupt = True
-#def interrupt_callback():
-#    global HotwordInterrupt
-#    return HotwordInterrupt
 ### MAIN CALL ###
 if __name__ == "__main__":
     main()
