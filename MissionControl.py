@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:00:53
+# @Last Modified time: 2017-06-03 22:04:46
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -44,11 +44,11 @@ def main():
         print("Listening")
         GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.bounceTime)
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, DESI.performPause, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING, DESI.perform00, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING, DESI.perform01, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING, DESI.perform02, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING, DESI.perform03, DESI.bounceTime)
-        GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING, DESI.perform04, DESI.bounceTime)
+        GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING, DESI.performS0, DESI.bounceTime)
+        GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING, DESI.performS1, DESI.bounceTime)
+        GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING, DESI.performS2, DESI.bounceTime)
+        GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING, DESI.performS3, DESI.bounceTime)
+        GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING, DESI.performS4, DESI.bounceTime)
         #DESI.DESIListen()
         activeFlag = True
         while activeFlag == True:

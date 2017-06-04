@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:02:10
+# @Last Modified time: 2017-06-03 22:04:29
 
 import RPi.GPIO as GPIO
 import time
@@ -108,22 +108,22 @@ class DESI(object):
             self.performEnter()
             print("Enter")
         elif command == "00":
-            self.perform00()
+            self.performS0()
             print("Send00")
         elif command == "01":
-            self.perform01()
+            self.performS1()
             print("Send01")
         elif command == "02":
-            self.perform02()
+            self.performS2()
             print("Send02")
         elif command == "03":
-            self.perform03()
+            self.performS3()
             print("Send03")
         elif command == "04":
-            self.perform04()
+            self.performS4()
             print("Send04")
         elif command == "05":
-            self.perform05()
+            self.performS5()
             print("Send04")
         else:
             print("Error")
@@ -140,13 +140,13 @@ class DESI(object):
             time.sleep(0.1)
             GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            self.perform00()
+            self.performS0()
         elif self.State_Main == "Pause":
             print("Shutdown")
             self.performShutdown()
         else:
             print("Already Started")
-    def performShutdown():
+    def performShutdown(self):
         print("Shutting Down")
         if self.State_Main == "Pause":
             GPIO.output(self.OUT_OFF, GPIO.LOW)
@@ -187,7 +187,7 @@ class DESI(object):
             self.State_Main = "Speed0"
             print("Nope")
     
-    def perform00(self):
+    def performS0(self):
         if self.State_Main == "Speed1" or self.State_Main == "Idle":
             GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.1)
@@ -206,7 +206,7 @@ class DESI(object):
             time.sleep(1)
         else:
             print("Nope")
-    def perform01(self):
+    def performS1(self):
         if self.State_Main == "Speed0" or self.State_Main == "Speed2":
             GPIO.output(self.OUT_2, GPIO.LOW)
             time.sleep(0.1)
@@ -224,7 +224,7 @@ class DESI(object):
             time.sleep(1)
         else:
             print("Nope")
-    def perform02(a,b):
+    def performS2(self):
         if self.State_Main == "Speed1" or self.State_Main == "Speed3":
             GPIO.output(self.OUT_2, GPIO.LOW)
             time.sleep(0.1)
@@ -243,7 +243,7 @@ class DESI(object):
             time.sleep(1)
         else:
             print("Nope")
-    def perform03(a,b):
+    def performS3(self):
         if self.State_Main == "Speed4" or self.State_Main == "Speed2":
             GPIO.output(self.OUT_3, GPIO.LOW)
             time.sleep(0.1)
@@ -261,7 +261,7 @@ class DESI(object):
             time.sleep(1)
         else:
             print("Nope")
-    def perform04(a,b):
+    def performS4(self):
         if self.State_Main == "Speed3":
             GPIO.output(self.OUT_3, GPIO.LOW)
             time.sleep(0.1)
@@ -279,7 +279,7 @@ class DESI(object):
             time.sleep(1)
         else:
             print("Nope")
-    def performAlexa(a,b):
+    def performAlexa(self):
         GPIO.output(self.OUT_A, GPIO.LOW)
         time.sleep(0.2)
         GPIO.output(self.OUT_A, GPIO.HIGH)
