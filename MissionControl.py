@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:29:05
+# @Last Modified time: 2017-06-04 03:31:15
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -108,17 +108,17 @@ def main():
             subZone = floor(Proximity - DESI.Zone_Yellow) + 1.0
             if Proximity == -1.0:
                 print ("Error")
-            # elif(Proximity > DESI.Zone_Yellow and subZone != lastZone):
-            #     subRedux = DESI.State_Speed * CONST_REDUX * 10
-            #     redux = subZone * subRedux
-            #     print(subRedux)
-            #     print(subZone)
-            #     print(redux)
-            #     while i < redux:
-            #         DESI.DESISend("SendDown")
-            #         i+=1
-            #     lastZone = subZone
-            #     print("refresh")
+            elif(Proximity > DESI.Zone_Yellow and subZone != lastZone):
+                subRedux = DESI.State_Speed * CONST_REDUX * 10
+                redux = subZone * subRedux
+                print(subRedux)
+                print(subZone)
+                print(redux)
+                while i < redux:
+                    DESI.DESISend("SendDown")
+                    i+=1
+                lastZone = subZone
+                print("refresh")
             elif Proximity > DESI.Zone_Red and not redFlag:
                 saveSpeed = DESI.State_Speed
                 DESI.DESISend("Send00")
