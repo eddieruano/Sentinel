@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:53:26
+# @Last Modified time: 2017-06-04 02:53:58
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -127,7 +127,7 @@ def main():
             # else:
             #     print("")
             ave = queryDistance()
-            #print(ave)
+            print(ave)
             if ave == -1.0:
                 print ("Error")
             elif(ave > DESI.Zone_Yellow and subZone != lastZone):
