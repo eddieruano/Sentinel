@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 01:25:28
+# @Last Modified time: 2017-06-04 02:13:15
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -45,6 +45,12 @@ def main():
     contact = False
     ave = 0.0
     dFlag = True
+    tStart = False
+    tPause = False
+    tS0 = False
+    tS1 = False
+    tS2 = False
+    tS3 = False
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -52,59 +58,82 @@ def main():
     if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
         print("TSense")
         sys.exit(1)
+    GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING)
     try:
         print("Listening")
-        GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.Time_Bounce)
-        GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, DESI.performPause, DESI.Time_Bounce)
-        GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING, DESI.performS0, DESI.Time_Bounce)
-        GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING, DESI.performS1, DESI.Time_Bounce)
-        GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING, DESI.performS2, DESI.Time_Bounce)
-        GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING, DESI.performS3, DESI.Time_Bounce)
-        GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING, DESI.performS4, DESI.Time_Bounce)
         #DESI.DESIListen()
         activeFlag = True
         while activeFlag == True:
             i = 0
-            command = input("Enter a command: ")
-            if command == "s":
-                play_audio_file(DING)
-                DESI.DESISend("Start")
-            elif command == "h":
-                DESI.DESISend("Shutdown")
-            elif command == "p":
-                DESI.DESISend("Pause")
-            elif command == "u":
-                DESI.DESISend("Pause")
-            elif command == "e":
-                DESI.DESISend("Enter")
-            elif command == "0":
-                DESI.DESISend("Send00")
-            elif command == "1":
-                DESI.DESISend("Send01")
-            elif command == "2":
-                DESI.DESISend("Send02")
-            elif command == "3":
-                DESI.DESISend("Send03")
-            elif command == "4":
-                DESI.DESISend("Send04")
-            elif command == "d":
-                DESI.DESISend("SendDown")
-            elif command == "a":
-                DESI.DESISend("SendAlexa")
+            if(GPIO.event_detected(DESI.IN_START)):
+                print("start")
+                #DESI.DESISend("Start")
+            elif(GPIO.event_detected(DESI.IN_PAUSE)):
+                print("pause")
+            elif(GPIO.event_detected(DESI.IN_SPEED0)):
+                print("0")
+            elif(GPIO.event_detected(DESI.IN_SPEED1)):
+                print("1")
+            elif(GPIO.event_detected(DESI.IN_SPEED2)):
+                print("2")
+            elif(GPIO.event_detected(DESI.IN_SPEED3)):
+                print("3")
             else:
-                ave = queryDistance()
-                print(ave)
-                if(ave > DESI.Zone_Yellow):
-                    subRedux = DESI.State_Speed * CONST_REDUX * 10
-                    subZone = floor(ave - DESI.Zone_Yellow) + 1.0
-                    redux = subZone * subRedux
-                    print(subRedux)
-                    print(subZone)
-                    print(redux)
-                    while i < redux:
-                        DESI.DESISend("SendDown")
-                        i+=1
-                    print("refresh")
+                pass
+            # command = input("Enter a command: ")
+            # if command == "s":
+            #     play_audio_file(DING)
+            #     DESI.DESISend("Start")
+            # elif command == "h":
+            #     DESI.DESISend("Shutdown")
+            # elif command == "p":
+            #     DESI.DESISend("Pause")
+            # elif command == "u":
+            #     DESI.DESISend("Pause")
+            # elif command == "e":
+            #     DESI.DESISend("Enter")
+            # elif command == "0":
+            #     DESI.DESISend("Send00")
+            # elif command == "1":
+            #     DESI.DESISend("Send01")
+            # elif command == "2":
+            #     DESI.DESISend("Send02")
+            # elif command == "3":
+            #     DESI.DESISend("Send03")
+            # elif command == "4":
+            #     DESI.DESISend("Send04")
+            # elif command == "d":
+            #     DESI.DESISend("SendDown")
+            # elif command == "a":
+            #     DESI.DESISend("SendAlexa")
+            # else:
+            #     print("")
+            ave = queryDistance()
+            print(ave)
+            if ave == -1.0:
+                print "Error"
+            elif(ave > DESI.Zone_Yellow):
+                subRedux = DESI.State_Speed * CONST_REDUX * 10
+                subZone = floor(ave - DESI.Zone_Yellow) + 1.0
+                redux = subZone * subRedux
+                print(subRedux)
+                print(subZone)
+                print(redux)
+                while i < redux:
+                    DESI.DESISend("SendDown")
+                    i+=1
+                print("refresh")
+            elif ave > DESI.Zone_Red:
+                saveSpeed = DESI.State_Speed
+                DESI.DESISend("Send00")
+            else
+                pass
             # Query for the proximity of Megan #
             #time.sleep(0.3)
             
@@ -161,11 +190,19 @@ def play_audio_file(fname=DING):
     stream_out.close()
     audio.terminate()
 def queryDistance():
+    error = False
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
     # Sanitize
     distv1 = distv1 - 3.5
     distv2 = distv2 - 3.5
+    if distv1 < 0 or distv1 > 15:
+        distv1 = distv2
+        error = True
+    if distv2 < 0 or distv2 > 15 and not error:
+        distv2 = distv1
+    if error:
+        ave = -1.0
     print(distv1)
     print(distv2)
     ave = (distv1 + distv2) / 2
