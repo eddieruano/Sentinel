@@ -60,7 +60,7 @@ while True:
             print('{0} released!'.format(i))
     # Update last state and wait a short period before repeating.
     last_touched = current_touched
-
+    cap.get_thresholds()
     # Alternatively, if you only care about checking one or a few pins you can
     # call the is_touched method with a pin number to directly check that pin.
     # This will be a little slower than the above code for checking a lot of pins.
@@ -69,9 +69,9 @@ while True:
 
     # If you're curious or want to see debug info for each pin, uncomment the
     # following lines:
-    print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched()))
-    filtered = [cap.filtered_data(i) for i in range(12)]
-    print('Filt:', '\t'.join(map(str, filtered)))
-    base = [cap.baseline_data(i) for i in range(12)]
-    print('Base:', '\t'.join(map(str, base)))
-    time.sleep(0.4)
+    #print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched()))
+    #filtered = [cap.filtered_data(i) for i in range(12)]
+    #print('Filt:', '\t'.join(map(str, filtered)))
+    #base = [cap.baseline_data(i) for i in range(12)]
+    #print('Base:', '\t'.join(map(str, base)))
+    time.sleep(2)
