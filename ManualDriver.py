@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 10:16:09
+# @Last Modified time: 2017-06-04 10:27:59
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -18,7 +18,6 @@ import time
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
-import snowboy.snowboydecoder
 # Local Modules #
 ### Set path ###
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -48,8 +47,8 @@ def main():
         print("TSense")
         sys.exit(1)
     try:
-        detector = snowboydecoder.HotwordDetector("resources/DESI.pmdl", sensitivity=0.5, audio_gain=1)
-        detector.start(detected_callback)
+        #detector = snowboydecoder.HotwordDetector("resources/DESI.pmdl", sensitivity=0.5, audio_gain=1)
+        #detector.start(detected_callback)
         print("Listening")
         #DESI.DESIListen()
         activeFlag = True
