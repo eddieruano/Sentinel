@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:18:41
+# @Last Modified time: 2017-06-04 00:21:26
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -32,7 +32,7 @@ Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
 CONST_REDUX = 0.2
-CONST_ZONE_FIX = 1.0
+CONST_ZONE_FIX = 0.0
 
 def main():
     # Variables
