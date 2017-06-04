@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:13:44
+# @Last Modified time: 2017-06-03 22:14:24
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -78,7 +78,7 @@ def main():
                 DESI.DESISend("SendAlexa")
             else:
                 print("Invalid Command")
-            print(DESI.StateMain)
+            print(DESI.State_Main)
             # Query for the proximity of Megan #
             #distv1 = Voyager1.get_distance()
             #time.sleep(0.3)
