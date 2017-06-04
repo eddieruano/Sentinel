@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:57:35
+# @Last Modified time: 2017-06-04 01:00:08
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -101,9 +101,9 @@ def main():
                     print(subRedux)
                     print(subZone)
                     print(redux)
-                    while (i < redux) and dFlag:
-                        DESI.DESISend("Down")
-                        dFlag = False    
+                    while i < redux:
+                        DESI.DESISend("SendDown")
+                        i++    
                     print("refresh")
             else:
                 print("inv")
