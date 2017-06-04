@@ -46,7 +46,7 @@ cap.set_thresholds(23, 35)
 print('Press Ctrl-C to quit.')
 last_touched = cap.touched()
 while True:
-    # #current_touched = cap.touched()
+    current_touched = cap.touched()
     # # Check each pin's last and current state to see if it was pressed or released.
     for i in range(12):
         # Each pin is represented by a bit in the touched value.  A value of 1
