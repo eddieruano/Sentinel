@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:07:06
+# @Last Modified time: 2017-06-04 03:30:01
 
 import RPi.GPIO as GPIO
 import time
@@ -46,7 +46,7 @@ class DESI(object):
     State_Speed = 0.0
 
     Zone_Yellow = 10.0
-    Zone_Red = 13.5
+    Zone_Red = 12.5
     Time_Bounce = 800
     # Constructor
     def __init__(self):
