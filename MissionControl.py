@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:21:16
+# @Last Modified time: 2017-06-04 03:24:04
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -211,6 +211,7 @@ def play_audio_file(fname=DING):
     stream_out.close()
     audio.terminate()
 def queryDistance():
+    global FlagDisparity
     error = False
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
@@ -227,7 +228,7 @@ def queryDistance():
     #print(distv1)
     #print(distv2)
     ave = floor((distv1 + distv2) / 2)
-    if (abs(ave - Proximity) > 4) and not FlagDisparity:
+    if (mabs(ave - Proximity) > 4) and not FlagDisparity:
         ave = Proximity
         FlagDisparity = True
     else:
