@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:51:56
+# @Last Modified time: 2017-06-04 00:54:12
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -15,7 +15,6 @@ import collections
 import pyaudio
 import wave
 import time
-import curses
 from math import floor
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
@@ -70,8 +69,7 @@ def main(stdscr):
         activeFlag = True
         while activeFlag == True:
             i = 0
-            command = stdscr.getkey()
-            #command = input("Enter a command: ")
+            command = input("Enter a command: ")
             if command == "s":
                 play_audio_file(DING)
                 DESI.DESISend("Start")
@@ -97,25 +95,25 @@ def main(stdscr):
                 DESI.DESISend("SendDown")
             elif command == "a":
                 DESI.DESISend("SendAlexa")
+            elif command == "r":
+                ave = queryDistance()
+                print(ave)
+                if(ave > DESI.Zone_Yellow):
+                    subRedux = DESI.State_Speed * CONST_REDUX * 10
+                    subZone = floor(ave - DESI.Zone_Yellow) + 1.0
+                    redux = subZone * subRedux
+                    print(subRedux)
+                    print(subZone)
+                    print(redux)
+                    while (i < redux) and dFlag:
+                        DESI.DESISend("Down")
+                        dFlag = False    
+                    print("refresh")
             else:
-                print("refresh")
-            print(DESI.State_Main)
-            time.sleep(0.05)
+                print("inv")
             # Query for the proximity of Megan #
             #time.sleep(0.3)
-            ave = queryDistance()
-            print(ave)
             
-            if(ave > DESI.Zone_Yellow):
-                subRedux = DESI.State_Speed * CONST_REDUX * 10
-                subZone = floor(ave - DESI.Zone_Yellow) + 1.0
-                redux = subZone * subRedux
-                print(subRedux)
-                print(subZone)
-                print(redux)
-                while (i < redux) and dFlag:
-                    DESI.DESISend("Down")
-                    dFlag = False    
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
             #contact = checkContact()
@@ -186,4 +184,4 @@ def queryDistance():
 #    return HotwordInterrupt
 ### MAIN CALL ###
 if __name__ == "__main__":
-    curses.wrapper(main)
+    main()
