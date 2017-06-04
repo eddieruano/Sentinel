@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:59:34
+# @Last Modified time: 2017-06-03 23:03:58
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -72,6 +72,8 @@ def main():
                 DESI.DESISend("Send02")
             elif command == "3":
                 DESI.DESISend("Send03")
+            elif command == "4":
+                DESI.DESISend("Send04")
             elif command == "down":
                 DESI.DESISend("SendDown")
             elif command == "alexa":
