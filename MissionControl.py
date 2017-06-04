@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:16:31
+# @Last Modified time: 2017-06-04 02:16:48
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -132,7 +132,7 @@ def main():
             elif ave > DESI.Zone_Red:
                 saveSpeed = DESI.State_Speed
                 DESI.DESISend("Send00")
-            else
+            else:
                 pass
             # Query for the proximity of Megan #
             #time.sleep(0.3)
