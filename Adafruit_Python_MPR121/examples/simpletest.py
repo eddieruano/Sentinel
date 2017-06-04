@@ -48,25 +48,25 @@ last_touched = cap.touched()
 while True:
     # #current_touched = cap.touched()
     # # Check each pin's last and current state to see if it was pressed or released.
-    # #for i in range(12):
-    #     # Each pin is represented by a bit in the touched value.  A value of 1
-    #     # means the pin is being touched, and 0 means it is not being touched.
-    # #    pin_bit = 1 << i
-    #     # First check if transitioned from not touched to touched.
-    #     if current_touched & pin_bit and not last_touched & pin_bit:
-    #         print('{0} touched!'.format(i))
-    #     # Next check if transitioned from touched to not touched.
-    #     if not current_touched & pin_bit and last_touched & pin_bit:
-    #         print('{0} released!'.format(i))
-    # # Update last state and wait a short period before repeating.
-    # last_touched = current_touched
-    # time.sleep(0.1)
+    for i in range(12):
+        # Each pin is represented by a bit in the touched value.  A value of 1
+        # means the pin is being touched, and 0 means it is not being touched.
+       pin_bit = 1 << i
+        # First check if transitioned from not touched to touched.
+        if current_touched & pin_bit and not last_touched & pin_bit:
+            print('{0} touched!'.format(i))
+        # Next check if transitioned from touched to not touched.
+        if not current_touched & pin_bit and last_touched & pin_bit:
+            print('{0} released!'.format(i))
+    # Update last state and wait a short period before repeating.
+    last_touched = current_touched
+    time.sleep(0.1)
 
     # Alternatively, if you only care about checking one or a few pins you can
     # call the is_touched method with a pin number to directly check that pin.
     # This will be a little slower than the above code for checking a lot of pins.
-    if cap.is_touched(0):
-        print('Pin 0 is being touched!')
+    # if cap.is_touched(0):
+        # print('Pin 0 is being touched!')
 
     # If you're curious or want to see debug info for each pin, uncomment the
     # following lines:
@@ -75,4 +75,4 @@ while True:
     #print('Filt:', '\t'.join(map(str, filtered)))
     #base = [cap.baseline_data(i) for i in range(12)]
     #print('Base:', '\t'.join(map(str, base)))
-    time.sleep(0.1)
+    # time.sleep(0.1)
