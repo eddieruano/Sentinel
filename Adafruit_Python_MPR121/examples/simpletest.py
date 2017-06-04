@@ -34,7 +34,7 @@ cap = MPR121.MPR121()
 if not cap.begin():
     print('Error initializing MPR121.  Check your wiring!')
     sys.exit(1)
-
+cap.set_thresholds(23, 35):
 # Alternatively, specify a custom I2C address such as 0x5B (ADDR tied to 3.3V),
 # 0x5C (ADDR tied to SDA), or 0x5D (ADDR tied to SCL).
 #cap.begin(address=0x5B)
@@ -65,14 +65,14 @@ while True:
     # Alternatively, if you only care about checking one or a few pins you can
     # call the is_touched method with a pin number to directly check that pin.
     # This will be a little slower than the above code for checking a lot of pins.
-    #if cap.is_touched(0):
-    #    print('Pin 0 is being touched!')
+    if cap.is_touched(0):
+        print('Pin 0 is being touched!')
 
     # If you're curious or want to see debug info for each pin, uncomment the
     # following lines:
-    print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched()))
-    filtered = [cap.filtered_data(i) for i in range(12)]
-    print('Filt:', '\t'.join(map(str, filtered)))
-    base = [cap.baseline_data(i) for i in range(12)]
-    print('Base:', '\t'.join(map(str, base)))
-    time.sleep(0.5)
+    #print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched()))
+    #filtered = [cap.filtered_data(i) for i in range(12)]
+    #print('Filt:', '\t'.join(map(str, filtered)))
+    #base = [cap.baseline_data(i) for i in range(12)]
+    #print('Base:', '\t'.join(map(str, base)))
+    time.sleep(0.1)
