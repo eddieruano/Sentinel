@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 21:59:05
+# @Last Modified time: 2017-06-03 22:02:10
 
 import RPi.GPIO as GPIO
 import time
@@ -99,31 +99,31 @@ class DESI(object):
             self.performStart()
             print("SendStart")
         elif command == "Pause":
-            performPause()
+            self.performPause()
             print("SendPause")
         elif command == "Off":
-            performOff()
+            self.performOff()
             print("Off")
         elif command == "Enter":
-            performEnter()
+            self.performEnter()
             print("Enter")
         elif command == "00":
-            perform00()
+            self.perform00()
             print("Send00")
         elif command == "01":
-            perform01()
+            self.perform01()
             print("Send01")
         elif command == "02":
-            perform02()
+            self.perform02()
             print("Send02")
         elif command == "03":
-            perform03()
+            self.perform03()
             print("Send03")
         elif command == "04":
-            perform04()
+            self.perform04()
             print("Send04")
         elif command == "05":
-            perform05()
+            self.perform05()
             print("Send04")
         else:
             print("Error")
