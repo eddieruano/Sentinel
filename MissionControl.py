@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:34:53
+# @Last Modified time: 2017-06-03 23:37:25
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -149,6 +149,9 @@ def play_audio_file(fname=DING):
 def queryDistance():
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
+    # Sanitize
+    distv1 = distv1 - 3.5
+    distv2 = distv2 = 3.5
     print(distv1)
     print(distv2)
     ave = (distv1 + distv2) / 2
