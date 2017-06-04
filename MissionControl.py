@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:17:38
+# @Last Modified time: 2017-06-04 02:21:39
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -73,17 +73,25 @@ def main():
             i = 0
             if(GPIO.event_detected(DESI.IN_START)):
                 print("start")
-                #DESI.DESISend("Start")
+                DESI.DESISend("Start")
             elif(GPIO.event_detected(DESI.IN_PAUSE)):
                 print("pause")
+                DESI.DESISend("Pause")
             elif(GPIO.event_detected(DESI.IN_SPEED0)):
                 print("0")
+                DESI.DESISend("Send00")
             elif(GPIO.event_detected(DESI.IN_SPEED1)):
                 print("1")
+                DESI.DESISend("Send01")
             elif(GPIO.event_detected(DESI.IN_SPEED2)):
                 print("2")
+                DESI.DESISend("Send02")
             elif(GPIO.event_detected(DESI.IN_SPEED3)):
                 print("3")
+                DESI.DESISend("Send03")
+            elif(GPIO.event_detected(DESI.IN_SPEED4)):
+                print("4")
+                DESI.DESISend("Send04")
             else:
                 pass
             # command = input("Enter a command: ")
@@ -115,7 +123,7 @@ def main():
             # else:
             #     print("")
             ave = queryDistance()
-            print(ave)
+            #print(ave)
             if ave == -1.0:
                 print ("Error")
             elif(ave > DESI.Zone_Yellow):
@@ -134,7 +142,7 @@ def main():
                 DESI.DESISend("Send00")
             else:
                 pass
-            time.sleep(1)
+            time.sleep(0.3)
             # Query for the proximity of Megan #
             #time.sleep(0.3)
             
