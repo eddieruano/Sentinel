@@ -1,7 +1,7 @@
 import snowboydecoder
 import sys
 import signal
-from light import Light
+import RPi.GPIO as GPIO
 
 interrupted = False
 
@@ -25,7 +25,6 @@ signal.signal(signal.SIGINT, signal_handler)
 detector = snowboydecoder.HotwordDetector(model, sensitivity=0.6)
 print('Listening... Press Ctrl+C to exit')
 
-led = Light(17)
 detector.start(detected_callback=led.blink,
                interrupt_check=interrupt_callback,
                sleep_time=0.03)

@@ -1,6 +1,8 @@
 import snowboydecoder
 import sys
 import signal
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
 
 interrupted = False
 
