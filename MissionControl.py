@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:31:15
+# @Last Modified time: 2017-06-04 04:08:45
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -40,19 +40,8 @@ def main():
     global FlagDisparity
     global Proximity
     # Variables
-    proxError = 0.0
-    distv1 = 0.0
-    distv2 = 0.0
-    slack = 0.0
     contact = False
-    ave = 0.0
     dFlag = True
-    tStart = False
-    tPause = False
-    tS0 = False
-    tS1 = False
-    tS2 = False
-    tS3 = False
     lastZone = -1.0
     subZone = 0.0
     redFlag = False
@@ -131,31 +120,6 @@ def main():
                 pass
             time.sleep(0.05)
             # Query for the proximity of Megan #
-            #time.sleep(0.3)
-            
-            #distAverage = (distv1 + distv2) / 2
-            #proxError = distv1 - distv2
-            #contact = checkContact()
-            #state = checkState(distAverage)
-            #if state == "Red":
-            #    print("Red!")
-            #    past_state = state
-            #    DESI.send("Pause")
-            #    time.sleep(5)
-            #    DESI.send(past_state)
-            #elif state == "Yellow":
-            #    DESI.send("Down")
-            #    time.sleep(0.4)
-            #    DESI.send("Down")
-            #    time.sleep(0.4)
-            #    DESI.send("Down")
-            #else:
-            #    print("Green!")
-            #    slack = 30 - distAverage
-            #    redux = ((distAverage - 10) / 2) * 10
-            #    redux = int(redux)
-    #           time.sleep(1)
-    # Catch Ctrl+C
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")
