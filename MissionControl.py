@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:24:13
+# @Last Modified time: 2017-06-03 23:32:44
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -11,6 +11,8 @@
 import sys
 import os.path
 import signal
+import pyaudio
+import wave
 import time
 # Customs Mods #
 import Adafruit_MPR121.MPR121 as MPR121
@@ -20,6 +22,8 @@ import RPi.GPIO as GPIO
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04 as VoyagerHCSR04
 import drivers.DESIConfig as DESIConfig
+TOP_DIR = os.path.dirname(os.path.abspath(__file__))
+DING = os.path.join(TOP_DIR, "resources/ding.wav")
 ### Global Variables ###
 DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
@@ -33,6 +37,7 @@ def main():
     distv2 = 0.0
     slack = 0.0
     contact = False
+    ave = 0.0
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -55,6 +60,7 @@ def main():
             activeFlag = True
             command = input("Enter a command: ")
             if command == "start":
+                play_audio_file(DING)
                 DESI.DESISend("Start")
             elif command == "shutdown":
                 DESI.DESISend("Shutdown")
@@ -82,11 +88,11 @@ def main():
                 print("Invalid Command")
             print(DESI.State_Main)
             # Query for the proximity of Megan #
-            distv1 = Voyager1.get_distance()
+            
             #time.sleep(0.3)
-            distv2 = Voyager2.get_distance()
-            print(distv1)
-            print(distv2)
+            ave = queryDistance()
+            print(ave)
+            
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
             #contact = checkContact()
@@ -121,6 +127,31 @@ def activateAlexa():
     GPIO.output(DESI.OUT_ALEXA, GPIO.LOW)
     time.sleep(2)
     GPIO.output(DESI.OUT_ALEXA, GPIO.HIGH)
+def play_audio_file(fname=DETECT_DING):
+    """Plays audio
+    :param str fname: wave file name
+    :return: None
+    """
+    ding_wav = wave.open(fname, 'rb')
+    ding_data = ding_wav.readframes(ding_wav.getnframes())
+    audio = pyaudio.PyAudio()
+    stream_out = audio.open(
+        format=audio.get_format_from_width(ding_wav.getsampwidth()),
+        channels=ding_wav.getnchannels(),
+        rate=ding_wav.getframerate(), input=False, output=True)
+    stream_out.start_stream()
+    stream_out.write(ding_data)
+    time.sleep(0.2)
+    stream_out.stop_stream()
+    stream_out.close()
+    audio.terminate()
+def queryDistance(self):
+    distv1 = Voyager1.get_distance()
+    distv2 = Voyager2.get_distance()
+    print(distv1)
+    print(distv2)
+    ave = (distv1 + distv2) / 2
+    return ave
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
 #    HotwordInterrupt = True
