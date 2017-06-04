@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:26:54
+# @Last Modified time: 2017-06-04 02:27:33
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -51,7 +51,7 @@ def main():
     tS1 = False
     tS2 = False
     tS3 = False
-    lastZone = 0.0
+    lastZone = -1.0
     subZone = 0.0
     # Initialize DESI States
     DESI.initDESI()
