@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:43:52
+# @Last Modified time: 2017-06-04 00:45:37
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -53,6 +53,7 @@ def main(stdscr):
     stdscr = curses.initscr()
     stdscr.border(0)
     curses.noecho()
+    curses.use_default_colors()
     stdscr.refresh()
     try:
         print("Listening")
