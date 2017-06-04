@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 21:56:36
+# @Last Modified time: 2017-06-03 21:59:05
 
 import RPi.GPIO as GPIO
 import time
@@ -131,156 +131,156 @@ class DESI(object):
     def DESIUpdateState(self, state):
         pass
     def performStart(self):
-        if DESI.State_Main == "Idle":
-            GPIO.output(DESI.OUT_START, GPIO.LOW)
+        if self.State_Main == "Idle":
+            GPIO.output(self.OUT_START, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_START, GPIO.HIGH)
+            GPIO.output(self.OUT_START, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.perform00(a,b)
-        elif DESI.State_Main == "Pause":
+            self.perform00()
+        elif self.State_Main == "Pause":
             print("Shutdown")
-            DESI.performShutdown(a,b)
+            self.performShutdown()
         else:
             print("Already Started")
     def performShutdown():
         print("Shutting Down")
-        if DESI.State_Main == "Pause":
-            GPIO.output(DESI.OUT_OFF, GPIO.LOW)
+        if self.State_Main == "Pause":
+            GPIO.output(self.OUT_OFF, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_OFF, GPIO.HIGH)
+            GPIO.output(self.OUT_OFF, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_OFF, GPIO.LOW)
+            GPIO.output(self.OUT_OFF, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_OFF, GPIO.HIGH)
+            GPIO.output(self.OUT_OFF, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Shutdown"
+            self.State_Main = "Shutdown"
         else:
             print("Nope")
-    def performPause(a,b):
-        if DESI.State_Main != "Pause":
-            GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
+    def performPause(self):
+        if self.State_Main != "Pause":
+            GPIO.output(self.OUT_PAUSE, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_PAUSE, GPIO.HIGH)
+            GPIO.output(self.OUT_PAUSE, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Pause"
+            self.State_Main = "Pause"
         else:
-            GPIO.output(DESI.OUT_PAUSE, GPIO.LOW)
+            GPIO.output(self.OUT_PAUSE, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_PAUSE, GPIO.HIGH)
+            GPIO.output(self.OUT_PAUSE, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Speed0"
+            self.State_Main = "Speed0"
             print("Nope")
     
-    def perform00(a,b):
-        if DESI.State_Main == "Speed1" or DESI.State_Main == "Idle":
-            GPIO.output(DESI.OUT_0, GPIO.LOW)
+    def perform00(self):
+        if self.State_Main == "Speed1" or self.State_Main == "Idle":
+            GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.HIGH)
+            GPIO.output(self.OUT_0, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.LOW)
+            GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.HIGH)
+            GPIO.output(self.OUT_0, GPIO.HIGH)
             time.sleep(0.1)
             #
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Speed0"
+            self.State_Main = "Speed0"
             time.sleep(1)
         else:
             print("Nope")
-    def perform01(a,b):
-        if DESI.State_Main == "Speed0" or DESI.State_Main == "Speed2":
-            GPIO.output(DESI.OUT_2, GPIO.LOW)
+    def perform01(self):
+        if self.State_Main == "Speed0" or self.State_Main == "Speed2":
+            GPIO.output(self.OUT_2, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_2, GPIO.HIGH)
+            GPIO.output(self.OUT_2, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.LOW)
+            GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.HIGH)
+            GPIO.output(self.OUT_0, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Speed1"
+            self.State_Main = "Speed1"
             time.sleep(1)
         else:
             print("Nope")
     def perform02(a,b):
-        if DESI.State_Main == "Speed1" or DESI.State_Main == "Speed3":
-            GPIO.output(DESI.OUT_2, GPIO.LOW)
+        if self.State_Main == "Speed1" or self.State_Main == "Speed3":
+            GPIO.output(self.OUT_2, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_2, GPIO.HIGH)
+            GPIO.output(self.OUT_2, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_5, GPIO.LOW)
+            GPIO.output(self.OUT_5, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_5, GPIO.HIGH)
+            GPIO.output(self.OUT_5, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             #
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Speed2"
+            self.State_Main = "Speed2"
             time.sleep(1)
         else:
             print("Nope")
     def perform03(a,b):
-        if DESI.State_Main == "Speed4" or DESI.State_Main == "Speed2":
-            GPIO.output(DESI.OUT_3, GPIO.LOW)
+        if self.State_Main == "Speed4" or self.State_Main == "Speed2":
+            GPIO.output(self.OUT_3, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_3, GPIO.HIGH)
+            GPIO.output(self.OUT_3, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.LOW)
+            GPIO.output(self.OUT_0, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_0, GPIO.HIGH)
+            GPIO.output(self.OUT_0, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Speed3"
+            self.State_Main = "Speed3"
             time.sleep(1)
         else:
             print("Nope")
     def perform04(a,b):
-        if DESI.State_Main == "Speed3":
-            GPIO.output(DESI.OUT_3, GPIO.LOW)
+        if self.State_Main == "Speed3":
+            GPIO.output(self.OUT_3, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_3, GPIO.HIGH)
+            GPIO.output(self.OUT_3, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_5, GPIO.LOW)
+            GPIO.output(self.OUT_5, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_5, GPIO.HIGH)
+            GPIO.output(self.OUT_5, GPIO.HIGH)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.LOW)
+            GPIO.output(self.OUT_ENTER, GPIO.LOW)
             time.sleep(0.1)
-            GPIO.output(DESI.OUT_ENTER, GPIO.HIGH)
+            GPIO.output(self.OUT_ENTER, GPIO.HIGH)
             time.sleep(0.1)
-            DESI.State_Main = "Speed4"
+            self.State_Main = "Speed4"
             time.sleep(1)
         else:
             print("Nope")
     def performAlexa(a,b):
-        GPIO.output(DESI.OUT_A, GPIO.LOW)
+        GPIO.output(self.OUT_A, GPIO.LOW)
         time.sleep(0.2)
-        GPIO.output(DESI.OUT_A, GPIO.HIGH)
+        GPIO.output(self.OUT_A, GPIO.HIGH)
         time.sleep(0.2)
