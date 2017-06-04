@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 01:09:59
+# @Last Modified time: 2017-06-04 01:13:29
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -45,6 +45,7 @@ def main():
     contact = False
     ave = 0.0
     i = 0
+    dFlag = True
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -63,20 +64,23 @@ def main():
         GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING, DESI.performS4, DESI.Time_Bounce)
         #DESI.DESIListen()
         activeFlag = True
+        lastZone = 0.0
         while activeFlag == True:
             i = 0
             ave = queryDistance()
-                print(ave)
-                if(ave > DESI.Zone_Yellow):
-                    subRedux = DESI.State_Speed * CONST_REDUX * 10
-                    subZone = floor(ave - DESI.Zone_Yellow) + 1.0
-                    redux = subZone * subRedux
-                    print(subRedux)
-                    print(subZone)
-                    print(redux)
-                    while i < redux:
-                        DESI.DESISend("SendDown")
-                        i+=1
+            subRedux = DESI.State_Speed * CONST_REDUX * 10
+            subZone = floor(ave - DESI.Zone_Yellow) + 1.0
+            redux = subZone * subRedux
+            lastZone = 
+            print(subRedux)
+            print(subZone)
+            print(redux)
+            print(ave)
+            if (ave > DESI.Zone_Yellow) and (lastZone != subZone):
+                lastZone = subZone
+                while i < redux:
+                    DESI.DESISend("SendDown")
+                    i+=1
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")
