@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 00:42:23
+# @Last Modified time: 2017-06-04 00:43:14
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -54,7 +54,6 @@ def main():
     stdscr.border(0)
     curses.noecho()
     stdscr.refresh()
-    curses.wrapper(main)
     try:
         print("Listening")
         GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, DESI.performStart, DESI.Time_Bounce)
@@ -184,4 +183,4 @@ def queryDistance():
 #    return HotwordInterrupt
 ### MAIN CALL ###
 if __name__ == "__main__":
-    main()
+    curses.wrapper(main)
