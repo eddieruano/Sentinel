@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:59:50
+# @Last Modified time: 2017-06-04 00:02:44
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -96,7 +96,6 @@ def main():
             if(ave > DESI.Zone_Yellow):
                 subZone = DESI.Zone_Red - DESI.Zone_Yellow - ave
                 print(subZone)
-                #redux = DESI.Zone_Red - DE(DESI.State_Speed * 10) / 5)
             #distAverage = (distv1 + distv2) / 2
             #proxError = distv1 - distv2
             #contact = checkContact()
@@ -149,6 +148,16 @@ def play_audio_file(fname=DING):
     stream_out.stop_stream()
     stream_out.close()
     audio.terminate()
+def queryDistance():
+    distv1 = Voyager1.get_distance()
+    distv2 = Voyager2.get_distance()
+    # Sanitize
+    distv1 = distv1 - 3.5
+    distv2 = distv2 - 3.5
+    print(distv1)
+    print(distv2)
+    ave = (distv1 + distv2) / 2
+    return ave
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
 #    HotwordInterrupt = True
