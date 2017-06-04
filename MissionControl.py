@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 01:13:29
+# @Last Modified time: 2017-06-04 01:14:07
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -71,7 +71,6 @@ def main():
             subRedux = DESI.State_Speed * CONST_REDUX * 10
             subZone = floor(ave - DESI.Zone_Yellow) + 1.0
             redux = subZone * subRedux
-            lastZone = 
             print(subRedux)
             print(subZone)
             print(redux)
