@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-02 17:33:08
+# @Last Modified time: 2017-06-02 17:42:59
 
 import RPi.GPIO as GPIO
 import time
@@ -270,4 +270,9 @@ class DESI(object):
             time.sleep(1)
         else:
             print("Nope")
+    def performAlexa(a,b):
+        GPIO.output(DESI.OUT_A, GPIO.LOW)
+            time.sleep(0.2)
+            GPIO.output(DESI.OUT_A, GPIO.HIGH)
+            time.sleep(0.2)
 
