@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 23:33:35
+# @Last Modified time: 2017-06-03 23:34:53
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -11,6 +11,7 @@
 import sys
 import os.path
 import signal
+import collections
 import pyaudio
 import wave
 import time
@@ -145,7 +146,7 @@ def play_audio_file(fname=DING):
     stream_out.stop_stream()
     stream_out.close()
     audio.terminate()
-def queryDistance(self):
+def queryDistance():
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
     print(distv1)
