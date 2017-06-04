@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 10:14:43
+# @Last Modified time: 2017-06-04 10:15:12
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -99,7 +99,7 @@ def activateAlexa():
     time.sleep(2)
     GPIO.output(DESI.OUT_ALEXA, GPIO.HIGH)
 def detected_callback():
-    print "hotword detected"
+    print ("hotword detected")
 # def play_audio_file(fname=DING):
 #     """Plays audio
 #     :param str fname: wave file name
