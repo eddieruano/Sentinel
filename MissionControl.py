@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:19:24
+# @Last Modified time: 2017-06-04 03:19:58
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -229,8 +229,8 @@ def queryDistance():
     #print(distv1)
     #print(distv2)
     ave = floor((distv1 + distv2) / 2)
-    if (abs(ave - Distance) > 4) and not FlagDisparity:
-        ave = Distance
+    if (abs(ave - Proximity) > 4) and not FlagDisparity:
+        ave = Proximity
         FlagDisparity = True
     else:
         FlagDisparity == False
