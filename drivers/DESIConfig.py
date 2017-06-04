@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-03 22:20:27
+# @Last Modified time: 2017-06-03 23:01:30
 
 import RPi.GPIO as GPIO
 import time
@@ -30,9 +30,9 @@ class DESI(object):
     OUT_1       = 25
     OUT_2       = 8
     OUT_3       = 7
-    OUT_4       = 12
+    OUT_4       = 21
     OUT_5       = 16
-    OUT_DOWN    = 21
+    OUT_DOWN    = 12
     OUT_ALEXA   = 20
     # States of DESI
     State_Main  = "Idle"
@@ -119,12 +119,12 @@ class DESI(object):
         elif command == "Send03":
             self.performS3()
             print("Send03")
-        elif command == "Send04":
-            self.performS4()
-            print("Send04")
+        elif command == "SendDown":
+            self.performDown()
+            print("SendDown")
         elif command == "Send05":
             self.performS5()
-            print("Send04")
+            print("Send05")
         elif command == "SendAlexa":
             self.performAlexa()
             print("Alexa")
@@ -279,6 +279,14 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Main = "Speed4"
+        time.sleep(1)
+        # else:
+            # print("Nope")
+    def performDown(self):
+        GPIO.output(self.OUT_DOWN, GPIO.LOW)
+        time.sleep(0.1)
+        GPIO.output(self.OUT_DOWN, GPIO.HIGH)
+        time.sleep(0.1)
         time.sleep(1)
         # else:
             # print("Nope")
