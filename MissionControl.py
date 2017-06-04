@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 02:35:52
+# @Last Modified time: 2017-06-04 02:38:34
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -127,6 +127,7 @@ def main():
             # else:
             #     print("")
             ave = queryDistance()
+            print("out")
             #print(ave)
             if ave == -1.0:
                 print ("Error")
@@ -153,7 +154,6 @@ def main():
             else:
                 pass
             time.sleep(0.3)
-            print("loop")
             # Query for the proximity of Megan #
             #time.sleep(0.3)
             
@@ -210,6 +210,7 @@ def play_audio_file(fname=DING):
     stream_out.close()
     audio.terminate()
 def queryDistance():
+    print("in")
     error = False
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
@@ -226,6 +227,7 @@ def queryDistance():
     #print(distv1)
     #print(distv2)
     ave = (distv1 + distv2) / 2
+
     return ave
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
