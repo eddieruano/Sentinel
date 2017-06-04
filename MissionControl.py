@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 01:23:30
+# @Last Modified time: 2017-06-04 01:25:28
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -91,7 +91,7 @@ def main():
                 DESI.DESISend("SendDown")
             elif command == "a":
                 DESI.DESISend("SendAlexa")
-            elif command == "r":
+            else:
                 ave = queryDistance()
                 print(ave)
                 if(ave > DESI.Zone_Yellow):
@@ -105,8 +105,6 @@ def main():
                         DESI.DESISend("SendDown")
                         i+=1
                     print("refresh")
-            else:
-                print("inv")
             # Query for the proximity of Megan #
             #time.sleep(0.3)
             
