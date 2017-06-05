@@ -63,9 +63,9 @@ while True:
     # Alternatively, if you only care about checking one or a few pins you can
     # call the is_touched method with a pin number to directly check that pin.
     # This will be a little slower than the above code for checking a lot of pins.
-    if cap.is_touched(2):
-        print('Pin 2 is being touched!')
-    elif cap.is_touched(7):
+    #if cap.is_touched(2):
+    #    print('Pin 2 is being touched!')
+    if cap.is_touched(7):
         print('Pin 7 is being touched!')
     elif cap.is_touched(8):
         print('Pin 8 is being touched!')
