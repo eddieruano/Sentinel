@@ -77,4 +77,4 @@ while True:
     # print('Filt:', '\t'.join(map(str, filtered)))
     # base = [cap.baseline_data(i) for i in range(12)]
     # print('Base:', '\t'.join(map(str, base)))
-    time.sleep(0.4)
+    time.sleep(0.1)
