@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 23:37:09
+# @Last Modified time: 2017-06-04 23:39:24
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -83,6 +83,7 @@ def main():
                     print("4")
                     DESI.DESISend("Send04")
                 else:
+                    pass
                     print("Error in Trigger")
 
                 Sentinel.Proximity = queryDistance()
