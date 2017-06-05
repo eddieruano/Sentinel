@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 22:26:46
+# @Last Modified time: 2017-06-04 22:27:10
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -11,6 +11,7 @@
 import sys
 import os.path
 import signal
+import time
 from math import floor
 # Customs Mods #
 import RPi.GPIO as GPIO
