@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 01:01:59
+# @Last Modified time: 2017-06-05 01:02:27
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -100,7 +100,7 @@ def main():
                 else:
                     pass
             if(not Sentinel.ActiveLock):
-                entinel.CapCountdown -= 1
+                Sentinel.CapCountdown -= 1
                 if(Sentinel.CapCountdown == 0):
                     DESI.DESISend("Pause")
                     Sentinel.CapCountdown = 100
