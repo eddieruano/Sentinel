@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 01:08:36
+# @Last Modified time: 2017-06-05 01:25:51
 
 import RPi.GPIO as GPIO
 class Sentinel(object):

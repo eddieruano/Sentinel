@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 01:12:43
+# @Last Modified time: 2017-06-05 01:26:04
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -59,11 +59,18 @@ def main():
         print("Listening")
         while True:
             Sentinel.updateActiveLock(TouchSense)
+            Sentinel.getStateKnob(DESI)
             Sentinel.setStateKnob()
+            if (Sentinel.StateKnob != Sentinel.StateSpeed):
+                DESI.DESISend(Sentinel.StateKnob * 1.0)
             if GPIO.event_detected(DESI.IN_START):
                 print("start")
                 DESI.DESISend("Start")
             elif GPIO.event_detected(DESI.IN_PAUSE):
+                if (Sentinel.StateKnob == 0):
+                    DESI.DESISend("Shutdown")
+                else:
+                    pass
                 print("pause")
                 DESI.DESISend("Pause")
             elif GPIO.event_detected(DESI.IN_SPEED0):
