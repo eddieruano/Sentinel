@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 01:02:27
+# @Last Modified time: 2017-06-05 01:12:43
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -59,29 +59,30 @@ def main():
         print("Listening")
         while True:
             Sentinel.updateActiveLock(TouchSense)
-            if(GPIO.event_detected(DESI.IN_START)):
+            Sentinel.setStateKnob()
+            if GPIO.event_detected(DESI.IN_START):
                 print("start")
                 DESI.DESISend("Start")
-            elif(GPIO.event_detected(DESI.IN_PAUSE)):
+            elif GPIO.event_detected(DESI.IN_PAUSE):
                 print("pause")
                 DESI.DESISend("Pause")
-            elif(GPIO.event_detected(DESI.IN_SPEED0)):
+            elif GPIO.event_detected(DESI.IN_SPEED0):
                 print("0")
                 DESI.DESISend("Send00")
                 Sentinel.setSpeed(0.0)
-            elif(GPIO.event_detected(DESI.IN_SPEED1)):
+            elif GPIO.event_detected(DESI.IN_SPEED1):
                 print("1")
                 DESI.DESISend("Send01")
                 Sentinel.setSpeed(2.0)
-            elif(GPIO.event_detected(DESI.IN_SPEED2)):
+            elif GPIO.event_detected(DESI.IN_SPEED2):
                 print("2")
                 DESI.DESISend("Send02")
                 Sentinel.setSpeed(2.5)
-            elif(GPIO.event_detected(DESI.IN_SPEED3)):
+            elif GPIO.event_detected(DESI.IN_SPEED3):
                 print("3")
                 DESI.DESISend("Send03")
                 Sentinel.setSpeed(3.0)
-            elif(GPIO.event_detected(DESI.IN_SPEED4)):
+            elif GPIO.event_detected(DESI.IN_SPEED4):
                 print("4")
                 DESI.DESISend("Send04")
                 Sentinel.setSpeed(3.5)
@@ -96,7 +97,7 @@ def main():
                     while i < Sentinel.Redux:
                         DESI.DESISend("SendDown")
                         i += 1
-                    Sentinel.ProxCountdown = 30
+                    Sentinel.ProxCountdown = 50
                 else:
                     pass
             if(not Sentinel.ActiveLock):

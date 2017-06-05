@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 03:30:01
+# @Last Modified time: 2017-06-05 01:07:52
 
 import RPi.GPIO as GPIO
 import time
@@ -187,17 +187,6 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Main = "Pause"
-        # else:
-        #     GPIO.output(self.OUT_PAUSE, GPIO.LOW)
-        #     time.sleep(0.1)
-        #     GPIO.output(self.OUT_PAUSE, GPIO.HIGH)
-        #     time.sleep(0.1)
-        #     GPIO.output(self.OUT_ENTER, GPIO.LOW)
-        #     time.sleep(0.1)
-        #     GPIO.output(self.OUT_ENTER, GPIO.HIGH)
-        #     time.sleep(0.1)
-        #     self.State_Main = "Speed0"
-        #     print("Nope")
     
     def performS0(self):
         # if self.State_Main == "Speed1" or self.State_Main == "Idle":
@@ -216,7 +205,7 @@ class DESI(object):
         time.sleep(0.1)
         self.State_Main = "Speed0"
         self.State_Speed = self.SPEED0
-        time.sleep(1)
+        time.sleep(0.1)
         # else:
             # print("Nope")
     def performS1(self):
@@ -235,7 +224,7 @@ class DESI(object):
         time.sleep(0.1)
         self.State_Main = "Speed1"
         self.State_Speed = self.SPEED1
-        time.sleep(1)
+        time.sleep(0.1)
         # else:
             # print("Nope")
     def performS2(self):
@@ -255,7 +244,7 @@ class DESI(object):
         time.sleep(0.1)
         self.State_Main = "Speed2"
         self.State_Speed = self.SPEED2
-        time.sleep(1)
+        time.sleep(0.1)
         # else:
             # print("Nope")
     def performS3(self):
@@ -273,7 +262,7 @@ class DESI(object):
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Speed = self.SPEED3
-        time.sleep(1)
+        time.sleep(0.1)
         # else:
             # print("Nope")
     def performS4(self):
@@ -292,7 +281,7 @@ class DESI(object):
         time.sleep(0.1)
         self.State_Main = "Speed4"
         self.State_Speed = self.SPEED4
-        time.sleep(1)
+        time.sleep(0.1)
         # else:
             # print("Nope")
     def performDown(self):
