@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:08:07
+# @Last Modified time: 2017-06-05 00:25:39
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -66,7 +66,7 @@ class Sentinel(object):
         elif self.TouchRegister & self.SecondaryGripChannel:
             self.ActiveLock = True
         else:
-            #print ("NO CONTACT")
+            print ("NO CONTACT")
             self.ActiveLock = False
         
 

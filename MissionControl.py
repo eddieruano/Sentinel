@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:08:41
+# @Last Modified time: 2017-06-05 00:25:18
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -60,7 +60,6 @@ def main():
         
         while True:
             Sentinel.updateActiveLock(TouchSense)
-            print(TouchSense.touched())
             if(Sentinel.ActiveLock):
                 if(GPIO.event_detected(DESI.IN_START)):
                     print("start")
