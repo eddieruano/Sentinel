@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 22:27:10
+# @Last Modified time: 2017-06-04 22:27:39
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -146,6 +146,7 @@ def queryDistance():
     
     return ave
 def sanitizeDistance(voy, inDist):
+    tries = 0
     while inDist == -1.0 and tries < Sentinel.ProximityRetries:
         inDist = Voyager1.get_distance()
     return inDist
