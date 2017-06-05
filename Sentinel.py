@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:28:29
+# @Last Modified time: 2017-06-05 00:29:18
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -10,7 +10,7 @@ class Sentinel(object):
         """Create an instance of Sentinel"""
         # Locks/Mutex/Counters
         self.ActiveLock = True
-        self.Countdown = 3
+        self.Countdown = 40
         self.CountdownLoopSpeed = 1.0   # seconds
         self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
@@ -60,11 +60,11 @@ class Sentinel(object):
     def updateActiveLock(self, intouch):
         self.TouchRegister = intouch.touched()
         # Need to target channels
-        print (intouch.touched())
+        #print (intouch.touched())
         if self.TouchRegister  > 1:
             self.ActiveLock = True
         else:
-            print ("NO CONTACT")
+            #print ("NO CONTACT")
             self.ActiveLock = False
         
 

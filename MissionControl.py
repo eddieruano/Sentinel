@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:25:18
+# @Last Modified time: 2017-06-05 00:30:20
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -83,19 +83,21 @@ def main():
                     print("4")
                     DESI.DESISend("Send04")
                 else:
-                    print("Error in Trigger")
+                    pass
 
                 Sentinel.Proximity = queryDistance()
+                if (Sentinel.Proximity > 12.0):
+                    print("Yellow")
                 time.sleep(Sentinel.RunningLoopSpeed)
             else:
                 #print(Sentinel.TouchRegister)
                 time.sleep(Sentinel.RunningLoopSpeed)
-                #print("Countdown Started")
-                #Sentinel.Countdown -= 1
-                #if(Sentinel.Countdown == 0):
-                #    DESI.DESISend("Pause")
-                #else:
-                #    pass
+                print("Countdown Started")
+                Sentinel.Countdown -= 1
+                if(Sentinel.Countdown == 0):
+                    DESI.DESISend("Pause")
+                else:
+                    pass
                 #time.sleep(Sentinel.CountdownLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
