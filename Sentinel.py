@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:29:18
+# @Last Modified time: 2017-06-05 00:31:43
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -10,7 +10,7 @@ class Sentinel(object):
         """Create an instance of Sentinel"""
         # Locks/Mutex/Counters
         self.ActiveLock = True
-        self.Countdown = 40
+        self.Countdown = 100
         self.CountdownLoopSpeed = 1.0   # seconds
         self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
