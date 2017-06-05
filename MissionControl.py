@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:35:43
+# @Last Modified time: 2017-06-05 00:41:42
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -64,31 +64,45 @@ def main():
                 if(GPIO.event_detected(DESI.IN_START)):
                     print("start")
                     DESI.DESISend("Start")
+                    Sentinel.setSpeed()
                 elif(GPIO.event_detected(DESI.IN_PAUSE)):
                     print("pause")
                     DESI.DESISend("Pause")
                 elif(GPIO.event_detected(DESI.IN_SPEED0)):
                     print("0")
                     DESI.DESISend("Send00")
+                    Sentinel.setSpeed(0.0)
                 elif(GPIO.event_detected(DESI.IN_SPEED1)):
                     print("1")
                     DESI.DESISend("Send01")
+                    Sentinel.setSpeed(2.0)
                 elif(GPIO.event_detected(DESI.IN_SPEED2)):
                     print("2")
                     DESI.DESISend("Send02")
+                    Sentinel.setSpeed(2.5)
                 elif(GPIO.event_detected(DESI.IN_SPEED3)):
                     print("3")
                     DESI.DESISend("Send03")
+                    Sentinel.setSpeed(3.0)
                 elif(GPIO.event_detected(DESI.IN_SPEED4)):
                     print("4")
                     DESI.DESISend("Send04")
+                    Sentinel.setSpeed(3.5)
                 else:
                     pass
 
                 Sentinel.Proximity = queryDistance()
                 if (Sentinel.Proximity > 12.0):
                     print("Yellow")
-                time.sleep(Sentinel.RunningLoopSpeed)
+                    Sentinel.ProxCountdown -= 1
+                    if(Sentinel.Countdown == 0):
+                        i = 0
+                        while i < Sentinel.Redux:
+                            DESI.DESISend("SendDown")
+                            i += 1
+                        Sentinel.Countdown = 100
+                    else:
+                        pass
             else:
                 #print(Sentinel.TouchRegister)
                 time.sleep(Sentinel.RunningLoopSpeed)

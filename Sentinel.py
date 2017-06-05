@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:35:35
+# @Last Modified time: 2017-06-05 00:42:07
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -10,7 +10,9 @@ class Sentinel(object):
         """Create an instance of Sentinel"""
         # Locks/Mutex/Counters
         self.ActiveLock = True
-        self.Countdown = 100
+        self.Redux = 0.0
+        self.ProxCountdown = 100
+        self.CapCountdown = 100
         self.CountdownLoopSpeed = 1.0   # seconds
         self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
@@ -20,7 +22,7 @@ class Sentinel(object):
         self.KNOB2 = False
         self.KNOB3 = False
         self.KNOB4 = False
-        self.StateSpeed = 0
+        self.StateSpeed = 0.0
         # Proximity Monitors
         self.Proximity = 0.0
         self.ProximityRetries = 3
@@ -57,6 +59,9 @@ class Sentinel(object):
             print("Error in StateKnob")
     def setStateCap(self, intouch):
         self.TouchRegister = intouch
+    def setSpeed(self, speed):
+        self.StateSpeed = speed
+        self.Redux = (self.StateSpeed * 0.5) * 10
     def updateActiveLock(self, intouch):
         self.TouchRegister = intouch.touched()
         # Need to target channels
