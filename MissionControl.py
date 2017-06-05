@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 21:54:53
+# @Last Modified time: 2017-06-04 21:56:28
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -30,8 +30,6 @@ Sentinel = Sentinel.Sentinel()
 ################################## PATHS ######################################
 
 def main():
-    global FlagDisparity
-    global Proximity
     # Variables
     contact = False
     dFlag = True
@@ -111,8 +109,9 @@ def main():
             # elif Proximity < DESI.Zone_Red and redFlag:
             #     DESI.DESISend("Send01")
             #     redFlag = False
-            else:
-                pass
+            #else:
+            #    pass
+
             time.sleep(0.05)
             # Query for the proximity of Megan #
     except KeyboardInterrupt:
