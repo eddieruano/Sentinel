@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 23:24:16
+# @Last Modified time: 2017-06-04 23:26:00
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -58,15 +58,19 @@ class Sentinel(object):
     def setStateCap(self, intouch):
         self.TouchRegister = intouch
     def updateActiveLock(self, intouch):
-        self.TouchRegister = intouch.touched()
+        inp = intouch.touched()
         # Need to target channels
         print (self.TouchRegister)
-        if self.TouchRegister & (1 << self.PrimaryGripChannel):
+        print (inp)
+        if inp & (1 << self.PrimaryGripChannel):
             self.ActiveLock = True
-        elif self.TouchRegister & (1 << self.SecondaryGripChannel):
+            self.TouchRegister = inp
+        elif inp & (1 << self.SecondaryGripChannel):
             self.ActiveLock = True
+            self.TouchRegister = inp
         else:
             print ("NO CONTACT")
+            self.TouchRegister = inp
             self.ActiveLock = False
         
 
