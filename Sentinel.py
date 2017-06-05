@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 23:30:34
+# @Last Modified time: 2017-06-04 23:35:35
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -29,8 +29,8 @@ class Sentinel(object):
         self.CONST_ZONE_FIX = 0.0
         # Capacitive Monitors
         self.TouchRegister = 0
-        self.PrimaryGripChannel = 2
-        self.SecondaryGripChannel = 8
+        self.PrimaryGripChannel = 1 << 2
+        self.SecondaryGripChannel = 1 << 8
     def getStateKnob(self, desi):
         self.KNOB0 = GPIO.input(desi.IN_SPEED0)
         self.KNOB1 = GPIO.input(desi.IN_SPEED1)
@@ -58,19 +58,15 @@ class Sentinel(object):
     def setStateCap(self, intouch):
         self.TouchRegister = intouch
     def updateActiveLock(self, intouch):
-        inp = intouch.touched()
+        self.TouchRegister = intouch.touched()
         # Need to target channels
-        #print (self.TouchRegister)
-        print (inp)
-        if inp & (1 << self.PrimaryGripChannel):
+        print (self.TouchRegister)
+        if self.TouchRegister & self.PrimaryGripChannel:
             self.ActiveLock = True
-            self.TouchRegister = inp
-        elif inp & (1 << self.SecondaryGripChannel):
+        elif self.TouchRegister & self.SecondaryGripChannel:
             self.ActiveLock = True
-            self.TouchRegister = inp
         else:
             #print ("NO CONTACT")
-            self.TouchRegister = inp
             self.ActiveLock = False
         
 
