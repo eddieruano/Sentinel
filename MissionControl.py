@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:46:31
+# @Last Modified time: 2017-06-05 01:00:11
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -57,11 +57,9 @@ def main():
     GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING)
     try:
         print("Listening")
-        
         while True:
             Sentinel.updateActiveLock(TouchSense)
-            if(Sentinel.ActiveLock):
-                if(GPIO.event_detected(DESI.IN_START)):
+            if(GPIO.event_detected(DESI.IN_START)):
                     print("start")
                     DESI.DESISend("Start")
                 elif(GPIO.event_detected(DESI.IN_PAUSE)):
@@ -89,27 +87,27 @@ def main():
                     Sentinel.setSpeed(3.5)
                 else:
                     pass
-                Sentinel.Proximity = queryDistance()
-                if (Sentinel.Proximity > 12.0):
-                    print("Yellow")
-                    Sentinel.ProxCountdown -= 1
-                    if(Sentinel.CapCountdown == 0):
-                        i = 0
-                        while i < Sentinel.Redux:
-                            DESI.DESISend("SendDown")
-                            i += 1
-                        Sentinel.CapCountdown = 100
-                    else:
-                        pass
-            else:
-                #print(Sentinel.TouchRegister)
-                #print("Countdown Started")
-                Sentinel.CapCountdown -= 1
+            Sentinel.Proximity = queryDistance()
+            if (Sentinel.Proximity > 12.0):
+                print("Yellow")
+                Sentinel.ProxCountdown -= 1
+                if(Sentinel.ProxCountdown == 0):
+                    i = 0
+                    while i < Sentinel.Redux:
+                        DESI.DESISend("SendDown")
+                        i += 1
+                    Sentinel.ProxCountdown = 30
+                else:
+                    pass
+            if(not Sentinel.ActiveLock):
+                entinel.CapCountdown -= 1
                 if(Sentinel.CapCountdown == 0):
                     DESI.DESISend("Pause")
                     Sentinel.CapCountdown = 100
                 else:
                     pass
+            else:
+                pass
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()

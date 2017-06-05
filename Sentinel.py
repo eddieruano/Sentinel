@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:45:24
+# @Last Modified time: 2017-06-05 00:57:11
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -11,7 +11,7 @@ class Sentinel(object):
         # Locks/Mutex/Counters
         self.ActiveLock = True
         self.Redux = 0.0
-        self.ProxCountdown = 100
+        self.ProxCountdown = 30
         self.CapCountdown = 100
         self.CountdownLoopSpeed = 1.0   # seconds
         self.RunningLoopSpeed = 0.1    # seconds
