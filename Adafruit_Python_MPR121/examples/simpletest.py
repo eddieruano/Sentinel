@@ -78,4 +78,4 @@ while True:
         base = [cap.baseline_data(i) for i in range(12)]
         print('Base:', '\t'.join(map(str, base)))
 
-        time.sleep(0.05)
+        time.sleep(0.3)
