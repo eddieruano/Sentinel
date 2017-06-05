@@ -103,7 +103,7 @@ class MPR121(object):
         if c != 0x24:
            return False
         # Set threshold for touch and release to default values.
-        self.set_thresholds(12, 6)
+        self.set_thresholds(2, 1)
         # Configure baseline filtering control registers.
         self._i2c_retry(self._device.write8, MPR121_MHDR, 0x01)
         self._i2c_retry(self._device.write8, MPR121_NHDR, 0x01)
@@ -156,7 +156,14 @@ class MPR121(object):
         for i in range(12):
             self._i2c_retry(self._device.write8, MPR121_TOUCHTH_0 + 2*i, touch)
             self._i2c_retry(self._device.write8, MPR121_RELEASETH_0 + 2*i, release)
-
+    def get_thresholds(self):
+        """Return filtered data register value for the provided pin (0-11).
+        Useful for debugging.
+        """
+        #assert pin >= 0 and pin < 12, 'pin must be between 0-11 (inclusive)'
+        for i in range(12):
+            bl = self._i2c_retry(self._device.readU8, MPR121_TOUCHTH_0 + 2*i)
+            print(bl)
     def filtered_data(self, pin):
         """Return filtered data register value for the provided pin (0-11).
         Useful for debugging.

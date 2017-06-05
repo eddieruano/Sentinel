@@ -2,39 +2,32 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 04:08:45
+# @Last Modified time: 2017-06-04 21:33:12
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
 """
-### IMPORT MODULES ###
+################################## IMPORTS ###################################
 import sys
 import os.path
 import signal
-import collections
-import pyaudio
-import wave
-import time
 from math import floor
 # Customs Mods #
-import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
+import Sentinel as Sentinel
 # Local Modules #
-### Set path ###
+################################### PATHS #####################################
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04 as VoyagerHCSR04
 import drivers.DESIConfig as DESIConfig
-TOP_DIR = os.path.dirname(os.path.abspath(__file__))
-DING = os.path.join(TOP_DIR, "resources/ding.wav")
-### Global Variables ###
+import drivers.MPR121 as MPR121
+############################ INITIALIZE CLASSES ###############################
 DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
-CONST_REDUX = 0.1
-CONST_ZONE_FIX = 0.0
-Proximity = 0
-FlagDisparity = False
+Sentinel = Sentinel.Sentinel()
+################################## PATHS ######################################
 
 def main():
     global FlagDisparity
@@ -53,6 +46,7 @@ def main():
     if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
         print("TSense")
         sys.exit(1)
+
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING)
     GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING)
     GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING)
@@ -89,7 +83,6 @@ def main():
                 DESI.DESISend("Send04")
             else:
                 pass
-
             Proximity = queryDistance()
             if FlagDisparity:
                 FlagDisparity = False;
@@ -131,50 +124,29 @@ def activateAlexa():
     GPIO.output(DESI.OUT_ALEXA, GPIO.LOW)
     time.sleep(2)
     GPIO.output(DESI.OUT_ALEXA, GPIO.HIGH)
-def play_audio_file(fname=DING):
-    """Plays audio
-    :param str fname: wave file name
-    :return: None
-    """
-    ding_wav = wave.open(fname, 'rb')
-    ding_data = ding_wav.readframes(ding_wav.getnframes())
-    audio = pyaudio.PyAudio()
-    stream_out = audio.open(
-        format=audio.get_format_from_width(ding_wav.getsampwidth()),
-        channels=ding_wav.getnchannels(),
-        rate=ding_wav.getframerate(), input=False, output=True)
-    stream_out.start_stream()
-    stream_out.write(ding_data)
-    time.sleep(0.2)
-    stream_out.stop_stream()
-    stream_out.close()
-    audio.terminate()
 def queryDistance():
-    global FlagDisparity
-    global Proximity
-    error = False
     distv1 = Voyager1.get_distance()
     distv2 = Voyager2.get_distance()
     # Sanitize
-    distv1 = distv1 - 3.5
-    distv2 = distv2 - 3.5
-    if distv1 < 0 or distv1 > 15:
-        distv1 = distv2
-        error = True
-    if distv2 < 0 or distv2 > 15 and not error:
-        distv2 = distv1
-    if error:
-        ave = -1.0
-    #print(distv1)
-    #print(distv2)
-    ave = floor((distv1 + distv2) / 2)
-    if (abs(ave - Proximity) > 4) and not FlagDisparity:
-        ave = Proximity
-        FlagDisparity = True
+    distv1 = sanitizeDistance(Voyager1, distv1)
+    distv2 = sanitizeDistance(Voyager2, distv2)
+    # Subtract 3.5 to get 0
+    distv1 = abs(distv1 - 3.5)
+    distv2 = abs(distv2 - 3.5)
+    if distv1 == -1.0 and distv2 != -1.0:
+        print("Check Sensor 1")
+        return distv2
+    elif distv2 == -1.0 and distv1 != -1.0:
+        print("Check Sensor 2")
+        return distv1
     else:
-        FlagDisparity == False
-    #    return Distance
+        ave = distv1 + distv2 / 2
+    
     return ave
+def sanitizeDistance(voy, inDist):
+    while inDist == -1.0 and tries < Sentinel.ProximityRetries:
+        inDist = Voyager1.get_distance()
+    return inDist
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
 #    HotwordInterrupt = True
