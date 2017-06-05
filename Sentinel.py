@@ -2,9 +2,10 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 04:28:25
+# @Last Modified time: 2017-06-05 04:51:54
 
 import RPi.GPIO as GPIO
+
 class Sentinel(object):
     def __init__(self):
         """Create an instance of Sentinel"""

@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 04:23:03
+# @Last Modified time: 2017-06-05 04:53:34
 
 import RPi.GPIO as GPIO
 import time
@@ -189,7 +189,6 @@ class DESI(object):
         self.State_Main = "Pause"
     
     def performS0(self):
-        # if self.State_Main == "Speed1" or self.State_Main == "Idle":
         GPIO.output(self.OUT_0, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(self.OUT_0, GPIO.HIGH)
@@ -225,10 +224,7 @@ class DESI(object):
         self.State_Main = "Speed1"
         self.State_Speed = self.SPEED1
         time.sleep(0.1)
-        # else:
-            # print("Nope")
     def performS2(self):
-        # if self.State_Main == "Speed1" or self.State_Main == "Speed3":
         GPIO.output(self.OUT_2, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(self.OUT_2, GPIO.HIGH)
@@ -245,10 +241,7 @@ class DESI(object):
         self.State_Main = "Speed2"
         self.State_Speed = self.SPEED2
         time.sleep(0.1)
-        # else:
-            # print("Nope")
     def performS3(self):
-        # if self.State_Main == "Speed4" or self.State_Main == "Speed2":
         GPIO.output(self.OUT_3, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(self.OUT_3, GPIO.HIGH)
@@ -263,10 +256,7 @@ class DESI(object):
         time.sleep(0.1)
         self.State_Speed = self.SPEED3
         time.sleep(0.1)
-        # else:
-            # print("Nope")
     def performS4(self):
-        # if self.State_Main == "Speed3":
         GPIO.output(self.OUT_3, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(self.OUT_3, GPIO.HIGH)
@@ -282,16 +272,12 @@ class DESI(object):
         self.State_Main = "Speed4"
         self.State_Speed = self.SPEED4
         time.sleep(0.1)
-        # else:
-            # print("Nope")
     def performDown(self):
         GPIO.output(self.OUT_DOWN, GPIO.LOW)
         time.sleep(0.1)
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
         time.sleep(0.1)
         self.State_Speed -= 0.1
-        # else:
-            # print("Nope")
     def performAlexa(self):
         GPIO.output(self.OUT_ALEXA, GPIO.LOW)
         time.sleep(0.2)
