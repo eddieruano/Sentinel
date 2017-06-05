@@ -46,7 +46,7 @@ if not cap.begin():
 print('Press Ctrl-C to quit.')
 #last_touched = cap.touched()
 while True:
-    #current_touched = cap.touched()
+    current_touched = cap.touched()
     # # Check each pin's last and current state to see if it was pressed or released.
     #for i in range(12):
         # Each pin is represented by a bit in the touched value.  A value of 1
@@ -63,18 +63,18 @@ while True:
     # Alternatively, if you only care about checking one or a few pins you can
     # call the is_touched method with a pin number to directly check that pin.
     # This will be a little slower than the above code for checking a lot of pins.
-    if cap.is_touched(2):
-        print('Pin 2 is being touched!')
-    elif cap.is_touched(7):
-        print('Pin 7 is being touched!')
-    elif cap.is_touched(8):
-        print('Pin 8 is being touched!')
+    # if cap.is_touched(2):
+    #     print('Pin 2 is being touched!')
+    # elif cap.is_touched(7):
+    #     print('Pin 7 is being touched!')
+    # elif cap.is_touched(8):
+    #     print('Pin 8 is being touched!')
     # else:
     #     # If you're curious or want to see debug info for each pin, uncomment the
-    #     # following lines:
-    #     #print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched()))
-    #     #filtered = [cap.filtered_data(i) for i in range(12)]
-    #     #print('Filt:', '\t'.join(map(str, filtered)))
-    #     #base = [cap.baseline_data(i) for i in range(12)]
-    #     #print('Base:', '\t'.join(map(str, base)))
-    time.sleep(0.25)
+    #following lines:
+    print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched()))
+    filtered = [cap.filtered_data(i) for i in range(12)]
+    print('Filt:', '\t'.join(map(str, filtered)))
+    base = [cap.baseline_data(i) for i in range(12)]
+    print('Base:', '\t'.join(map(str, base)))
+    time.sleep(0.4)
