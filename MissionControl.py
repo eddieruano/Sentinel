@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:32:04
+# @Last Modified time: 2017-06-05 00:35:43
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -92,7 +92,7 @@ def main():
             else:
                 #print(Sentinel.TouchRegister)
                 time.sleep(Sentinel.RunningLoopSpeed)
-                print("Countdown Started")
+                #print("Countdown Started")
                 Sentinel.Countdown -= 1
                 if(Sentinel.Countdown == 0):
                     DESI.DESISend("Pause")
