@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:28:01
+# @Last Modified time: 2017-06-05 00:28:29
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -61,7 +61,7 @@ class Sentinel(object):
         self.TouchRegister = intouch.touched()
         # Need to target channels
         print (intouch.touched())
-        if self.TouchRegister > 2:
+        if self.TouchRegister  > 1:
             self.ActiveLock = True
         else:
             print ("NO CONTACT")
