@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 00:25:39
+# @Last Modified time: 2017-06-05 00:27:10
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -60,7 +60,7 @@ class Sentinel(object):
     def updateActiveLock(self, intouch):
         self.TouchRegister = intouch.touched()
         # Need to target channels
-        #print (intouch.touched())
+        print (intouch.touched())
         if self.TouchRegister & self.PrimaryGripChannel:
             self.ActiveLock = True
         elif self.TouchRegister & self.SecondaryGripChannel:
