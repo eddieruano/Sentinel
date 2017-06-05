@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 22:37:01
+# @Last Modified time: 2017-06-04 22:39:56
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
@@ -27,19 +27,19 @@ class Sentinel(object):
         self.KNOB3 = GPIO.input(desi.IN_SPEED3)
         self.KNOB4 = GPIO.input(desi.IN_SPEED4)
     def setState(self):
-        if self.KNOB0 == True:
+        if self.KNOB0 == False:
             self.StateKnob = 0
             print("State0")
-        elif self.KNOB1 == True:
+        elif self.KNOB1 == False:
             self.StateKnob = 1
             print("State1")
-        elif self.KNOB2 == True:
+        elif self.KNOB2 == False:
             self.StateKnob = 2
             print("State2")
-        elif self.KNOB3 == True:
+        elif self.KNOB3 == False:
             self.StateKnob = 3
             print("State3")
-        elif self.KNOB4 == True:
+        elif self.KNOB4 == False:
             self.StateKnob = 4
             print("State4")
         else:
