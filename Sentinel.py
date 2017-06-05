@@ -2,17 +2,22 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 01:25:51
+# @Last Modified time: 2017-06-05 04:28:25
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
     def __init__(self):
         """Create an instance of Sentinel"""
+        # CONSTANTS
+        self.CONST_REDUX = 0.1
+        self.CONST_ZONE_FIX = 0.0
+        self.PROXCOUNT = 50
+        self.CAPCOUNT = 100
         # Locks/Mutex/Counters
         self.ActiveLock = True
         self.Redux = 0.0
-        self.ProxCountdown = 50
-        self.CapCountdown = 100
+        self.ProxCountdown = self.PROXCOUNT
+        self.CapCountdown = self.CAPCOUNT
         self.CountdownLoopSpeed = 1.0   # seconds
         self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
@@ -23,16 +28,16 @@ class Sentinel(object):
         self.KNOB3 = False
         self.KNOB4 = False
         self.StateSpeed = 0.0
+        self.KnobInterrupt = False
         # Proximity Monitors
         self.Proximity = 0.0
         self.ProximityRetries = 3
         self.FlagDisparity = False
-        self.CONST_REDUX = 0.1
-        self.CONST_ZONE_FIX = 0.0
         # Capacitive Monitors
         self.TouchRegister = 0
         self.PrimaryGripChannel = 1 << 2
         self.SecondaryGripChannel = 1 << 8
+        # 
     def getStateKnob(self, desi):
         self.KNOB0 = GPIO.input(desi.IN_SPEED0)
         self.KNOB1 = GPIO.input(desi.IN_SPEED1)
@@ -57,8 +62,6 @@ class Sentinel(object):
             print("State4")
         else:
             print("Error in StateKnob")
-    def setStateCap(self, intouch):
-        self.TouchRegister = intouch
     def setSpeed(self, speed):
         self.StateSpeed = speed
         self.Redux = (self.StateSpeed * 0.5) * 10
@@ -71,5 +74,13 @@ class Sentinel(object):
         else:
             #print ("NO CONTACT")
             self.ActiveLock = False
+    def setKnobInterrupt(self):
+        self.KnobInterrupt = True
+    def checkForInput(self):
+        if self.KnobInterrupt == True:
+            return True
+        else:
+            return False
+
         
 

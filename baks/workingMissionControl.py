@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 04:36:52
+# @Last Modified time: 2017-06-05 01:34:55
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -44,11 +44,15 @@ def main():
     Sentinel.setStateKnob()
     Sentinel.updateActiveLock(TouchSense)
     # Add the triggers
-    GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.BOUNCE_CONSTANT)
-    GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.BOUNCE_CONSTANT)
+    GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED1, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED2, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED3, GPIO.FALLING)
+    GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING)
     try:
         print("Listening")
-        localKnobState = Sentinel.StateKnob
         while True:
             # Update the ActiveLock
             Sentinel.updateActiveLock(TouchSense)
@@ -56,48 +60,65 @@ def main():
             Sentinel.getStateKnob(DESI)
             # Set the Knob State according to the recent get
             Sentinel.setStateKnob()
-            # Check if the knob changed position
-            if (Sentinel.StateKnob != localKnobState):
-                localKnobState = Sentinel.StateKnob
-                DESI.DESISend(Sentinel.StateKnob * 1.0)
-            # Set the Speed if the knob doesn't match up
+            # 
             if (Sentinel.StateKnob != Sentinel.StateSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
-                Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
-            # Start Query for Distances
+            if GPIO.event_detected(DESI.IN_START):
+                print("start")
+                DESI.DESISend("Start")
+            elif GPIO.event_detected(DESI.IN_PAUSE):
+                if (Sentinel.StateKnob == 0):
+                    DESI.DESISend("Shutdown")
+                else:
+                    pass
+                print("pause")
+                DESI.DESISend("Pause")
+            elif GPIO.event_detected(DESI.IN_SPEED0):
+                print("0")
+                DESI.DESISend("Send00")
+                Sentinel.setSpeed(0.0)
+            elif GPIO.event_detected(DESI.IN_SPEED1):
+                print("1")
+                DESI.DESISend("Send01")
+                Sentinel.setSpeed(2.0)
+            elif GPIO.event_detected(DESI.IN_SPEED2):
+                print("2")
+                DESI.DESISend("Send02")
+                Sentinel.setSpeed(2.5)
+            elif GPIO.event_detected(DESI.IN_SPEED3):
+                print("3")
+                DESI.DESISend("Send03")
+                Sentinel.setSpeed(3.0)
+            elif GPIO.event_detected(DESI.IN_SPEED4):
+                print("4")
+                DESI.DESISend("Send04")
+                Sentinel.setSpeed(3.5)
+            else:
+                pass
             Sentinel.Proximity = queryDistance()
-            # Check to see if the Distance is above the threshold
             if (Sentinel.Proximity > 12.0):
                 print("Yellow")
-                # Start the coundown here
                 Sentinel.ProxCountdown -= 1
-                # Here we trigger finally
                 if(Sentinel.ProxCountdown == 0):
                     i = 0
                     while i < Sentinel.Redux:
                         DESI.DESISend("SendDown")
                         i += 1
-                    # Update the new speed and redux
-                    Sentinel.setSpeed(Sentinel.StateSpeed - Sentinel.Redux)
-                    # Restart the counter
-                    Sentinel.ProxCountdown = Sentinel.PROXCOUNT
-            else: # Else, we're back in the green
-                Sentinel.ProxCountdown = Sentinel.PROXCOUNT
-                Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
-            # Here we check for contact
-            if not Sentinel.ActiveLock:
-                # Start the countdown to regain contact
-                if Sentinel.CapCountdown == 0 and not Sentinel.ContactLock:
-                    DESI.DESISend("Pause")
-                    Sentinel.ContactLock = True
+                    Sentinel.ProxCountdown = 50
                 else:
-                    # Continue to countdown
-                    Sentinel.CapCountdown -= 1
-            else: 
-                # Any contact will reset the counter because it's sensitive
-                Sentinel.CapCountdown = Sentinel.CAPCOUNT
-                Sentinel.ContactLock = False
-                Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
+                    pass
+            else (Sentinel.Proximity < 12.0)
+                Sentinel.ProxCountdown += 1
+                if(Sentinel)
+            if(not Sentinel.ActiveLock):
+                Sentinel.CapCountdown -= 1
+                if(Sentinel.CapCountdown == 0):
+                    DESI.DESISend("Pause")
+                    Sentinel.CapCountdown = 100
+                else:
+                    pass
+            else:
+                pass
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
@@ -133,19 +154,6 @@ def sanitizeDistance(voy, inDist):
     while inDist == -1.0 and tries < Sentinel.ProximityRetries:
         inDist = Voyager1.get_distance()
     return inDist
-def StartHandler(channel):
-    print("Starting")
-    DESI.DESISend("Start")
-def PauseHandler(channel):
-    if (Sentinel.StateKnob == 0):
-        DESI.DESISend("Shutdown")
-        time.sleep(30)
-        GPIO.cleanup()
-        print("Shutdown")
-        sys.exit(0)
-    else:
-        print("pause")
-        DESI.DESISend("Pause")
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
 #    HotwordInterrupt = True

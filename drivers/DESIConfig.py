@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 01:07:52
+# @Last Modified time: 2017-06-05 04:23:03
 
 import RPi.GPIO as GPIO
 import time
