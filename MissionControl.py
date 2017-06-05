@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 23:01:02
+# @Last Modified time: 2017-06-04 23:05:43
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -44,8 +44,8 @@ def main():
         print("TSense")
         sys.exit(1)
 
-    Sentinel.getState(DESI)
-    Sentinel.setState()
+    Sentinel.getStateKnob(DESI)
+    Sentinel.setStateKnob()
     Sentinel.updateActiveLock(TouchSense)
     # Add the triggers
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING)
