@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 22:38:29
+# @Last Modified time: 2017-06-04 23:01:02
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -32,8 +32,6 @@ Sentinel = Sentinel.Sentinel()
 
 def main():
     # Variables
-    contact = False
-    dFlag = True
     lastZone = -1.0
     subZone = 0.0
     redFlag = False
@@ -48,6 +46,8 @@ def main():
 
     Sentinel.getState(DESI)
     Sentinel.setState()
+    Sentinel.updateActiveLock(TouchSense)
+    # Add the triggers
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING)
     GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING)
     GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING)
@@ -57,66 +57,43 @@ def main():
     GPIO.add_event_detect(DESI.IN_SPEED4, GPIO.FALLING)
     try:
         print("Listening")
-        #DESI.DESIListen()
-        activeFlag = True
-        while activeFlag == True:
-            i = 0
-            if(GPIO.event_detected(DESI.IN_START)):
-                print("start")
-                DESI.DESISend("Start")
-            elif(GPIO.event_detected(DESI.IN_PAUSE)):
-                print("pause")
-                DESI.DESISend("Pause")
-            elif(GPIO.event_detected(DESI.IN_SPEED0)):
-                print("0")
-                DESI.DESISend("Send00")
-            elif(GPIO.event_detected(DESI.IN_SPEED1)):
-                print("1")
-                DESI.DESISend("Send01")
-            elif(GPIO.event_detected(DESI.IN_SPEED2)):
-                print("2")
-                DESI.DESISend("Send02")
-            elif(GPIO.event_detected(DESI.IN_SPEED3)):
-                print("3")
-                DESI.DESISend("Send03")
-            elif(GPIO.event_detected(DESI.IN_SPEED4)):
-                print("4")
-                DESI.DESISend("Send04")
-            else:
-                pass
-            Sentinel.Proximity = queryDistance()
-            #print(Sentinel.Proximity)
-            subZone = floor(Sentinel.Proximity - DESI.Zone_Yellow) + 1.0
-            if Sentinel.Proximity == -1.0:
-                print ("Error")
-            else:
-                time.sleep(0.05)
-                #print (Sentinel.Proximity)
-                #print(Sentinel.StateKnob)
-            # elif(Sentinel.Proximity > DESI.Zone_Yellow and subZone != lastZone):
-            #     subRedux = DESI.State_Speed * Sentinel.CONST_REDUX * 10
-            #     redux = subZone * subRedux
-            #     print(subRedux)
-            #     print(subZone)
-            #     print(redux)
-            #     while i < redux:
-            #         DESI.DESISend("SendDown")
-            #         i+=1
-            #     lastZone = subZone
-            #     print("refresh")
-            # elif Proximity > DESI.Zone_Red and not redFlag:
-            #     saveSpeed = DESI.State_Speed
-            #     DESI.DESISend("Send00")
-            #     print(ave)
-            #     redFlag = True
-            # elif Proximity < DESI.Zone_Red and redFlag:
-            #     DESI.DESISend("Send01")
-            #     redFlag = False
-            #else:
-            #    pass
+        
+        while True:
+            if(Sentinel.ActiveLock):
+                if(GPIO.event_detected(DESI.IN_START)):
+                    print("start")
+                    DESI.DESISend("Start")
+                elif(GPIO.event_detected(DESI.IN_PAUSE)):
+                    print("pause")
+                    DESI.DESISend("Pause")
+                elif(GPIO.event_detected(DESI.IN_SPEED0)):
+                    print("0")
+                    DESI.DESISend("Send00")
+                elif(GPIO.event_detected(DESI.IN_SPEED1)):
+                    print("1")
+                    DESI.DESISend("Send01")
+                elif(GPIO.event_detected(DESI.IN_SPEED2)):
+                    print("2")
+                    DESI.DESISend("Send02")
+                elif(GPIO.event_detected(DESI.IN_SPEED3)):
+                    print("3")
+                    DESI.DESISend("Send03")
+                elif(GPIO.event_detected(DESI.IN_SPEED4)):
+                    print("4")
+                    DESI.DESISend("Send04")
+                else:
+                    print("Error in Trigger")
 
-            #time.sleep(0.05)
-            # Query for the proximity of Megan #
+                Sentinel.Proximity = queryDistance()
+                time.sleep(Sentinel.RunningLoopSpeed)
+            else:
+                print("Countdown Started")
+                Sentinel.Countdown -= 1
+                if(Sentinel.Countdown == 0):
+                    DESI.DESISend("Pause")
+                else:
+                    pass
+                time.sleep(Sentinel.CountdownLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")
