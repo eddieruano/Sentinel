@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 23:22:54
+# @Last Modified time: 2017-06-04 23:26:34
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -94,7 +94,7 @@ def main():
                     DESI.DESISend("Pause")
                 else:
                     pass
-                time.sleep(Sentinel.CountdownLoopSpeed)
+        time.sleep(Sentinel.CountdownLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Shutdown Mission.")
