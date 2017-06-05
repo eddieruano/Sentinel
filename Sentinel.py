@@ -2,19 +2,19 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 21:36:22
+# @Last Modified time: 2017-06-04 21:53:39
 
 import RPi.GPIO as GPIO
 class Sentinel(object):
     def __init__(self):
         """Create an instance of Sentinel"""
         # Initialize Everything
+        self.StateKnob = 0
         self.KNOB0 = False
         self.KNOB1 = False
         self.KNOB2 = False
         self.KNOB3 = False
         self.KNOB4 = False
-        self.KNOB5 = False
         self.Proximity = 0.0
         self.ProximityRetries = 3
         self.FlagDisparity = False
@@ -26,5 +26,22 @@ class Sentinel(object):
         self.KNOB2 = GPIO.input(GPIO.IN_SPEED2)
         self.KNOB3 = GPIO.input(GPIO.IN_SPEED3)
         self.KNOB4 = GPIO.input(GPIO.IN_SPEED4)
-        self.KNOB5 = GPIO.input(GPIO.IN_SPEED5)
+    def setState(self):
+        if self.KNOB0 == True:
+            StateKnob = 0
+            print("State0")
+        elif self.KNOB1 == True:
+            StateKnob = 1
+            print("State1")
+        elif self.KNOB2 == True:
+            StateKnob = 2
+            print("State2")
+        elif self.KNOB3 == True:
+            StateKnob = 3
+            print("State3")
+        elif self.KNOB4 == True:
+            StateKnob = 4
+            print("State4")
+        else:
+            print("Error in StateKnob")
 

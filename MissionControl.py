@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 21:33:12
+# @Last Modified time: 2017-06-04 21:54:53
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -47,6 +47,8 @@ def main():
         print("TSense")
         sys.exit(1)
 
+    Sentinel.getState(DESI)
+    Sentinel.setState()
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING)
     GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING)
     GPIO.add_event_detect(DESI.IN_SPEED0, GPIO.FALLING)
@@ -83,32 +85,32 @@ def main():
                 DESI.DESISend("Send04")
             else:
                 pass
-            Proximity = queryDistance()
-            if FlagDisparity:
-                FlagDisparity = False;
+            Sentinel.Proximity = queryDistance()
             print(Proximity)
-            subZone = floor(Proximity - DESI.Zone_Yellow) + 1.0
-            if Proximity == -1.0:
+            subZone = floor(Sentinel.Proximity - DESI.Zone_Yellow) + 1.0
+            if Sentinel.Proximity == -1.0:
                 print ("Error")
-            elif(Proximity > DESI.Zone_Yellow and subZone != lastZone):
-                subRedux = DESI.State_Speed * CONST_REDUX * 10
-                redux = subZone * subRedux
-                print(subRedux)
-                print(subZone)
-                print(redux)
-                while i < redux:
-                    DESI.DESISend("SendDown")
-                    i+=1
-                lastZone = subZone
-                print("refresh")
-            elif Proximity > DESI.Zone_Red and not redFlag:
-                saveSpeed = DESI.State_Speed
-                DESI.DESISend("Send00")
-                print(ave)
-                redFlag = True
-            elif Proximity < DESI.Zone_Red and redFlag:
-                DESI.DESISend("Send01")
-                redFlag = False
+            else:
+                print (Sentinel.Proximity)
+            # elif(Sentinel.Proximity > DESI.Zone_Yellow and subZone != lastZone):
+            #     subRedux = DESI.State_Speed * Sentinel.CONST_REDUX * 10
+            #     redux = subZone * subRedux
+            #     print(subRedux)
+            #     print(subZone)
+            #     print(redux)
+            #     while i < redux:
+            #         DESI.DESISend("SendDown")
+            #         i+=1
+            #     lastZone = subZone
+            #     print("refresh")
+            # elif Proximity > DESI.Zone_Red and not redFlag:
+            #     saveSpeed = DESI.State_Speed
+            #     DESI.DESISend("Send00")
+            #     print(ave)
+            #     redFlag = True
+            # elif Proximity < DESI.Zone_Red and redFlag:
+            #     DESI.DESISend("Send01")
+            #     redFlag = False
             else:
                 pass
             time.sleep(0.05)
