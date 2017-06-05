@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 22:38:23
+# @Last Modified time: 2017-06-04 22:38:29
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -115,7 +115,7 @@ def main():
             #else:
             #    pass
 
-            time.sleep(0.05)
+            #time.sleep(0.05)
             # Query for the proximity of Megan #
     except KeyboardInterrupt:
         GPIO.cleanup()
