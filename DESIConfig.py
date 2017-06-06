@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:36:59
+# @Last Modified time: 2017-06-06 05:38:50
 
 import RPi.GPIO as GPIO
 import time
@@ -146,7 +146,7 @@ class DESI(object):
         else:
             print("Error")
             print(command)
-    def DESISendResponse(fname=DETECT_DING):
+    def DESISendResponse(fname):
         """ 
             Callback plays a wave file.
             :param str fname: wave file name
