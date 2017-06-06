@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:32:39
+# @Last Modified time: 2017-06-06 06:33:25
 
 import RPi.GPIO as GPIO
 import time
@@ -53,11 +53,11 @@ class DESI(object):
     Time_Bounce = 800
     # Audio
     RespondStart   = "audio/wav_lets_start.wav"
-    RespondSpeed00 = "audio/wav_lets_tspeed0.wav"
-    RespondSpeed01 = "audio/wav_lets_tspeed1.wav"
-    RespondSpeed02 = "audio/wav_lets_tspeed2.wav"
-    RespondSpeed03 = "audio/wav_lets_tspeed3.wav"
-    RespondSpeed04 = "audio/wav_lets_tspeed4.wav"
+    RespondSpeed00 = "audio/wav_tspeed0.wav"
+    RespondSpeed01 = "audio/wav_tspeed1.wav"
+    RespondSpeed02 = "audio/wav_tspeed2.wav"
+    RespondSpeed03 = "audio/wav_tspeed3.wav"
+    RespondSpeed04 = "audio/wav_tspeed4.wav"
     # Constructor
     def __init__(self):
         """Create an instance of DESI"""
