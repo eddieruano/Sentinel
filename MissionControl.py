@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:43:20
+# @Last Modified time: 2017-06-06 05:44:24
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -76,25 +76,25 @@ def main():
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
                 Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
             # Start Query for Distances
-            Sentinel.Proximity = queryDistance()
+            #Sentinel.Proximity = queryDistance()
             # Check to see if the Distance is above the threshold
-            if (Sentinel.Proximity > 12.0):
-                print("Yellow")
-                # Start the coundown here
-                Sentinel.ProxCountdown -= 1
-                # Here we trigger finally
-                if(Sentinel.ProxCountdown == 0):
-                    i = 0
-                    while i < Sentinel.Redux:
-                        DESI.DESISend("SendDown")
-                        i += 1
-                    # Update the new speed and redux
-                    Sentinel.setSpeed(Sentinel.StateSpeed - Sentinel.Redux)
-                    # Restart the counter
-                    Sentinel.ProxCountdown = Sentinel.PROXCOUNT
-            else: # Else, we're back in the green
-                Sentinel.ProxCountdown = Sentinel.PROXCOUNT
-                Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
+            # if (Sentinel.Proximity > 12.0):
+            #     print("Yellow")
+            #     # Start the coundown here
+            #     Sentinel.ProxCountdown -= 1
+            #     # Here we trigger finally
+            #     if(Sentinel.ProxCountdown == 0):
+            #         i = 0
+            #         while i < Sentinel.Redux:
+            #             DESI.DESISend("SendDown")
+            #             i += 1
+            #         # Update the new speed and redux
+            #         Sentinel.setSpeed(Sentinel.StateSpeed - Sentinel.Redux)
+            #         # Restart the counter
+            #         Sentinel.ProxCountdown = Sentinel.PROXCOUNT
+            # else: # Else, we're back in the green
+            #     Sentinel.ProxCountdown = Sentinel.PROXCOUNT
+            #     Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             # Here we check for contact
             # if not Sentinel.ActiveLock:
             #     # Start the countdown to regain contact
