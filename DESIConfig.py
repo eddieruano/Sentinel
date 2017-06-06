@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:36:55
+# @Last Modified time: 2017-06-06 06:44:50
 
 import RPi.GPIO as GPIO
 import time
@@ -131,7 +131,6 @@ class DESI(object):
             print("Enter")
         elif command == "Send00":
             self.DESICleanupAudio()
-            self.DESISendResponse(self.RespondOkay)
             self.DESISendResponse(self.RespondSpeed00)
             self.performS0()
             print("Send00")
