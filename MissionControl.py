@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:40:04
+# @Last Modified time: 2017-06-06 05:40:20
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -57,7 +57,7 @@ def main():
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
     GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
     try:
-        DESISendResponse("audio/wav_lets_start.wav")
+        DESI.DESISendResponse("audio/wav_lets_start.wav")
         print("Listening")
         localKnobState = Sentinel.StateKnob
         while True:
