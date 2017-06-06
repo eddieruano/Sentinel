@@ -2,12 +2,13 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:40:51
+# @Last Modified time: 2017-06-06 05:55:01
 
 import RPi.GPIO as GPIO
 import time
 import pyaudio
 import wave
+import subprocess
 class DESI(object):
     """Representation of a DESI Entity"""
     # Control Box Pins
@@ -152,19 +153,7 @@ class DESI(object):
             :param str fname: wave file name
             :return: None
         """
-        ding_wav = wave.open(fname, 'rb')
-        ding_data = ding_wav.readframes(ding_wav.getnframes())
-        audio = pyaudio.PyAudio()
-        stream_out = audio.open(
-            format=audio.get_format_from_width(ding_wav.getsampwidth()),
-            channels=ding_wav.getnchannels(),
-            rate=ding_wav.getframerate(), input=False, output=True)
-        stream_out.start_stream()
-        stream_out.write(ding_data)
-        time.sleep(0.2)
-        stream_out.stop_stream()
-        stream_out.close()
-        audio.terminate()
+        subprocess.Popen(['mpg123', fname])
     def DESIUpdateState(self, state):
         pass
     def performStart(self):
@@ -310,3 +299,5 @@ class DESI(object):
         time.sleep(0.2)
     def DESIQuerySpeed(self):
         return self.State_Speed
+    def DESICleanup(self):
+        subprocess.call(['killall', 'mpg123'])
