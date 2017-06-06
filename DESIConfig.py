@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:34:37
+# @Last Modified time: 2017-06-06 05:36:59
 
 import RPi.GPIO as GPIO
 import time
@@ -51,7 +51,8 @@ class DESI(object):
     Zone_Red = 12.5
     Time_Bounce = 800
     # Audio
-    RespondStart = os.path.join(TOP_DIR, "audio/dong.wav")
+    RespondStart = "audio/dong.wav"
+
     # Constructor
     def __init__(self):
         """Create an instance of DESI"""
@@ -110,6 +111,7 @@ class DESI(object):
     def DESISend(self, command):
         if command == "Start":
             self.performStart()
+            self.DESISendResponse(RespondStart)
             print("SendStart")
         elif command == "Pause":
             self.performPause()
@@ -144,6 +146,25 @@ class DESI(object):
         else:
             print("Error")
             print(command)
+    def DESISendResponse(fname=DETECT_DING):
+        """ 
+            Callback plays a wave file.
+            :param str fname: wave file name
+            :return: None
+        """
+        ding_wav = wave.open(fname, 'rb')
+        ding_data = ding_wav.readframes(ding_wav.getnframes())
+        audio = pyaudio.PyAudio()
+        stream_out = audio.open(
+            format=audio.get_format_from_width(ding_wav.getsampwidth()),
+            channels=ding_wav.getnchannels(),
+            rate=ding_wav.getframerate(), input=False, output=True)
+        stream_out.start_stream()
+        stream_out.write(ding_data)
+        time.sleep(0.2)
+        stream_out.stop_stream()
+        stream_out.close()
+        audio.terminate()
     def DESIUpdateState(self, state):
         pass
     def performStart(self):

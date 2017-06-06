@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-05 04:41:06
+# @Last Modified time: 2017-06-06 05:37:06
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -12,6 +12,11 @@ import sys
 import os.path
 import signal
 import time
+#
+import collections
+import pyaudio
+import snowboydetect
+import wave
 from math import floor
 # Customs Mods #
 import RPi.GPIO as GPIO
@@ -20,13 +25,14 @@ import Sentinel as Sentinel
 ################################### PATHS #####################################
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import drivers.VoyagerHCSR04 as VoyagerHCSR04
-import drivers.DESIConfig as DESIConfig
+import DESIConfig as DESIConfig
 import drivers.MPR121 as MPR121
+import trigger.snowboydetect as snowboydetect
 ############################ INITIALIZE CLASSES ###############################
 DESI = DESIConfig.DESI()
 Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
-TouchSense = MPR121.MPR121()
+#TouchSense = MPR121.MPR121()
 Sentinel = Sentinel.Sentinel()
 ################################## PATHS ######################################
 
@@ -47,11 +53,12 @@ def main():
         sys.exit(1)
     Sentinel.getStateKnob(DESI)
     Sentinel.setStateKnob()
-    Sentinel.updateActiveLock(TouchSense)
+    #Sentinel.updateActiveLock(TouchSense)
     # Add the triggers
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.BOUNCE_CONSTANT)
     GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.BOUNCE_CONSTANT)
     try:
+        DESISendResponse("audio/wav_lets_start.wav")
         print("Listening")
         localKnobState = Sentinel.StateKnob
         while True:
