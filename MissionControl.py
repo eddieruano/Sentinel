@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:37:06
+# @Last Modified time: 2017-06-06 05:38:16
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -15,7 +15,6 @@ import time
 #
 import collections
 import pyaudio
-import snowboydetect
 import wave
 from math import floor
 # Customs Mods #
