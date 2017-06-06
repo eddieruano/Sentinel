@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:55:01
+# @Last Modified time: 2017-06-06 06:02:45
 
 import RPi.GPIO as GPIO
 import time
@@ -52,7 +52,7 @@ class DESI(object):
     Zone_Red = 12.5
     Time_Bounce = 800
     # Audio
-    RespondStart = "audio/dong.wav"
+    RespondStart = "audio.wav_lets_start.wav"
 
     # Constructor
     def __init__(self):
