@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:29:34
+# @Last Modified time: 2017-06-06 06:30:06
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -52,7 +52,6 @@ def main():
             activeFlag = True
             command = input("Enter a command: ")
             if command == "start":
-                play_audio_file(DING)
                 DESI.DESISend("Start")
             elif command == "shutdown":
                 DESI.DESISend("Shutdown")
