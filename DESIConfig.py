@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:28:14
+# @Last Modified time: 2017-06-06 06:31:26
 
 import RPi.GPIO as GPIO
 import time
@@ -58,7 +58,6 @@ class DESI(object):
     RespondSpeed02 = "audio/wav_lets_tspeed2.wav"
     RespondSpeed03 = "audio/wav_lets_tspeed3.wav"
     RespondSpeed04 = "audio/wav_lets_tspeed4.wav"
-
     # Constructor
     def __init__(self):
         """Create an instance of DESI"""
@@ -119,7 +118,6 @@ class DESI(object):
             self.performStart()
             print("SendStart")
         elif command == "Pause":
-            
             self.performPause()
             print("SendPause")
         elif command == "Shutdown":
