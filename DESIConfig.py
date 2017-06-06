@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:02:45
+# @Last Modified time: 2017-06-06 06:11:02
 
 import RPi.GPIO as GPIO
 import time
@@ -52,7 +52,7 @@ class DESI(object):
     Zone_Red = 12.5
     Time_Bounce = 800
     # Audio
-    RespondStart = "audio.wav_lets_start.wav"
+    RespondStart = "audio/wav_lets_start.wav"
 
     # Constructor
     def __init__(self):
@@ -153,7 +153,19 @@ class DESI(object):
             :param str fname: wave file name
             :return: None
         """
-        subprocess.Popen(['mpg123', fname])
+        res_wav = wave.open(fname, 'rb')
+        res_data = res_wav.readframes(res_wav.getnframes())
+        audio = pyaudio.PyAudio()
+        stream_out = audio.open(
+            format=audio.get_format_from_width(res_wav.getsampwidth()),
+            channels=res_wav.getnchannels(),
+            rate=res_wav.getframerate(), input=False, output=True)
+        stream_out.start_stream()
+        stream_out.write(res_data)
+        time.sleep(0.2)
+        stream_out.stop_stream()
+        stream_out.close()
+        audio.terminate()
     def DESIUpdateState(self, state):
         pass
     def performStart(self):
