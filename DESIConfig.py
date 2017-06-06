@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:26:55
+# @Last Modified time: 2017-06-06 06:28:14
 
 import RPi.GPIO as GPIO
 import time
@@ -317,6 +317,6 @@ class DESI(object):
     def DESIQuerySpeed(self):
         return self.State_Speed
     def DESICleanup(self):
-        self.CleanupAudio()
+        self.DESICleanupAudio()
     def DESICleanupAudio(self):
         subprocess.call(['killall', 'aplay'])
