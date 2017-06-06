@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:38:16
+# @Last Modified time: 2017-06-06 05:39:11
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -42,14 +42,14 @@ def main():
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
     DESI.initProximity(Voyager1, Voyager2)
-    try:
-        if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
-            print("TSense Error")
-            sys.exit(1)
-    except OSError as e:
-        print(e)
-        print("Sensor Error.")
-        sys.exit(1)
+    # try:
+    #     if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
+    #         print("TSense Error")
+    #         sys.exit(1)
+    # except OSError as e:
+    #     print(e)
+    #     print("Sensor Error.")
+    #     sys.exit(1)
     Sentinel.getStateKnob(DESI)
     Sentinel.setStateKnob()
     #Sentinel.updateActiveLock(TouchSense)
