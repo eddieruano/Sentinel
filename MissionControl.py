@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:40:20
+# @Last Modified time: 2017-06-06 05:43:20
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -62,7 +62,7 @@ def main():
         localKnobState = Sentinel.StateKnob
         while True:
             # Update the ActiveLock
-            Sentinel.updateActiveLock(TouchSense)
+            #Sentinel.updateActiveLock(TouchSense)
             # Query the knob states
             Sentinel.getStateKnob(DESI)
             # Set the Knob State according to the recent get
@@ -96,19 +96,19 @@ def main():
                 Sentinel.ProxCountdown = Sentinel.PROXCOUNT
                 Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             # Here we check for contact
-            if not Sentinel.ActiveLock:
-                # Start the countdown to regain contact
-                if Sentinel.CapCountdown == 0 and not Sentinel.ContactLock:
-                    DESI.DESISend("Pause")
-                    Sentinel.ContactLock = True
-                else:
-                    # Continue to countdown
-                    Sentinel.CapCountdown -= 1
-            else: 
-                # Any contact will reset the counter because it's sensitive
-                Sentinel.CapCountdown = Sentinel.CAPCOUNT
-                Sentinel.ContactLock = False
-                Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
+            # if not Sentinel.ActiveLock:
+            #     # Start the countdown to regain contact
+            #     if Sentinel.CapCountdown == 0 and not Sentinel.ContactLock:
+            #         DESI.DESISend("Pause")
+            #         Sentinel.ContactLock = True
+            #     else:
+            #         # Continue to countdown
+            #         Sentinel.CapCountdown -= 1
+            # else: 
+            #     # Any contact will reset the counter because it's sensitive
+            #     Sentinel.CapCountdown = Sentinel.CAPCOUNT
+            #     Sentinel.ContactLock = False
+            #     Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
