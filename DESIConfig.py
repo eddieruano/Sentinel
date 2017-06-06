@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:31:26
+# @Last Modified time: 2017-06-06 06:32:39
 
 import RPi.GPIO as GPIO
 import time
@@ -122,7 +122,7 @@ class DESI(object):
             print("SendPause")
         elif command == "Shutdown":
             self.DESICleanupAudio()
-            self.DESISendResponse(RespondShutdown)
+            self.DESISendResponse(self.RespondShutdown)
             self.performShutdown()
             print("Shutdown")
         elif command == "Enter":
@@ -130,27 +130,27 @@ class DESI(object):
             print("Enter")
         elif command == "Send00":
             self.DESICleanupAudio()
-            self.DESISendResponse(RespondSpeed00)
+            self.DESISendResponse(self.RespondSpeed00)
             self.performS0()
             print("Send00")
         elif command == "Send01":
             self.DESICleanupAudio()
-            self.DESISendResponse(RespondSpeed01)
+            self.DESISendResponse(self.RespondSpeed01)
             self.performS1()
             print("Send01")
         elif command == "Send02":
             self.DESICleanupAudio()
-            self.DESISendResponse(RespondSpeed02)
+            self.DESISendResponse(self.RespondSpeed02)
             self.performS2()
             print("Send02")
         elif command == "Send03":
             self.DESICleanupAudio()
-            self.DESISendResponse(RespondSpeed03)
+            self.DESISendResponse(self.RespondSpeed03)
             self.performS3()
             print("Send03")
         elif command == "Send04":
             self.DESICleanupAudio()
-            self.DESISendResponse(RespondSpeed04)
+            self.DESISendResponse(self.RespondSpeed04)
             self.performS4()
             print("Send04")
         elif command == "SendDown":
