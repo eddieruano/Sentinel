@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:29:06
+# @Last Modified time: 2017-06-06 06:29:34
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -16,11 +16,11 @@ import pyaudio
 import wave
 import time
 # Customs Mods #
-import Adafruit_MPR121.MPR121 as MPR121
+#import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
 # Local Modules #
 ### Set path ###
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+#sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 #import drivers.VoyagerHCSR04 as VoyagerHCSR04
 import DESIConfig as DESIConfig
 ### Global Variables ###
