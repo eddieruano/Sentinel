@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:11:02
+# @Last Modified time: 2017-06-06 06:17:10
 
 import RPi.GPIO as GPIO
 import time
@@ -153,19 +153,7 @@ class DESI(object):
             :param str fname: wave file name
             :return: None
         """
-        res_wav = wave.open(fname, 'rb')
-        res_data = res_wav.readframes(res_wav.getnframes())
-        audio = pyaudio.PyAudio()
-        stream_out = audio.open(
-            format=audio.get_format_from_width(res_wav.getsampwidth()),
-            channels=res_wav.getnchannels(),
-            rate=res_wav.getframerate(), input=False, output=True)
-        stream_out.start_stream()
-        stream_out.write(res_data)
-        time.sleep(0.2)
-        stream_out.stop_stream()
-        stream_out.close()
-        audio.terminate()
+        audio_subprocess = subprocess.Popen(["aplay", fname])
     def DESIUpdateState(self, state):
         pass
     def performStart(self):
@@ -312,4 +300,4 @@ class DESI(object):
     def DESIQuerySpeed(self):
         return self.State_Speed
     def DESICleanup(self):
-        subprocess.call(['killall', 'mpg123'])
+        subprocess.call(['killall', 'aplay'])
