@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:17:10
+# @Last Modified time: 2017-06-06 06:26:55
 
 import RPi.GPIO as GPIO
 import time
@@ -52,7 +52,12 @@ class DESI(object):
     Zone_Red = 12.5
     Time_Bounce = 800
     # Audio
-    RespondStart = "audio/wav_lets_start.wav"
+    RespondStart   = "audio/wav_lets_start.wav"
+    RespondSpeed00 = "audio/wav_lets_tspeed0.wav"
+    RespondSpeed01 = "audio/wav_lets_tspeed1.wav"
+    RespondSpeed02 = "audio/wav_lets_tspeed2.wav"
+    RespondSpeed03 = "audio/wav_lets_tspeed3.wav"
+    RespondSpeed04 = "audio/wav_lets_tspeed4.wav"
 
     # Constructor
     def __init__(self):
@@ -112,30 +117,42 @@ class DESI(object):
     def DESISend(self, command):
         if command == "Start":
             self.performStart()
-            self.DESISendResponse(RespondStart)
             print("SendStart")
         elif command == "Pause":
+            
             self.performPause()
             print("SendPause")
         elif command == "Shutdown":
+            self.DESICleanupAudio()
+            self.DESISendResponse(RespondShutdown)
             self.performShutdown()
             print("Shutdown")
         elif command == "Enter":
             self.performEnter()
             print("Enter")
         elif command == "Send00":
+            self.DESICleanupAudio()
+            self.DESISendResponse(RespondSpeed00)
             self.performS0()
             print("Send00")
         elif command == "Send01":
+            self.DESICleanupAudio()
+            self.DESISendResponse(RespondSpeed01)
             self.performS1()
             print("Send01")
         elif command == "Send02":
+            self.DESICleanupAudio()
+            self.DESISendResponse(RespondSpeed02)
             self.performS2()
             print("Send02")
         elif command == "Send03":
+            self.DESICleanupAudio()
+            self.DESISendResponse(RespondSpeed03)
             self.performS3()
             print("Send03")
         elif command == "Send04":
+            self.DESICleanupAudio()
+            self.DESISendResponse(RespondSpeed04)
             self.performS4()
             print("Send04")
         elif command == "SendDown":
@@ -300,4 +317,6 @@ class DESI(object):
     def DESIQuerySpeed(self):
         return self.State_Speed
     def DESICleanup(self):
+        self.CleanupAudio()
+    def DESICleanupAudio(self):
         subprocess.call(['killall', 'aplay'])

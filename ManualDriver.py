@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-04 11:12:28
+# @Last Modified time: 2017-06-06 06:27:14
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -29,7 +29,7 @@ DING = os.path.join(TOP_DIR, "resources/ding.wav")
 DESI = DESIConfig.DESI()
 #Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 #Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
-TouchSense = MPR121.MPR121()
+#TouchSense = MPR121.MPR121()
 
 def main():
     # Variables
@@ -43,9 +43,9 @@ def main():
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
     #DESI.initProximity(Voyager1, Voyager2)
-    if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
-        print("TSense")
-        sys.exit(1)
+    # if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
+    #     print("TSense")
+    #     sys.exit(1)
     try:
         print("Listening")
         #DESI.DESIListen()
