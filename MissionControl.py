@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 05:44:24
+# @Last Modified time: 2017-06-06 05:45:52
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -61,20 +61,22 @@ def main():
         print("Listening")
         localKnobState = Sentinel.StateKnob
         while True:
+            DESI.DESISendResponse("audio/wav_lets_start.wav")
+            print("Sent")
             # Update the ActiveLock
             #Sentinel.updateActiveLock(TouchSense)
             # Query the knob states
-            Sentinel.getStateKnob(DESI)
-            # Set the Knob State according to the recent get
-            Sentinel.setStateKnob()
-            # Check if the knob changed position
-            if (Sentinel.StateKnob != localKnobState):
-                localKnobState = Sentinel.StateKnob
-                DESI.DESISend(Sentinel.StateKnob * 1.0)
-            # Set the Speed if the knob doesn't match up
-            if (Sentinel.StateKnob != Sentinel.StateSpeed):
-                DESI.DESISend(Sentinel.StateKnob * 1.0)
-                Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
+            # Sentinel.getStateKnob(DESI)
+            # # Set the Knob State according to the recent get
+            # Sentinel.setStateKnob()
+            # # Check if the knob changed position
+            # if (Sentinel.StateKnob != localKnobState):
+            #     localKnobState = Sentinel.StateKnob
+            #     DESI.DESISend(Sentinel.StateKnob * 1.0)
+            # # Set the Speed if the knob doesn't match up
+            # if (Sentinel.StateKnob != Sentinel.StateSpeed):
+            #     DESI.DESISend(Sentinel.StateKnob * 1.0)
+            #     Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
             # Start Query for Distances
             #Sentinel.Proximity = queryDistance()
             # Check to see if the Distance is above the threshold
