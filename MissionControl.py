@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:48:05
+# @Last Modified time: 2017-06-08 09:19:34
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -78,7 +78,7 @@ def main():
             if (Sentinel.StateKnob != Sentinel.StateSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
                 Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
-            Start Query for Distances
+            #Start Query for Distances
             Sentinel.Proximity = queryDistance()
             # Check to see if the Distance is above the threshold
             if (Sentinel.Proximity > 12.0):
