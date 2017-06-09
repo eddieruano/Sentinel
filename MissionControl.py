@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 00:49:40
+# @Last Modified time: 2017-06-09 00:50:09
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -261,6 +261,7 @@ def PauseHandler(channel):
         Sentinel.CapLock = False
     elif Sentinel.ProxLock == True:
         Sentinel.ProxLock = False
+        Sentinel.ProximityRetries = 0
 def checkRailWarning(flag):
     if ((Sentinel.ActiveLock == False) and (flag == False)):
         if (Sentinel.CapCountdown == (Sentinel.CAPCOUNT / 2)):
