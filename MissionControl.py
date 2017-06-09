@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:34:56
+# @Last Modified time: 2017-06-08 20:37:36
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -104,10 +104,11 @@ def main():
             # Here we check for contact
             if not Sentinel.ActiveLock:
                 # Start the countdown to regain contact
-                if flagRailWarning == False:
+                if flagRailWarning == False and Sentinel.ContactLock == Sentinel.ContactLock / 2:
                     DESI.DESISendResponse(DESI.RespondRails)
                     flagRailWarning = True
                 if Sentinel.CapCountdown == 0 and not Sentinel.ContactLock:
+
                     DESI.DESISend("Pause")
                     Sentinel.ContactLock = True
                 else:
