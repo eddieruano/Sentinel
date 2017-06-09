@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:36:11
+# @Last Modified time: 2017-06-08 21:46:13
 
 import RPi.GPIO as GPIO
 
@@ -15,7 +15,7 @@ class Sentinel(object):
         self.PROXCOUNT = 50
         self.CAPCOUNT = 100
         self.CONST_BOUNCE = 800
-        self.CONST_RESCOUNT = 50
+        self.CONST_RESCOUNT = 75
         # Locks/Mutex/Counters
         self.ActiveLock = True
         self.Redux = 0.0
