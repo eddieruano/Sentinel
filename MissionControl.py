@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 10:24:18
+# @Last Modified time: 2017-06-09 10:24:44
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -91,7 +91,7 @@ def main():
         # officially add pause event
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
         while True:
-            if Sentinel.flagShut = True:
+            if Sentinel.flagShut == True:
                 continue
             localKnobState = Sentinel.StateKnob
             # Update the ActiveLock
