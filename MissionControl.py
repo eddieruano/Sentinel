@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 02:50:42
+# @Last Modified time: 2017-06-09 02:54:06
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -40,6 +40,7 @@ def main():
     flagRailWarning = False
     flagSelectorWarning = False
     flagProximityWarning = False
+    flagRedux = False
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -152,6 +153,7 @@ def main():
                         #print("Reducing By: " + i)
                         DESI.DESISend("SendDown")
                         i += 1.0
+                        flagRedux = True
                         Sentinel.ActualSpeed = Sentinel.ActualSpeed - 0.1
                     # Enable the CapLock
                     if (Sentinel.ProximityRetries > Sentinel.CONST_PROX_RETRIES):
@@ -168,7 +170,9 @@ def main():
                     Sentinel.ProxCountdown = Sentinel.PROXCOUNT
                     flagProximityWarning = False
                     sp = getSpeed()
-                    DESI.DESISend(sp)
+                    if flagRedux:
+                        DESI.DESISend(sp)
+                        flagRedux = False
             #Start Query for Distances
             # Sentinel.Proximity = queryDistance()
             # if (Sentinel.Proximity > 12.0):
