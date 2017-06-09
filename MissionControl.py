@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 02:24:23
+# @Last Modified time: 2017-06-09 02:26:56
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -152,8 +152,7 @@ def main():
                         #print("Reducing By: " + i)
                         DESI.DESISend("SendDown")
                         i += 1
-                        Sentinel.ActualSpeed -= 0.1
-
+                        Sentinel.ActualSpeed = ((Sentinel.ActualSpeed * 1.0) - (i * 1.0 / 10.0))
                     # Enable the CapLock
                     if (Sentinel.ProximityRetries > Sentinel.CONST_PROX_RETRIES):
                         Sentinel.ProxLock = True
