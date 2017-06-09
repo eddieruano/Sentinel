@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:33:39
+# @Last Modified time: 2017-06-09 00:04:23
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -78,7 +78,9 @@ class Sentinel(object):
         self.StateSpeed = speed
         self.Redux = (self.StateSpeed * 0.5) * 10
     def updateActiveLock(self, intouch):
+        intouch.begin()
         self.TouchRegister = intouch.touched()
+
         # Need to target channels
         print (intouch.touched())
         if self.TouchRegister  > 1:
