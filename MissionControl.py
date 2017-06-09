@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:24:41
+# @Last Modified time: 2017-06-08 23:32:44
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -66,10 +66,11 @@ def main():
         while not Sentinel.StartDetect:
             print("Off")
         #Wait until the correct Knob State Happens
+        print("Waiting for knob")
         while Sentinel.StateKnob != 0:
+
             # if the counter reaches zero issue warning
             if (Sentinel.SpCount == 0):
-                
                 DESI.DESISendResponse("audio/wav_sp_sel.wav")
                 Sentinel.SpCount = Sentinel.CONST_RESCOUNT
             else:
