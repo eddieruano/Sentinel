@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:21:07
+# @Last Modified time: 2017-06-08 21:28:42
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -59,9 +59,20 @@ def main():
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
     GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
     try:
-        DESI.DESISendResponse("audio/wav_lets_start.wav")
+        
         print("Listening")
         localKnobState = Sentinel.StateKnob
+        Sentinel.getStateKnob(DESI)
+        while not Sentinel.StartDetect:
+            print("Off")
+        while Sentinel.StateKnob != 0:
+            if (Sentinel.RESCount == 0):
+                DESI.SendResponse("audio/wav_sp_sel.wav")
+                Sentinel.RESCount = CONST_RESCOUNT
+            else:
+            time.sleep(0.1)
+            DESI.RESCount-=1
+        DESI.DESISendResponse("audio/wav_lets_start.wav")
         while True:
             # Update the ActiveLock
             Sentinel.updateActiveLock(TouchSense)
@@ -125,7 +136,7 @@ def main():
             elif DESI.State_Main == "Pause": 
                 DESI.DESISend("Pause")
                 sp = getSpeed()
-                DESISendResponse(RespondRestart)
+                DESI.DESISendResponse(RespondRestart)
                 time.sleep(3)
                 DESI.DESISend(sp)
                 #print("ra")
@@ -171,6 +182,7 @@ def sanitizeDistance(voy, inDist):
     return inDist
 def StartHandler(channel):
     print("Starting")
+    Sentinel.StartDetect = True
     DESI.DESISend("Start")
 def getSpeed():
     if Sentinel.StateKnob == 0:

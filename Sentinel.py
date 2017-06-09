@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:49:05
+# @Last Modified time: 2017-06-08 21:28:30
 
 import RPi.GPIO as GPIO
 
@@ -15,6 +15,7 @@ class Sentinel(object):
         self.PROXCOUNT = 50
         self.CAPCOUNT = 100
         self.CONST_BOUNCE = 800
+        self.CONST_RESCOUNT = 50
         # Locks/Mutex/Counters
         self.ActiveLock = True
         self.Redux = 0.0
@@ -31,6 +32,7 @@ class Sentinel(object):
         self.KNOB4 = False
         self.StateSpeed = 0.0
         self.KnobInterrupt = False
+        self.StartDetect = False
         # Proximity Monitors
         self.Proximity = 0.0
         self.ProximityRetries = 3
