@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:26:10
+# @Last Modified time: 2017-06-08 23:26:55
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -92,7 +92,7 @@ class Sentinel(object):
         else:
             return False
     def checkMutexSpeech(self):
-        if (subprocess.check_output(["aplay","-s",name]) == 0):
+        if (subprocess.check_output(["pidof","-s", "aplay"]) == 0):
             self.MutexSpeech = False;
         else:
             self.MutexSpeech = True;
