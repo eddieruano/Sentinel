@@ -117,7 +117,7 @@ class MPR121(object):
         self._i2c_retry(self._device.write8, MPR121_FDLT, 0x00)
         # Set other configuration registers.
         self._i2c_retry(self._device.write8, MPR121_DEBOUNCE, 0)
-        self._i2c_retry(self._device.write8, MPR121_CONFIG1, 0x02) # default, 16uA charge current
+        self._i2c_retry(self._device.write8, MPR121_CONFIG1, 0x63:) # default, 16uA charge current
         self._i2c_retry(self._device.write8, MPR121_CONFIG2, 0x20) # 0.5uS encoding, 1ms period
         # Enable all electrodes.
         
