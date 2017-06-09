@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:32:44
+# @Last Modified time: 2017-06-08 23:34:12
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -96,7 +96,7 @@ def main():
             # Set the Knob State according to the recent get
             Sentinel.setStateKnob()
             speed = getSpeed()
-            if (Sentinel.capLock == True):
+            if (Sentinel.CapLock == True):
                 continue
             # Check if the knob changed position
             if ((Sentinel.StateKnob * 1.0) != localKnobState):
