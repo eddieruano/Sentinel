@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:45:44
+# @Last Modified time: 2017-06-08 20:47:46
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -114,7 +114,7 @@ def main():
                 else:
                     # Continue to countdown
                     Sentinel.CapCountdown -= 1
-            else: 
+            elif DESI.State_Main != "Pause": 
                 # Any contact will reset the counter because it's sensitive
                 Sentinel.CapCountdown = Sentinel.CAPCOUNT
                 Sentinel.ActiveLock = False
