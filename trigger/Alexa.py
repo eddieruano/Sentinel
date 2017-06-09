@@ -28,8 +28,8 @@ class Alexa(object):
             self.set_on()
 
     def blink(self, t=0.2):
-        light.set_off()
+        self.set_off()
         time.sleep(t)
-        light.set_on()
+        self.set_on()
 
     
