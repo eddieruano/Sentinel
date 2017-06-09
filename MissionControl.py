@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:51:32
+# @Last Modified time: 2017-06-08 21:57:08
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -118,11 +118,9 @@ def main():
                 Sentinel.ProxCountdown = Sentinel.PROXCOUNT
                 Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             # Here we check for contact
+            flagRailWarning = checkRailWarning(flagRailWarning)
             if not Sentinel.ActiveLock:
                 # Start the countdown to regain contact
-                if ((flagRailWarning == False) and Sentinel.CapCountdown == (Sentinel.CapCountdown < Sentinel.CAPCOUNT - 20)):
-                    DESI.DESISendResponse(DESI.RespondRails)
-                    flagRailWarning = True
                 if Sentinel.CapCountdown == 0 and (DESI.State_Main != "Pause"):
                     saved_state = Sentinel.StateKnob
                     DESI.DESISendResponse(DESI.RespondPaused)
@@ -209,6 +207,11 @@ def PauseHandler(channel):
     else:
         print("pause")
         DESI.DESISend("Pause")
+def checkRailWarning(flag):
+    if ((Sentinel.ActiveLock == False) and (flag == False)):
+        DESI.DESISendResponse(DESI.RespondRails)
+        return True
+    return False
 #def signal_handler(signal, frame):
 #    global HotwordInterrupt
 #    HotwordInterrupt = True
