@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:16:58
+# @Last Modified time: 2017-06-08 21:22:15
 
 import RPi.GPIO as GPIO
 import time
@@ -63,6 +63,7 @@ class DESI(object):
     RespondOkay = "audio/wav_okay_megan.wav"
     RespondRails = "audio/wav_rem_rails.wav"
     RespondProx = "audio/wav_rem_rails.wav"
+    RespondRestart = "audio/wav_restart.wav"
     # Constructor
     def __init__(self):
         """Create an instance of DESI"""
