@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 00:54:19
+# @Last Modified time: 2017-06-09 01:04:49
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -75,7 +75,7 @@ class Sentinel(object):
         else:
             print("Error in StateKnob")
     def setSpeed(self, speed):
-        self.StateSpeed = speed
+        self.ActualSpeed = speed
         self.Redux = (self.StateSpeed * 0.5) * 10
     def updateActiveLock(self, intouch):
         self.TouchRegister = intouch.touched()

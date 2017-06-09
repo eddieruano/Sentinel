@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 00:53:42
+# @Last Modified time: 2017-06-09 01:06:27
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -119,6 +119,7 @@ def main():
             flagRailWarning = checkRailWarning(flagRailWarning)
             # if we aren't touching
             if not Sentinel.ActiveLock:
+                print("NO CONTACT")
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
                     # save current workout state
@@ -139,6 +140,7 @@ def main():
             
             """ START PROXIMITY CHECKS """
             Sentinel.Proximity = queryDistance()
+            print Sentinel.Proximity
             if Sentinel.Proximity > 12.0:
                 flagProximityWarning = True
                 # If we reach zero on the counter and not in pause
@@ -244,14 +246,19 @@ def StartHandler(channel):
         DESI.DESISend("Start")
 def getSpeed():
     if Sentinel.StateKnob == 0:
+        Sentinel.setSpeed(0.0)
         return "Send00"
     elif Sentinel.StateKnob == 1:
+        Sentinel.setSpeed(2.0)
         return "Send01"
     elif Sentinel.StateKnob == 2:
+        Sentinel.setSpeed(2.5)
         return "Send02"
     elif Sentinel.StateKnob == 3:
+        Sentinel.setSpeed(3.0)
         return "Send03"
     elif Sentinel.StateKnob == 4:
+        Sentinel.setSpeed(3.5)
         return "Send04"
     else:
         return "Send00"
