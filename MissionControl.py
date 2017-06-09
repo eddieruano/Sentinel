@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 00:47:14
+# @Last Modified time: 2017-06-09 00:48:22
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -136,6 +136,7 @@ def main():
                     flagRailWarning = False
             
             """ START PROXIMITY CHECKS """
+            Sentinel.Proximity = queryDistance()
             if Sentinel.Proximity > 12.0:
                 flagProximityWarning = True
                 # If we reach zero on the counter and not in pause
