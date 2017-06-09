@@ -30,8 +30,4 @@ class Alexa(object):
         time.sleep(t)
         light.set_on()
 
-if __name__ == "__main__":
-    Alexa = Alexa(20)
-    Alexa.blink
-
     
