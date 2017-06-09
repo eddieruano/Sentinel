@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:38:48
+# @Last Modified time: 2017-06-08 20:41:35
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -63,7 +63,6 @@ def main():
         print("Listening")
         localKnobState = Sentinel.StateKnob
         while True:
-            print("Sent")
             # Update the ActiveLock
             Sentinel.updateActiveLock(TouchSense)
             # Query the knob states
@@ -71,9 +70,10 @@ def main():
             # Set the Knob State according to the recent get
             Sentinel.setStateKnob()
             # Check if the knob changed position
-            if (Sentinel.StateKnob != localKnobState):
+            if ((Sentinel.StateKnob * 1.0) != localKnobState):
                 localKnobState = Sentinel.StateKnob
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
+                print("in")
             # Set the Speed if the knob doesn't match up
             if (Sentinel.StateKnob != Sentinel.StateSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
