@@ -3,7 +3,7 @@ import sys
 import os
 import signal
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import Alexa
+import Alexa as Alexa
 
 interrupted = False
 
