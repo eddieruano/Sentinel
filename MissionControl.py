@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 04:30:00
+# @Last Modified time: 2017-06-09 09:24:22
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -108,7 +108,8 @@ def main():
                 localKnobState = Sentinel.StateKnob
                 speed = getSpeed()
                 DESI.DESISend(speed)
-                print("in")
+                print("State Indifff")
+                print(speed)
             # Set the Speed if the knob doesn't match up
             #if (Sentinel.StateKnob != Sentinel.ActualSpeed):
             #    DESI.DESISend(Sentinel.StateKnob * 1.0)
@@ -118,7 +119,7 @@ def main():
             # Check for an issue warning
             flagRailWarning = checkRailWarning(flagRailWarning)
             # if we aren't touching
-            if not Sentinel.ActiveLock:
+            if not Sentinel.ActiveLock and DESI.State_Main != "Pause":
                 print("NO CONTACT")
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
@@ -141,7 +142,7 @@ def main():
             """ START PROXIMITY CHECKS """
             Sentinel.Proximity = queryDistance()
             print (Sentinel.Proximity)
-            if Sentinel.Proximity > 12.0:
+            if Sentinel.Proximity > 12.0 and DESI.State_Main != "Pause":
                 flagProximityWarning = True
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.ProxCountdown == 0) and (Sentinel.ProxLock == False)):
