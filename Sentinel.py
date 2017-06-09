@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 10:18:04
+# @Last Modified time: 2017-06-09 10:23:50
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -15,6 +15,7 @@ class Sentinel(object):
         """Create an instance of Sentinel"""
         # CONSTANTS
         self.flagPause = False
+        self.flagShut = False
         self.CONST_REDUX = 0.1
         self.CONST_ZONE_FIX = 0.0
         self.PROXCOUNT = 50

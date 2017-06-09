@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 10:19:58
+# @Last Modified time: 2017-06-09 10:24:18
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -91,6 +91,8 @@ def main():
         # officially add pause event
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
         while True:
+            if Sentinel.flagShut = True:
+                continue
             localKnobState = Sentinel.StateKnob
             # Update the ActiveLock
             Sentinel.updateActiveLock(TouchSense)
@@ -216,8 +218,7 @@ def sanitizeDistance(voy, inDist):
 def StartHandler(channel):
     if (Sentinel.StateKnob == 0.0) and DESI.State_Main == "Pause":
         DESI.DESISend("Shutdown")
-
-        time.sleep(30)
+        Sentinel.flagShut = True
         GPIO.cleanup()
         print("Shutdown")
         return
