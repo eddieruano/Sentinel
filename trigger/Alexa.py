@@ -1,3 +1,5 @@
+import RPi.GPIO as GPIO
+
 class Alexa(object):
     def __init__(self, port):
         self.port = port
