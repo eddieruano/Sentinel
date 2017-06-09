@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:39:25
+# @Last Modified time: 2017-06-08 20:49:05
 
 import RPi.GPIO as GPIO
 
@@ -49,19 +49,19 @@ class Sentinel(object):
     def setStateKnob(self):
         if self.KNOB0 == False:
             self.StateKnob = 0
-            print("State0")
+            #print("State0")
         elif self.KNOB1 == False:
             self.StateKnob = 1
-            print("State1")
+            #print("State1")
         elif self.KNOB2 == False:
             self.StateKnob = 2
-            print("State2")
+            #print("State2")
         elif self.KNOB3 == False:
             self.StateKnob = 3
-            print("State3")
+            #print("State3")
         elif self.KNOB4 == False:
             self.StateKnob = 4
-            print("State4")
+            #print("State4")
         else:
             print("Error in StateKnob")
     def setSpeed(self, speed):
