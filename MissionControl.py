@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:47:46
+# @Last Modified time: 2017-06-08 20:48:33
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -75,7 +75,7 @@ def main():
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
                 print("in")
             # Set the Speed if the knob doesn't match up
-            if (Sentinel.StateKnob != Sentinel.StateSpeed):
+            if ((Sentinel.StateKnob * 1.0) != Sentinel.StateSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
                 Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
             #Start Query for Distances
