@@ -102,7 +102,7 @@ class MPR121(object):
         if c != 0x24:
            return False
         # Set threshold for touch and release to default values.
-        self.set_thresholds(2, 1)
+        self.set_thresholds(3, 2)
         # Configure baseline filtering control registers.
         self._i2c_retry(self._device.write8, MPR121_MHDR, 0x01)
         self._i2c_retry(self._device.write8, MPR121_NHDR, 0x01)
@@ -119,7 +119,6 @@ class MPR121(object):
         self._i2c_retry(self._device.write8, MPR121_DEBOUNCE, 0)
         self._i2c_retry(self._device.write8, MPR121_CONFIG1, 0x10) # default, 16uA charge current
         self._i2c_retry(self._device.write8, MPR121_CONFIG2, 0x20) # 0.5uS encoding, 1ms period
-        self._i2c_retry(self._device.write8, MPR121_AUTOCONFIG0, 0x1F)
         # Enable all electrodes.
         
         self._i2c_retry(self._device.write8, MPR121_ECR, 0x8F) # start with first 5 bits of baseline tracking
