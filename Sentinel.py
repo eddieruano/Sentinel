@@ -2,9 +2,10 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:49:29
+# @Last Modified time: 2017-06-08 22:56:41
 
 import RPi.GPIO as GPIO
+import subprocess
 
 class Sentinel(object):
     def __init__(self):
@@ -18,6 +19,8 @@ class Sentinel(object):
         self.CONST_RESCOUNT = 60
         # Locks/Mutex/Counters
         self.ActiveLock = True
+        self.CapLock = False
+        self.ProxLock = False
         self.Redux = 0.0
         self.ProxCountdown = self.PROXCOUNT
         self.CapCountdown = self.CAPCOUNT
@@ -43,7 +46,8 @@ class Sentinel(object):
         self.TouchRegister = 0
         self.PrimaryGripChannel = 1 << 2
         self.SecondaryGripChannel = 1 << 8
-        # 
+        # Mutex
+        self.MutexSpeech = False;
     def getStateKnob(self, desi):
         self.KNOB0 = GPIO.input(desi.IN_SPEED0)
         self.KNOB1 = GPIO.input(desi.IN_SPEED1)
@@ -87,6 +91,25 @@ class Sentinel(object):
             return True
         else:
             return False
+    def checkMutexSpeech(self):
+        if (check_output(["aplay","-s",name]) == 0):
+            self.MutexSpeech = False;
+        else:
+            self.MutexSpeech = True;
+        return self.MutexSpeech
+    def takeMutexSpeech(self):
+        subprocess.call(['killall', 'aplay'])
+    def clearMutexSpeech(self)
+        while(self.checkMutexSpeech()):
+            self.takeMutexSpeech()
+        return True
+    def waitMutexSpeech(self)
+        while(self.checkMutexSpeech()):
+            time.sleep(0.001)
+        return True
+
+
+
 
         
 
