@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:27:05
+# @Last Modified time: 2017-06-09 09:42:37
 
 
 import RPi.GPIO as GPIO
@@ -137,34 +137,29 @@ class DESI(object):
             self.performEnter()
             print("Enter")
         elif command == "Send00":
-            self.performS0()
             self.DESICleanupAudio()
             self.DESISendResponse(self.RespondSpeed00)
-            
+            self.performS0()
             print("Send00")
         elif command == "Send01":
-            self.performS1()
             self.DESICleanupAudio()
             self.DESISendResponse(self.RespondSpeed01)
-            
+            self.performS1()
             print("Send01")
         elif command == "Send02":
-            self.performS2()
             self.DESICleanupAudio()
             self.DESISendResponse(self.RespondSpeed02)
-            
+            self.performS2()
             print("Send02")
         elif command == "Send03":
-            self.performS3()
             self.DESICleanupAudio()
             self.DESISendResponse(self.RespondSpeed03)
-            
+            self.performS3()
             print("Send03")
         elif command == "Send04":
-            self.performS4()
             self.DESICleanupAudio()
             self.DESISendResponse(self.RespondSpeed04)
-            
+            self.performS4()
             print("Send04")
         elif command == "SendDown":
             self.performDown()

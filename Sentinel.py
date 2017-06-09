@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:38:32
+# @Last Modified time: 2017-06-09 09:43:00
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -114,13 +114,13 @@ class Sentinel(object):
             time.sleep(0.001)
         return True
     def inMotion(self, desi):
-        if (desi.State_Main == "Paused"):
+        if desi.State_Main == "Paused":
             return False
         elif desi.State_Main == "Speed0":
             return False
-        elif Sentinel.CapLock == True:
+        elif self.CapLock == True:
             return False
-        elif Sentinel.ProxLock == True:
+        elif self.ProxLock == True:
             return False
         else:
             return True
