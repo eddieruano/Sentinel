@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:59:54
+# @Last Modified time: 2017-06-08 22:03:18
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -52,6 +52,9 @@ def main():
         print(e)
         print("Sensor Error.")
         sys.exit(1)
+    Sentinel.getStateKnob(DESI)
+    Sentinel.setStateKnob()
+    time.delay(1)
     Sentinel.getStateKnob(DESI)
     Sentinel.setStateKnob()
     Sentinel.updateActiveLock(TouchSense)
@@ -146,6 +149,7 @@ def main():
                 Sentinel.CapCountdown = Sentinel.CAPCOUNT
                 Sentinel.ActiveLock = False
                 Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
+                flagRailWarning = False
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
