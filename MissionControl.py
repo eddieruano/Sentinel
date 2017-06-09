@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 22:14:19
+# @Last Modified time: 2017-06-08 22:21:07
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -99,6 +99,8 @@ def main():
             if ((Sentinel.StateKnob * 1.0) != Sentinel.StateSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
                 Sentinel.StateSpeed = (speed)
+            if (DESI.State_Main == "Pause"):
+                continue
             #Start Query for Distances
             Sentinel.Proximity = queryDistance()
             # Check to see if the Distance is above the threshold
@@ -139,7 +141,7 @@ def main():
                     # Continue to countdown
                     Sentinel.CapCountdown -= 1
             elif DESI.State_Main == "Pause": 
-                DESI.DESISend("Pause")
+                #DESI.DESISend("Pause")
                 sp = getSpeed()
                 DESI.DESISendResponse(DESI.RespondRestart)
                 time.sleep(3)
@@ -148,10 +150,14 @@ def main():
                 Sentinel.ActiveLock = False
                 Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
                 #print("ra")
-            else:
+            elif :
                 # Any contact will reset the counter because it's sensitive
                 Sentinel.CapCountdown = Sentinel.CAPCOUNT
                 flagRailWarning = False
+                # sp = getSpeed(saved_state)
+                # DESI.DESISendResponse(DESI.RespondRestart)
+                # time.sleep(3)
+                # DESI.DESISend(sp)
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
