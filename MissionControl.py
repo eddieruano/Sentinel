@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:43:57
+# @Last Modified time: 2017-06-08 21:45:52
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -72,6 +72,7 @@ def main():
             else:
                 time.sleep(0.1)
                 Sentinel.SpCount-=1
+            Sentinel.getStateKnob(DESI)
         DESI.DESISendResponse("audio/wav_okay_megan.wav")
         time.sleep(2)
         DESI.DESISendResponse("audio/wav_lets_start.wav")
