@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:23:35
+# @Last Modified time: 2017-06-08 23:24:41
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -113,16 +113,15 @@ def main():
             # if we aren't touching
             if not Sentinel.ActiveLock:
                 # If we reach zero on the counter and not in pause
-                if Sentinel.CapCountdown == 0 and Sentinel.CapLock == False
+                if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
                     # save current workout state
                     saved_state = Sentinel.StateKnob
                     DESI.DESISendResponse(DESI.RespondPaused)   #pause
                     DESI.DESISend("Pause")
-                    #print("la")
-                    #DESI.State_Main = "Pause"
                     print(DESI.State_Main)
                     # Enable the CapLock
                     Sentinel.CapLock = True
+                    print("CapLocked.")
                     # Runs forever until CapLock disabled
                 else:
                     # Else we are not making contact but not end of count
