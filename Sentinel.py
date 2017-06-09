@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 01:13:46
+# @Last Modified time: 2017-06-09 01:15:22
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -113,9 +113,3 @@ class Sentinel(object):
         while(self.checkMutexSpeech()):
             time.sleep(0.001)
         return True
-
-
-
-
-        
-

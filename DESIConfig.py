@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 22:51:11
+# @Last Modified time: 2017-06-09 01:30:08
 
 import RPi.GPIO as GPIO
 import time
@@ -41,7 +41,7 @@ class DESI(object):
     OUT_4       = 21
     OUT_5       = 16
     OUT_DOWN    = 12
-    OUT_ALEXA   = 20
+    #OUT_ALEXA   = 20
     # States of DESI
     State_Main  = "Idle"
     State_Knob  = "Speed0"
@@ -116,7 +116,7 @@ class DESI(object):
         GPIO.output(self.OUT_4, GPIO.HIGH)
         GPIO.output(self.OUT_5, GPIO.HIGH)
         GPIO.output(self.OUT_DOWN, GPIO.HIGH)
-        GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
+        #GPIO.output(self.OUT_ALEXA, GPIO.HIGH)
         print ("Relay Array Set.")
     
     def DESISend(self, command):
@@ -326,4 +326,4 @@ class DESI(object):
         self.DESICleanupAudio()
     def DESICleanupAudio(self):
         subprocess.call(['killall', 'aplay'])
-    
+
