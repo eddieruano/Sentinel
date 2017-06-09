@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:54:38
+# @Last Modified time: 2017-06-09 10:02:46
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -242,7 +242,8 @@ def getSpeed():
 def PauseHandler(channel):
     print("pause")
     DESI.DESISend("Pause")
-    if (Sentinel.inMotion):
+    DESI.State_Main = "Pause"
+    if (Sentinel.inMotion()):
         Sentinel.waitMutexSpeech()
         DESI.DESISendResponse("audio/wav_pause.wav")
     else:
