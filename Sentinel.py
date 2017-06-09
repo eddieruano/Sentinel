@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-06 06:03:29
+# @Last Modified time: 2017-06-08 20:39:25
 
 import RPi.GPIO as GPIO
 
@@ -21,7 +21,7 @@ class Sentinel(object):
         self.ProxCountdown = self.PROXCOUNT
         self.CapCountdown = self.CAPCOUNT
         self.CountdownLoopSpeed = 1.0   # seconds
-        self.RunningLoopSpeed = 3    # seconds
+        self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
         self.StateKnob = 0
         self.KNOB0 = False
