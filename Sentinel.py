@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:36:26
+# @Last Modified time: 2017-06-09 09:38:32
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -122,5 +122,5 @@ class Sentinel(object):
             return False
         elif Sentinel.ProxLock == True:
             return False
-        else
+        else:
             return True
