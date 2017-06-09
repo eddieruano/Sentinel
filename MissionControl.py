@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 09:20:14
+# @Last Modified time: 2017-06-08 20:34:56
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -82,6 +82,9 @@ def main():
             Sentinel.Proximity = queryDistance()
             # Check to see if the Distance is above the threshold
             if (Sentinel.Proximity > 12.0):
+                #if (flagProximityWarning == False):
+                #    DESI.DESISendResponse(DESI.RespondProx)
+                #    flagProximityWarning = True
                 print("Yellow")
                 # Start the coundown here
                 Sentinel.ProxCountdown -= 1
@@ -101,6 +104,9 @@ def main():
             # Here we check for contact
             if not Sentinel.ActiveLock:
                 # Start the countdown to regain contact
+                if flagRailWarning == False:
+                    DESI.DESISendResponse(DESI.RespondRails)
+                    flagRailWarning = True
                 if Sentinel.CapCountdown == 0 and not Sentinel.ContactLock:
                     DESI.DESISend("Pause")
                     Sentinel.ContactLock = True
