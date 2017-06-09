@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 02:26:56
+# @Last Modified time: 2017-06-09 02:39:20
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -105,14 +105,15 @@ def main():
             if (Sentinel.ProxLock == True):
                 continue
             # Check if the knob changed position
-            if ((Sentinel.StateKnob * 1.0) != localKnobState):
+            if (Sentinel.StateKnob  != localKnobState):
                 localKnobState = Sentinel.StateKnob
+                speed = getSpeed()
                 DESI.DESISend(speed)
                 print("in")
             # Set the Speed if the knob doesn't match up
-            if ((Sentinel.StateKnob * 1.0) != Sentinel.ActualSpeed):
-                DESI.DESISend(Sentinel.StateKnob * 1.0)
-                Sentinel.ActualSpeed = (speed)
+            #if (Sentinel.StateKnob != Sentinel.ActualSpeed):
+            #    DESI.DESISend(Sentinel.StateKnob * 1.0)
+            #    Sentinel.ActualSpeed = (speed)
             # Here we check for contact
             """ CAPACITANCE CHECKS """
             # Check for an issue warning
@@ -147,12 +148,12 @@ def main():
                 if ((Sentinel.ProxCountdown == 0) and (Sentinel.ProxLock == False)):
                     Sentinel.ProximityRetries += 1
                     # reduce speed
-                    i = 0
-                    while (i * 1.0) < Sentinel.Redux:
+                    i = 0.0
+                    while i < Sentinel.Redux:
                         #print("Reducing By: " + i)
                         DESI.DESISend("SendDown")
-                        i += 1
-                        Sentinel.ActualSpeed = ((Sentinel.ActualSpeed * 1.0) - (i * 1.0 / 10.0))
+                        i += 1.0
+                        Sentinel.ActualSpeed = Sentinel.ActualSpeed - 0.1
                     # Enable the CapLock
                     if (Sentinel.ProximityRetries > Sentinel.CONST_PROX_RETRIES):
                         Sentinel.ProxLock = True
@@ -196,6 +197,7 @@ def main():
             #     Sentinel.ProxCountdown = Sentinel.PROXCOUNT
             #     Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             """"""""""""" END PROXIMITY CHECKS """""""""""""""""""""
+            print(Sentinel.ActualSpeed)
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
@@ -233,7 +235,7 @@ def sanitizeDistance(voy, inDist):
         inDist = Voyager1.get_distance()
     return inDist
 def StartHandler(channel):
-    if (Sentinel.StateKnob == 0) and DESI.State_Main == "Pause":
+    if (Sentinel.StateKnob == 0.0) and DESI.State_Main == "Pause":
         DESI.DESISend("Shutdown")
         time.sleep(30)
         GPIO.cleanup()
@@ -244,19 +246,19 @@ def StartHandler(channel):
         Sentinel.StartDetect = True
         DESI.DESISend("Start")
 def getSpeed():
-    if Sentinel.StateKnob == 0:
+    if Sentinel.StateKnob == 0.0:
         Sentinel.setSpeed(0.0)
         return "Send00"
-    elif Sentinel.StateKnob == 1:
+    elif Sentinel.StateKnob == 1.0:
         Sentinel.setSpeed(2.0)
         return "Send01"
-    elif Sentinel.StateKnob == 2:
+    elif Sentinel.StateKnob == 2.0:
         Sentinel.setSpeed(2.5)
         return "Send02"
-    elif Sentinel.StateKnob == 3:
+    elif Sentinel.StateKnob == 3.0:
         Sentinel.setSpeed(3.0)
         return "Send03"
-    elif Sentinel.StateKnob == 4:
+    elif Sentinel.StateKnob == 4.0:
         Sentinel.setSpeed(3.5)
         return "Send04"
     else:

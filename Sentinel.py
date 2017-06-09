@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 01:15:22
+# @Last Modified time: 2017-06-09 02:36:42
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -31,13 +31,12 @@ class Sentinel(object):
         self.CountdownLoopSpeed = 1.0   # seconds
         self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
-        self.StateKnob = 0
+        self.StateKnob = 1.0
         self.KNOB0 = False
         self.KNOB1 = False
         self.KNOB2 = False
         self.KNOB3 = False
         self.KNOB4 = False
-        self.ActualSpeed = 0.0
         self.KnobInterrupt = False
         self.StartDetect = False
         # Proximity Monitors
@@ -58,19 +57,19 @@ class Sentinel(object):
         self.KNOB4 = GPIO.input(desi.IN_SPEED4)
     def setStateKnob(self):
         if self.KNOB0 == False:
-            self.StateKnob = 0
+            self.StateKnob = 0.0
             #print("State0")
         elif self.KNOB1 == False:
-            self.StateKnob = 1
+            self.StateKnob = 1.0
             #print("State1")
         elif self.KNOB2 == False:
-            self.StateKnob = 2
+            self.StateKnob = 2.0
             #print("State2")
         elif self.KNOB3 == False:
-            self.StateKnob = 3
+            self.StateKnob = 3.0
             #print("State3")
         elif self.KNOB4 == False:
-            self.StateKnob = 4
+            self.StateKnob = 4.0
             #print("State4")
         else:
             print("Error in StateKnob")
