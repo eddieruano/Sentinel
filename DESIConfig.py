@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:06:22
+# @Last Modified time: 2017-06-08 21:11:22
 
 import RPi.GPIO as GPIO
 import time
@@ -124,7 +124,7 @@ class DESI(object):
             print("SendStart")
         elif command == "Pause":
             self.performPause()
-            self.DESISendResponse(self.RespondPaused)
+            #self.DESISendResponse(self.RespondPaused)
             print("SendPause")
         elif command == "Shutdown":
             self.DESICleanupAudio()
