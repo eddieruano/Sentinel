@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:50:56
+# @Last Modified time: 2017-06-09 09:54:38
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -126,7 +126,7 @@ def main():
                     # save current workout state
                     saved_state = Sentinel.StateKnob
                     #DESI.DESISendResponse(DESI.RespondPaused)   #pause
-                    #DESI.DESISend("Pause")
+                    DESI.DESISend("Pause")
                     print(DESI.State_Main)
                     # Enable the CapLock
                     Sentinel.CapLock = True
