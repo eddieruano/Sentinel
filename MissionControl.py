@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 10:10:21
+# @Last Modified time: 2017-06-09 10:17:46
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -103,7 +103,7 @@ def main():
             if (Sentinel.StateKnob != localKnobState):
                 localKnobState = Sentinel.StateKnob
                 speed = getSpeed()
-                if (DESI.State_Main != "Pause"):
+                if flagPause == False:
                     DESI.DESISend(speed)
                 print("State Indifff")
                 print(speed)
@@ -120,7 +120,7 @@ def main():
             # Check for an issue warning
             flagRailWarning = checkRailWarning(flagRailWarning)
             # if we aren't touching
-            if not Sentinel.ActiveLock and Sentinel.inMotion(DESI):
+            if not Sentinel.ActiveLock and Sentinel.flagPause == False:
                 print("NO CONTACT")
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
@@ -128,6 +128,7 @@ def main():
                     saved_state = Sentinel.StateKnob
                     #DESI.DESISendResponse(DESI.RespondPaused)   #pause
                     DESI.DESISend("Pause")
+                    Sentinel.flagPause = True
                     print(DESI.State_Main)
                     # Enable the CapLock
                     Sentinel.CapLock = True
@@ -143,7 +144,7 @@ def main():
             """ START PROXIMITY CHECKS """
             Sentinel.Proximity = queryDistance()
             #print (Sentinel.Proximity)
-            if Sentinel.Proximity > 12.0 and Sentinel.inMotion(DESI):
+            if Sentinel.Proximity > 12.0 and flagPause == False:
                 flagProximityWarning = True
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.ProxCountdown == 0) and (Sentinel.ProxLock == False)):
@@ -160,6 +161,7 @@ def main():
                     if (Sentinel.ProximityRetries > Sentinel.CONST_PROX_RETRIES):
                         Sentinel.ProxLock = True
                         DESI.DESISend("Pause")
+                        Sentinel.flagPause = True
                         #Sentinel.waitMutexSpeech()
                         #DESI.DESISendResponse(DESI.RespondPause)
                         print("ProxLocked.")
@@ -214,6 +216,7 @@ def sanitizeDistance(voy, inDist):
 def StartHandler(channel):
     if (Sentinel.StateKnob == 0.0) and DESI.State_Main == "Pause":
         DESI.DESISend("Shutdown")
+
         time.sleep(30)
         GPIO.cleanup()
         print("Shutdown")
@@ -243,13 +246,7 @@ def getSpeed():
 def PauseHandler(channel):
     print("pause")
     DESI.DESISend("Pause")
-    DESI.State_Main = "Pause"
-    if (Sentinel.inMotion(DESI)):
-        Sentinel.waitMutexSpeech()
-        DESI.DESISendResponse("audio/wav_pause.wav")
-    else:
-        Sentinel.waitMutexSpeech()
-        DESI.DESISendResponse("audio/wav_restart.wav")
+    Sentinel.flagPause = not Sentinel.flagPause
     if Sentinel.CapLock == True:
         Sentinel.CapLock = False
     elif Sentinel.ProxLock == True:
