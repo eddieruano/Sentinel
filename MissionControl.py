@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 22:13:18
+# @Last Modified time: 2017-06-08 22:14:19
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -195,7 +195,7 @@ def StartHandler(channel):
         GPIO.cleanup()
         print("Shutdown")
         sys.exit(0)
-    else
+    else:
         print("Starting")
         Sentinel.StartDetect = True
         DESI.DESISend("Start")
