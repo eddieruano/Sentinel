@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:25:00
+# @Last Modified time: 2017-06-08 23:25:07
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -99,7 +99,7 @@ class Sentinel(object):
         return self.MutexSpeech
     def takeMutexSpeech(self):
         subprocess.call(['killall', 'aplay'])
-    def clearMutexSpeech(self)
+    def clearMutexSpeech(self):
         while(self.checkMutexSpeech()):
             self.takeMutexSpeech()
         return True
