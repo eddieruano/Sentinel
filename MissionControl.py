@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 10:24:44
+# @Last Modified time: 2017-06-09 10:41:32
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -128,7 +128,8 @@ def main():
                 if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
                     # save current workout state
                     saved_state = Sentinel.StateKnob
-                    #DESI.DESISendResponse(DESI.RespondPaused)   #pause
+                    Sentinel.waitMutexSpeech()
+                    DESI.DESISendResponse(DESI.RespondPaused)   #pause
                     DESI.DESISend("Pause")
                     Sentinel.flagPause = True
                     print(DESI.State_Main)
@@ -164,8 +165,8 @@ def main():
                         Sentinel.ProxLock = True
                         DESI.DESISend("Pause")
                         Sentinel.flagPause = True
-                        #Sentinel.waitMutexSpeech()
-                        #DESI.DESISendResponse(DESI.RespondPause)
+                        Sentinel.waitMutexSpeech()
+                        DESI.DESISendResponse(DESI.RespondPause)
                         print("ProxLocked.")
                     # Runs forever until CapLock disabled
                 else:
