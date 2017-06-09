@@ -2,10 +2,11 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:31:00
+# @Last Modified time: 2017-06-08 23:31:35
 
 import RPi.GPIO as GPIO
 import subprocess
+import time
 from subprocess import check_output, CalledProcessError
 
 class Sentinel(object):
