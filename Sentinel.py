@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 22:56:41
+# @Last Modified time: 2017-06-08 23:25:00
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -103,7 +103,7 @@ class Sentinel(object):
         while(self.checkMutexSpeech()):
             self.takeMutexSpeech()
         return True
-    def waitMutexSpeech(self)
+    def waitMutexSpeech(self):
         while(self.checkMutexSpeech()):
             time.sleep(0.001)
         return True
