@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:41:35
+# @Last Modified time: 2017-06-08 20:43:20
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -107,17 +107,17 @@ def main():
                 if ((flagRailWarning == False) and Sentinel.CapCountdown == (Sentinel.CapCountdown/ 2)):
                     DESI.DESISendResponse(DESI.RespondRails)
                     flagRailWarning = True
-                if Sentinel.CapCountdown == 0 and not Sentinel.ContactLock:
+                if Sentinel.CapCountdown == 0 and not Sentinel.ActiveLock:
 
                     DESI.DESISend("Pause")
-                    Sentinel.ContactLock = True
+                    Sentinel.ActiveLock = True
                 else:
                     # Continue to countdown
                     Sentinel.CapCountdown -= 1
             else: 
                 # Any contact will reset the counter because it's sensitive
                 Sentinel.CapCountdown = Sentinel.CAPCOUNT
-                Sentinel.ContactLock = False
+                Sentinel.ActiveLock = False
                 Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
