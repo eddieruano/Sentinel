@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 22:04:11
+# @Last Modified time: 2017-06-08 22:08:04
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -144,11 +144,13 @@ def main():
                 DESI.DESISendResponse(DESI.RespondRestart)
                 time.sleep(3)
                 DESI.DESISend(sp)
-                #print("ra")
-                # Any contact will reset the counter because it's sensitive
                 Sentinel.CapCountdown = Sentinel.CAPCOUNT
                 Sentinel.ActiveLock = False
                 Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
+                #print("ra")
+            else:
+                # Any contact will reset the counter because it's sensitive
+                Sentinel.CapCountdown = Sentinel.CAPCOUNT
                 flagRailWarning = False
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
