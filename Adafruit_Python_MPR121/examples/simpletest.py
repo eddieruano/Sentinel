@@ -72,7 +72,7 @@ while True:
     # following lines:
     # If you're curious or want to see debug info for each pin, uncomment the
     # following lines:
-    print '\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched())
+    print ('\t\t\t\t\t\t\t\t\t\t\t\t\t 0x{0:0X}'.format(cap.touched())
     filtered = [cap.filtered_data(i) for i in range(12)]
     print('Filt:', '\t'.join(map(str, filtered)))
     base = [cap.baseline_data(i) for i in range(12)]
