@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 01:08:14
+# @Last Modified time: 2017-06-09 01:10:25
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -185,7 +185,7 @@ def main():
             #             DESI.DESISend("SendDown")
             #             i += 1
             #         # Update the new speed and redux
-            #         Sentinel.setSpeed(Sentinel.StateSpeed - Sentinel.Redux)
+            #         Sentinel.setSpeed(Sentinel.ActualSpeed - Sentinel.Redux)
             #         # Restart the counter
             #         Sentinel.ProxCountdown = Sentinel.PROXCOUNT
             #         Sentinel.ProxLock = True
