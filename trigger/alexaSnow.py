@@ -27,7 +27,7 @@ signal.signal(signal.SIGINT, signal_handler)
 
 detector = snowboydecoder.HotwordDetector(model, sensitivity=0.7)
 print('Listening... Press Ctrl+C to exit')
-Alexa = Alexa.Alexa(17)
+Alexa = Alexa.Alexa(20)
 detector.start(detected_callback=Alexa.blink,
                interrupt_check=interrupt_callback,
                sleep_time=0.03)
