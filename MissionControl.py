@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 21:45:52
+# @Last Modified time: 2017-06-08 21:47:02
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -139,7 +139,7 @@ def main():
             elif DESI.State_Main == "Pause": 
                 DESI.DESISend("Pause")
                 sp = getSpeed()
-                DESI.DESISendResponse(RespondRestart)
+                DESI.DESISendResponse(DESI.RespondRestart)
                 time.sleep(3)
                 DESI.DESISend(sp)
                 #print("ra")
