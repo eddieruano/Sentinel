@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:24:22
+# @Last Modified time: 2017-06-09 09:38:11
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -104,7 +104,7 @@ def main():
             if (Sentinel.ProxLock == True):
                 continue
             # Check if the knob changed position
-            if (Sentinel.StateKnob  != localKnobState):
+            if (Sentinel.StateKnob != localKnobState):
                 localKnobState = Sentinel.StateKnob
                 speed = getSpeed()
                 DESI.DESISend(speed)
@@ -119,7 +119,7 @@ def main():
             # Check for an issue warning
             flagRailWarning = checkRailWarning(flagRailWarning)
             # if we aren't touching
-            if not Sentinel.ActiveLock and DESI.State_Main != "Pause":
+            if not Sentinel.ActiveLock and Sentinel.inMotion(DESI):
                 print("NO CONTACT")
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
@@ -141,8 +141,8 @@ def main():
             
             """ START PROXIMITY CHECKS """
             Sentinel.Proximity = queryDistance()
-            print (Sentinel.Proximity)
-            if Sentinel.Proximity > 12.0 and DESI.State_Main != "Pause":
+            #print (Sentinel.Proximity)
+            if Sentinel.Proximity > 12.0 and Sentinel.inMotion(DESI):
                 flagProximityWarning = True
                 # If we reach zero on the counter and not in pause
                 if ((Sentinel.ProxCountdown == 0) and (Sentinel.ProxLock == False)):
@@ -174,7 +174,7 @@ def main():
                         DESI.DESISend(sp)
                         flagRedux = False
             """"""""""""" END PROXIMITY CHECKS """""""""""""""""""""
-            print(Sentinel.ActualSpeed)
+            #print(Sentinel.ActualSpeed)
             time.sleep(Sentinel.RunningLoopSpeed)
     except KeyboardInterrupt:
         GPIO.cleanup()
