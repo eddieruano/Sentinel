@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:43:00
+# @Last Modified time: 2017-06-09 09:52:55
 
 import RPi.GPIO as GPIO
 import subprocess
@@ -14,10 +14,10 @@ class Sentinel(object):
     def __init__(self):
         """Create an instance of Sentinel"""
         # CONSTANTS
-        self.CONST_REDUX = 0.05
+        self.CONST_REDUX = 0.1
         self.CONST_ZONE_FIX = 0.0
         self.PROXCOUNT = 50
-        self.CAPCOUNT = 100
+        self.CAPCOUNT = 60
         self.CONST_BOUNCE = 800
         self.CONST_RESCOUNT = 60
         self.CONST_PROX_RETRIES = 10
@@ -76,7 +76,7 @@ class Sentinel(object):
             print("Error in StateKnob")
     def setSpeed(self, speed):
         self.ActualSpeed = speed
-        self.Redux = (self.ActualSpeed * 0.5) * 10
+        self.Redux = (self.ActualSpeed * self.CONST_REDUX) * 10
     def updateActiveLock(self, intouch):
         self.TouchRegister = intouch.touched()
         # Need to target channels

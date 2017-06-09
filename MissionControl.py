@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 09:38:11
+# @Last Modified time: 2017-06-09 09:50:56
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -125,8 +125,8 @@ def main():
                 if ((Sentinel.CapCountdown == 0) and (Sentinel.CapLock == False)):
                     # save current workout state
                     saved_state = Sentinel.StateKnob
-                    DESI.DESISendResponse(DESI.RespondPaused)   #pause
-                    DESI.DESISend("Pause")
+                    #DESI.DESISendResponse(DESI.RespondPaused)   #pause
+                    #DESI.DESISend("Pause")
                     print(DESI.State_Main)
                     # Enable the CapLock
                     Sentinel.CapLock = True
@@ -159,8 +159,8 @@ def main():
                     if (Sentinel.ProximityRetries > Sentinel.CONST_PROX_RETRIES):
                         Sentinel.ProxLock = True
                         DESI.DESISend("Pause")
-                        Sentinel.waitMutexSpeech()
-                        DESI.DESISendResponse(DESI.RespondPause)
+                        #Sentinel.waitMutexSpeech()
+                        #DESI.DESISendResponse(DESI.RespondPause)
                         print("ProxLocked.")
                     # Runs forever until CapLock disabled
                 else:
@@ -242,6 +242,12 @@ def getSpeed():
 def PauseHandler(channel):
     print("pause")
     DESI.DESISend("Pause")
+    if (Sentinel.inMotion):
+        Sentinel.waitMutexSpeech()
+        DESI.DESISendResponse("audio/wav_pause.wav")
+    else:
+        Sentinel.waitMutexSpeech()
+        DESI.DESISendResponse("audio/wav_restart.wav")
     if Sentinel.CapLock == True:
         Sentinel.CapLock = False
     elif Sentinel.ProxLock == True:
