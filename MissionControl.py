@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 23:35:45
+# @Last Modified time: 2017-06-09 00:47:14
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -100,15 +100,17 @@ def main():
             speed = getSpeed()
             if (Sentinel.CapLock == True):
                 continue
+            if (Sentinel.ProxLock == True):
+                continue
             # Check if the knob changed position
             if ((Sentinel.StateKnob * 1.0) != localKnobState):
                 localKnobState = Sentinel.StateKnob
                 DESI.DESISend(speed)
                 print("in")
             # Set the Speed if the knob doesn't match up
-            if ((Sentinel.StateKnob * 1.0) != Sentinel.StateSpeed):
+            if ((Sentinel.StateKnob * 1.0) != Sentinel.ActualSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
-                Sentinel.StateSpeed = (speed)
+                Sentinel.ActualSpeed = (speed)
             # Here we check for contact
             """ CAPACITANCE CHECKS """
             # Check for an issue warning
@@ -134,6 +136,34 @@ def main():
                     flagRailWarning = False
             
             """ START PROXIMITY CHECKS """
+            if Sentinel.Proximity > 12.0:
+                flagProximityWarning = True
+                # If we reach zero on the counter and not in pause
+                if ((Sentinel.ProxCountdown == 0) and (Sentinel.ProxLock == False)):
+                    Sentinel.ProximityRetries += 1
+                    # reduce speed
+                    i = 0
+                    while i < Sentinel.Redux:
+                        print("Reducing By: " + i)
+                        DESI.DESISend("SendDown")
+                        i += 1
+                        Sentinel.ActualSpeed -= 0.1
+
+                    # Enable the CapLock
+                    if (Sentinel.ProximityRetries > Sentinel.CONST_PROX_RETRIES)
+                        Sentinel.ProxLock = True
+                        DESI.DESISend("Pause")
+                        Sentinel.waitMutexSpeech()
+                        DESI.DESISendResponse(DESI.Pause)
+                        print("ProxLocked.")
+                    # Runs forever until CapLock disabled
+                else:
+                    # Else we are not making contact but not end of count
+                    Sentinel.ProxCountdown -= 1
+            else:  # we are making contact
+                   # 
+                    Sentinel.ProxCountdown = Sentinel.PROXCOUNT
+                    flagProximityWarning = False
             #Start Query for Distances
             # Sentinel.Proximity = queryDistance()
             # if (Sentinel.Proximity > 12.0):
