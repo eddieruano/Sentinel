@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-
+import time
 class Alexa(object):
     def __init__(self, port):
         self.port = port
