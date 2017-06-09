@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 02:54:06
+# @Last Modified time: 2017-06-09 03:10:02
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -173,34 +173,6 @@ def main():
                     if flagRedux:
                         DESI.DESISend(sp)
                         flagRedux = False
-            #Start Query for Distances
-            # Sentinel.Proximity = queryDistance()
-            # if (Sentinel.Proximity > 12.0):
-            #     #if (flagProximityWarning == False):
-            #     #    DESI.DESISendResponse(DESI.RespondProx)
-            #     #    flagProximityWarning = True
-            #     print("Yellow")
-            #     # Start the coundown here
-            #     Sentinel.ProxCountdown -= 1
-
-            #     # Here we trigger finally
-            #     if(Sentinel.ProxCountdown == 0):
-            #         i = 0
-            #         while i < Sentinel.Redux:
-            #             DESI.DESISend("SendDown")
-            #             i += 1
-            #         # Update the new speed and redux
-            #         Sentinel.setSpeed(Sentinel.StateSpeed - Sentinel.Redux)
-            #         # Restart the counter
-            #         Sentinel.ProxCountdown = Sentinel.PROXCOUNT
-            #         Sentinel.ProxLock = True
-
-            # else: # Else, we're back in the green
-            #     if Sentinel.ProxLock == True:
-
-            #         DESI.DESISend()
-            #     Sentinel.ProxCountdown = Sentinel.PROXCOUNT
-            #     Sentinel.setSpeed(Sentinel.StateKnob * 1.0)
             """"""""""""" END PROXIMITY CHECKS """""""""""""""""""""
             print(Sentinel.ActualSpeed)
             time.sleep(Sentinel.RunningLoopSpeed)
@@ -209,7 +181,6 @@ def main():
         DESI.DESICleanup()
         print("Shutdown Mission.")
         #Detector.terminate()
-        
 ### END OF MAIN ###
 """Helper Functions"""
 def activateAlexa():
@@ -245,7 +216,7 @@ def StartHandler(channel):
         time.sleep(30)
         GPIO.cleanup()
         print("Shutdown")
-        sys.exit(0)
+        return
     else:
         print("Starting")
         Sentinel.StartDetect = True
