@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 22:08:04
+# @Last Modified time: 2017-06-08 22:13:18
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -189,9 +189,16 @@ def sanitizeDistance(voy, inDist):
         inDist = Voyager1.get_distance()
     return inDist
 def StartHandler(channel):
-    print("Starting")
-    Sentinel.StartDetect = True
-    DESI.DESISend("Start")
+    if (Sentinel.StateKnob == 0) and DESI.State_Main == "Pause":
+        DESI.DESISend("Shutdown")
+        time.sleep(30)
+        GPIO.cleanup()
+        print("Shutdown")
+        sys.exit(0)
+    else
+        print("Starting")
+        Sentinel.StartDetect = True
+        DESI.DESISend("Start")
 def getSpeed():
     if Sentinel.StateKnob == 0:
         return "Send00"
@@ -206,15 +213,8 @@ def getSpeed():
     else:
         return "Send00"
 def PauseHandler(channel):
-    if (Sentinel.StateKnob == 0):
-        DESI.DESISend("Shutdown")
-        time.sleep(30)
-        GPIO.cleanup()
-        print("Shutdown")
-        sys.exit(0)
-    else:
-        print("pause")
-        DESI.DESISend("Pause")
+    print("pause")
+    DESI.DESISend("Pause")
 def checkRailWarning(flag):
     if ((Sentinel.ActiveLock == False) and (flag == False)):
         if (Sentinel.CapCountdown == (Sentinel.CAPCOUNT / 2)):
