@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 01:30:08
+# @Last Modified time: 2017-06-09 01:53:05
 
 import RPi.GPIO as GPIO
 import time
@@ -104,7 +104,7 @@ class DESI(object):
         GPIO.setup(self.OUT_4, GPIO.OUT)
         GPIO.setup(self.OUT_5, GPIO.OUT)
         GPIO.setup(self.OUT_DOWN, GPIO.OUT)
-        GPIO.setup(self.OUT_ALEXA, GPIO.OUT)
+        #GPIO.setup(self.OUT_ALEXA, GPIO.OUT)
         GPIO.output(self.OUT_START, GPIO.HIGH)
         GPIO.output(self.OUT_OFF, GPIO.HIGH)
         GPIO.output(self.OUT_PAUSE, GPIO.HIGH)
