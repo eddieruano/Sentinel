@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:44:36
+# @Last Modified time: 2017-06-08 21:06:22
 
 import RPi.GPIO as GPIO
 import time
@@ -174,7 +174,7 @@ class DESI(object):
             :param str fname: wave file name
             :return: None
         """
-        #audio_subprocess = subprocess.Popen(["aplay", fname])
+        audio_subprocess = subprocess.Popen(["aplay", fname])
         pass
     def DESIUpdateState(self, state):
         pass
