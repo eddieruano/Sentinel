@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 00:50:09
+# @Last Modified time: 2017-06-09 00:51:52
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -64,6 +64,8 @@ def main():
         print("Listening")
         #Wait for the Start Command
         while not Sentinel.StartDetect:
+            Sentinel.getStateKnob(DESI)
+            Sentinel.setStateKnob()
             print("Off")
         #Wait until the correct Knob State Happens
         print("Waiting for knob")
@@ -155,7 +157,7 @@ def main():
                         Sentinel.ProxLock = True
                         DESI.DESISend("Pause")
                         Sentinel.waitMutexSpeech()
-                        DESI.DESISendResponse(DESI.Pause)
+                        DESI.DESISendResponse(DESI.RespondPause)
                         print("ProxLocked.")
                     # Runs forever until CapLock disabled
                 else:
