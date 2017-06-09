@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 01:10:25
+# @Last Modified time: 2017-06-09 01:12:13
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -140,7 +140,7 @@ def main():
             
             """ START PROXIMITY CHECKS """
             Sentinel.Proximity = queryDistance()
-            print (Sentinel.Proximity)
+            print Sentinel.Proximity
             if Sentinel.Proximity > 12.0:
                 flagProximityWarning = True
                 # If we reach zero on the counter and not in pause
@@ -185,7 +185,7 @@ def main():
             #             DESI.DESISend("SendDown")
             #             i += 1
             #         # Update the new speed and redux
-            #         Sentinel.setSpeed(Sentinel.ActualSpeed - Sentinel.Redux)
+            #         Sentinel.setSpeed(Sentinel.StateSpeed - Sentinel.Redux)
             #         # Restart the counter
             #         Sentinel.ProxCountdown = Sentinel.PROXCOUNT
             #         Sentinel.ProxLock = True
