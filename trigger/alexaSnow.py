@@ -2,6 +2,7 @@ import snowboydecoder
 import sys
 import os
 import signal
+import RPi.GPIO as GPIO
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import Alexa as Alexa
 
