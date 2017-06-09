@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-09 01:12:53
+# @Last Modified time: 2017-06-09 02:21:57
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -148,7 +148,7 @@ def main():
                     Sentinel.ProximityRetries += 1
                     # reduce speed
                     i = 0
-                    while i < Sentinel.Redux:
+                    while (i * 1.0) < Sentinel.Redux:
                         print("Reducing By: " + i)
                         DESI.DESISend("SendDown")
                         i += 1
