@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-08 20:58:44
+# @Last Modified time: 2017-06-08 21:02:51
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -69,15 +69,16 @@ def main():
             Sentinel.getStateKnob(DESI)
             # Set the Knob State according to the recent get
             Sentinel.setStateKnob()
+            speed = self.getSpeed(Sentinel.StateKnob)
             # Check if the knob changed position
             if ((Sentinel.StateKnob * 1.0) != localKnobState):
                 localKnobState = Sentinel.StateKnob
-                DESI.DESISend(Sentinel.StateKnob * 1.0)
+                DESI.DESISend(speed)
                 print("in")
             # Set the Speed if the knob doesn't match up
             if ((Sentinel.StateKnob * 1.0) != Sentinel.StateSpeed):
                 DESI.DESISend(Sentinel.StateKnob * 1.0)
-                Sentinel.StateSpeed = (Sentinel.StateKnob * 1.0)
+                Sentinel.StateSpeed = (speed)
             #Start Query for Distances
             Sentinel.Proximity = queryDistance()
             # Check to see if the Distance is above the threshold
@@ -164,6 +165,19 @@ def sanitizeDistance(voy, inDist):
 def StartHandler(channel):
     print("Starting")
     DESI.DESISend("Start")
+def getSpeed(self, sp):
+    if sp == 0:
+        return "Send00"
+    elif sp == 1:
+        return "Send01"
+    elif sp == 2:
+        return "Send02"
+    elif sp == 3:
+        return "Send03"
+    elif sp == 4:
+        return "Send04"
+    else:
+        return "Send00"
 def PauseHandler(channel):
     if (Sentinel.StateKnob == 0):
         DESI.DESISend("Shutdown")
