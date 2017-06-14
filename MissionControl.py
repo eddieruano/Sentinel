@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-13 20:07:27
+# @Last Modified time: 2017-06-13 20:14:53
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -40,8 +40,7 @@ def main():
     flagSelectorWarning = False
     flagProximityWarning = False
     flagRedux = False
-    flagStart = False
-    flagSet = False
+    flagStartSet = False
     # Initialize DESI States
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
@@ -92,13 +91,9 @@ def main():
         DESI.DESISendResponse("audio/wav_lets_start.wav")
         # officially add pause event
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
-        GPIO.remove_event_detect(DESI.IN_START)
+        flagStart = True
+
         while True:
-            if flagStart == True and flagSet != True:
-                print("Done Reset")
-                if (DESI.State_Main == "State0"):
-                    GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
-                    flagSet = True
             if Sentinel.flagShut == True:
                 continue
             localKnobState = Sentinel.StateKnob
@@ -109,8 +104,10 @@ def main():
             # Set the Knob State according to the recent get
             Sentinel.setStateKnob()
             speed = getSpeed()
-            if (speed != "Send00"):
-                flagStart = True
+            if (Sentinel.StateKnob != 0.0):
+                GPIO.remove_event_detect(DESI.IN_START)
+            else:
+                GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
             # Check if the knob changed position
             if (Sentinel.StateKnob != localKnobState):
                 localKnobState = Sentinel.StateKnob
