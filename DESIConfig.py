@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 07:23:39
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-14 12:04:56
+# @Last Modified time: 2017-06-14 12:21:26
 
 
 import RPi.GPIO as GPIO
@@ -190,7 +190,7 @@ class DESI(object):
         time.sleep(0.1)
         GPIO.output(self.OUT_ENTER, GPIO.HIGH)
         time.sleep(0.1)
-        #self.performS0()
+        self.performS0()
         #elif self.State_Main == "Pause":
         #    print("Shutdown")
         #    self.performShutdown()
