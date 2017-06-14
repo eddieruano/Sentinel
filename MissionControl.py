@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-13 20:20:19
+# @Last Modified time: 2017-06-13 20:20:35
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -107,7 +107,7 @@ def main():
             if (Sentinel.StateKnob == 0.0) and (flagStartSet == False):
                 GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
                 flagStartSet = True
-            elif(flagStartSet == True)
+            elif(flagStartSet == True):
                 GPIO.remove_event_detect(DESI.IN_START)
                 flagStartSet = False
                 
