@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-13 19:45:30
+# @Last Modified time: 2017-06-13 19:58:12
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -90,6 +90,7 @@ def main():
         DESI.DESISendResponse("audio/wav_lets_start.wav")
         # officially add pause event
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
+        GPIO.remove_event_detect(DESI.IN_START)
         while True:
             if Sentinel.flagShut == True:
                 continue
@@ -100,6 +101,8 @@ def main():
             Sentinel.getStateKnob(DESI)
             # Set the Knob State according to the recent get
             Sentinel.setStateKnob()
+            if (DESI.State_Main == "State0"):
+                GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
             speed = getSpeed()
             # Check if the knob changed position
             if (Sentinel.StateKnob != localKnobState):
@@ -227,6 +230,7 @@ def StartHandler(channel):
         print("Starting")
         Sentinel.StartDetect = True
         DESI.DESISend("Start")
+
 def getSpeed():
     if Sentinel.StateKnob == 0.0:
         Sentinel.setSpeed(0.0)
