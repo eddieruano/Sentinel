@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-14 09:54:41
+# @Last Modified time: 2017-06-14 10:01:17
 
 import RPi.GPIO as GPIO
 import logging
@@ -78,31 +78,7 @@ class Sentinel(object):
         self.SecondaryGripChannel = 1 << 8
         # Mutex
         self.MutexSpeech = False;
-    def getStateKnob(self, desi):
-        self.KNOB0 = GPIO.input(desi.IN_SPEED0)
-        self.KNOB1 = GPIO.input(desi.IN_SPEED1)
-        self.KNOB2 = GPIO.input(desi.IN_SPEED2)
-        self.KNOB3 = GPIO.input(desi.IN_SPEED3)
-        self.KNOB4 = GPIO.input(desi.IN_SPEED4)
-    def setStateKnob(self):
-        if self.KNOB0 == False:
-            self.StateKnob = 0.0
-            #print("State0")
-        elif self.KNOB1 == False:
-            self.StateKnob = 1.0
-            #print("State1")
-        elif self.KNOB2 == False:
-            self.StateKnob = 2.0
-            #print("State2")
-        elif self.KNOB3 == False:
-            self.StateKnob = 3.0
-            #print("State3")
-        elif self.KNOB4 == False:
-            self.StateKnob = 4.0
-            #print("State4")
-        else:
-            print("Error in StateKnob")
-    def getKnobState(self):
+    def queryKnobState(self, desi):
         if (GPIO.input(desi.IN_SPEED0) == False):
             self.StateKnob == 0.0
         elif (GPIO.input(desi.IN_SPEED1) == False):
@@ -122,11 +98,9 @@ class Sentinel(object):
     def updateActiveLock(self, intouch):
         self.TouchRegister = intouch.touched()
         # Need to target channels
-        #print (intouch.touched())
-        if self.TouchRegister  > 1:
+        if (self.TouchRegister  > 1):
             self.ActiveLock = True
         else:
-            #print ("NO CONTACT")
             self.ActiveLock = False
     def setKnobInterrupt(self):
         self.KnobInterrupt = True

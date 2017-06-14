@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-14 09:54:51
+# @Last Modified time: 2017-06-14 11:17:19
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
@@ -13,7 +13,7 @@ import os.path
 import signal
 import sys
 import time
-#
+# 
 from math import floor
 # Customs Mods #
 import RPi.GPIO as GPIO
@@ -31,8 +31,32 @@ Voyager1 = VoyagerHCSR04.Voyager("Voyager1", DESI.PROX1_TRIG, DESI.PROX1_ECHO)
 Voyager2 = VoyagerHCSR04.Voyager("Voyager2", DESI.PROX2_TRIG, DESI.PROX2_ECHO)
 TouchSense = MPR121.MPR121()
 Sentinel = Sentinel.Sentinel()
-################################## PATHS ######################################
+################################# LOGGER ######################################
+""" Initialization of Central Logger """
+# Top Vars
+LogLevel = logging.DEBUG        ## Change this later
+LogLocation = "mainLog.txt"
+#-------S8Proto
+# Create Instance of Logger
+Houston = logging.getLogger(__name__)
+# Setting Logging Level --Change from Debug later
+Houston.setLevel(level=LogLevel)
+# Set up Format Protocol --> Type of Msg, Name of Module, Time, PayloadMessage
+HouForm = logging.Formatter('%(levelname)s:%(name)s:%(asctime)s:%(message)s')
+# Set up File Handler + Add level + add formatter
+HouFile = logging.FileHandler(LogLocation)
+HouFile.setLevel(LogLevel)
+HouFile.setFormatter(HouForm)
+# Set up Stream Handler + level + format
+HouStream = logging.StreamHandler()
+HouStream.setLevel(LogLevel)
+HouStream.setFormatter(HouForm)
+# Add all handlers to instance of Handler
+Houston.addHandler(HouStream)
+Houston.addHandler(HouFile)
+Houston.info("Logger has been created.")
 def main():
+    global Houston
     # Variables/Flags
     flagRailWarning = False
     flagSelectorWarning = False
@@ -43,29 +67,34 @@ def main():
     DESI.initDESI()
     # Initialize Voyager Proximity Sensors
     DESI.initProximity(Voyager1, Voyager2)
+    Houston.info("Checking Cap Sensor SDA")
     try:
         if not TouchSense.begin():  # Init TouchSense Capacitive Sensor Array
-            print("TSense Error")
+            Houston.error("TSense Error")
             sys.exit(1)
     except OSError as e:
-        print(e)
-        print("Sensor Error.")
+        Houston.error(e)
+        Houston.critical("Sensor Error.")
         sys.exit(1)
-    Sentinel.getStateKnob(DESI)
-    Sentinel.setStateKnob()
+
+    Houston.info("Getting Knob State") 
+    # Update the Knob state in Sentinel 
+    Sentinel.queryKnobState(DESI)    
+    Houston.info(Sentinel.StateKnob)   
+    # Update the Active Lock checks for Contact
+    Houston.info("Checking Active Lock.")
     Sentinel.updateActiveLock(TouchSense)
+    Houston.info(Sentinel.ActiveLock)
     # Single Start Trigger
+    Houston.info("Adding Start Trigger")
     GPIO.add_event_detect(DESI.IN_START, GPIO.FALLING, callback=StartHandler, bouncetime=Sentinel.CONST_BOUNCE)
     try:
-        print("Listening")
         #Wait for the Start Command
+        Houston.info("Waiting for Start Command.")
         while not Sentinel.StartDetect:
-            Sentinel.getStateKnob(DESI)
-            Sentinel.setStateKnob()
-            print("Off")
+            Sentinel.queryKnobState(DESI)
         #Wait until the correct Knob State Happens
-        print("Waiting for knob")
-        print(Sentinel.StateKnob)
+        Houston.info("Waiting For Knob Zero Position")
         while Sentinel.StateKnob != 0.0:
             # if the counter reaches zero issue warning
             if (Sentinel.SpCount == 0):
@@ -76,15 +105,17 @@ def main():
                 time.sleep(0.1)
                 Sentinel.SpCount-=1
             # we verify here
-            Sentinel.getStateKnob(DESI)
-            Sentinel.setStateKnob()
+            Sentinel.queryKnobState(DESI)
+        Houston.info("Knob in Zero, Now initializing Treadmill")
         # in correct setting so we wait for speech mutex
         Sentinel.waitMutexSpeech()
         DESI.DESISendResponse("audio/wav_okay_megan.wav")
-        # issue start
+        Houston.info("Waiting 1 Second.")
+        time.sleep(1)
+        Houston.info("Let's Start is being Played.")
         Sentinel.waitMutexSpeech()
         DESI.DESISendResponse("audio/wav_lets_start.wav")
-        # officially add pause event
+        Houston.info("Enabling Pause/Stop Button")
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
         flagStartSet = True
         """MAIN WORKOUT LOOP BEGINS"""
