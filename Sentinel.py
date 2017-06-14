@@ -2,16 +2,42 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-13 20:13:54
+# @Last Modified time: 2017-06-14 09:54:41
 
 import RPi.GPIO as GPIO
+import logging
 import subprocess
 import time
-from subprocess import check_output, CalledProcessError
 
+from subprocess import CalledProcessError
+from subprocess import check_output
 
+""" Initialization of Central Logger """
+# Top Vars
+LogLevel = logging.DEBUG        ## Change this later
+LogLocation = "mainLog.txt"
+#-------S8Proto
+# Create Instance of Logger
+Houston = logging.getLogger(__name__)
+# Setting Logging Level --Change from Debug later
+Houston.setLevel(level=LogLevel)
+# Set up Format Protocol --> Type of Msg, Name of Module, Time, PayloadMessage
+HouForm = logging.Formatter('%(levelname)s:%(name)s:%(asctime)s:%(message)s')
+# Set up File Handler + Add level + add formatter
+HouFile = logging.FileHandler(LogLocation)
+HouFile.setLevel(LogLevel)
+HouFile.setFormatter(HouForm)
+# Set up Stream Handler + level + format
+HouStream = logging.StreamHandler()
+HouStream.setLevel(LogLevel)
+HouStream.setFormatter(HouForm)
+# Add all handlers to instance of Handler
+Houston.addHandler(HouStream)
+Houston.addHandler(HouFile)
+Houston.info("Logger has been created.")
 class Sentinel(object):
     def __init__(self):
+        global Houston
         """Create an instance of Sentinel"""
         # CONSTANTS
         self.flagPause = False
@@ -76,6 +102,20 @@ class Sentinel(object):
             #print("State4")
         else:
             print("Error in StateKnob")
+    def getKnobState(self):
+        if (GPIO.input(desi.IN_SPEED0) == False):
+            self.StateKnob == 0.0
+        elif (GPIO.input(desi.IN_SPEED1) == False):
+            self.StateKnob == 1.0
+        elif (GPIO.input(desi.IN_SPEED2) == False):
+            self.StateKnob == 2.0
+        elif (GPIO.input(desi.IN_SPEED3) == False):
+            self.StateKnob == 3.0
+        elif (GPIO.input(desi.IN_SPEED4) == False):
+            self.StateKnob == 4.0
+        else:
+            # Do Nothing
+            Houston.error("No Knob Position was set.")
     def setSpeed(self, speed):
         self.ActualSpeed = speed
         self.Redux = (self.ActualSpeed * self.CONST_REDUX) * 10

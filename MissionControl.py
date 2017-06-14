@@ -2,20 +2,18 @@
 # @Author: Eddie Ruano
 # @Date:   2017-05-01 05:14:54
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-13 20:20:35
+# @Last Modified time: 2017-06-14 09:54:51
 # 
 """
     MissionControl.py is a debugging tool for DESI_Sentinel
 """
 ################################## IMPORTS ###################################
-import sys
+import logging
 import os.path
 import signal
+import sys
 import time
 #
-import collections
-import pyaudio
-import wave
 from math import floor
 # Customs Mods #
 import RPi.GPIO as GPIO
@@ -23,9 +21,9 @@ import Sentinel as Sentinel
 # Local Modules #
 ################################### PATHS #####################################
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import drivers.VoyagerHCSR04 as VoyagerHCSR04
 import DESIConfig as DESIConfig
 import drivers.MPR121 as MPR121
+import drivers.VoyagerHCSR04 as VoyagerHCSR04
 #import trigger.snowboydetect as snowboydetect
 ############################ INITIALIZE CLASSES ###############################
 DESI = DESIConfig.DESI()
@@ -53,9 +51,6 @@ def main():
         print(e)
         print("Sensor Error.")
         sys.exit(1)
-    Sentinel.getStateKnob(DESI)
-    Sentinel.setStateKnob()
-    time.sleep(1)
     Sentinel.getStateKnob(DESI)
     Sentinel.setStateKnob()
     Sentinel.updateActiveLock(TouchSense)
@@ -92,7 +87,7 @@ def main():
         # officially add pause event
         GPIO.add_event_detect(DESI.IN_PAUSE, GPIO.FALLING, callback=PauseHandler, bouncetime=Sentinel.CONST_BOUNCE)
         flagStartSet = True
-
+        """MAIN WORKOUT LOOP BEGINS"""
         while True:
             if Sentinel.flagShut == True:
                 continue
@@ -271,13 +266,6 @@ def checkRailWarning(flag):
             DESI.DESISendResponse(DESI.RespondRails)
         return True
     return False
-
-#def signal_handler(signal, frame):
-#    global HotwordInterrupt
-#    HotwordInterrupt = True
-#def interrupt_callback():
-#    global HotwordInterrupt
-#    return HotwordInterrupt
 ### MAIN CALL ###
 if __name__ == "__main__":
     main()
