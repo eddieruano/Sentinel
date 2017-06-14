@@ -2,7 +2,7 @@
 # @Author: Eddie Ruano
 # @Date:   2017-06-01 14:25:28
 # @Last Modified by:   Eddie Ruano
-# @Last Modified time: 2017-06-14 10:01:17
+# @Last Modified time: 2017-06-14 12:06:28
 
 import RPi.GPIO as GPIO
 import logging
@@ -61,11 +61,6 @@ class Sentinel(object):
         self.RunningLoopSpeed = 0.05    # seconds
         # Knob Monitors
         self.StateKnob = 1.0
-        self.KNOB0 = False
-        self.KNOB1 = False
-        self.KNOB2 = False
-        self.KNOB3 = False
-        self.KNOB4 = False
         self.KnobInterrupt = False
         self.StartDetect = False
         # Proximity Monitors
@@ -92,6 +87,7 @@ class Sentinel(object):
         else:
             # Do Nothing
             Houston.error("No Knob Position was set.")
+            Houston.info(self.StateKnob)
     def setSpeed(self, speed):
         self.ActualSpeed = speed
         self.Redux = (self.ActualSpeed * self.CONST_REDUX) * 10
